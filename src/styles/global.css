@@ -17,8 +17,23 @@
 }
 
 html, body {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   width: 100%;
+}
+
+/* Fix mobile responsive */
+@media (max-width: 768px) {
+  .container, .max-w-7xl, .max-w-4xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container, .max-w-7xl, .max-w-4xl {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
 }
 
 /* Animations et transitions personnalisées */

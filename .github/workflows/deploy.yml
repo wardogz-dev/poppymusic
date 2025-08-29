@@ -1,9 +1,7 @@
-name: 🚀 Deploy Poppy Music to Digital Ocean
+name: Deploy to Digital Ocean
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
     branches: [ main ]
 
 jobs:
@@ -11,34 +9,30 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: 📥 Checkout code
+    - name: Checkout code
       uses: actions/checkout@v3
       
-    - name: 🔧 Setup Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18'
         cache: 'npm'
         
-    - name: 📦 Install dependencies
+    - name: Install dependencies
       run: npm ci
       
-    - name: 🏗️ Build Astro site
+    - name: Build project
       run: npm run build
       
-    - name: 🚀 Deploy to Digital Ocean
-      uses: appleboy/ssh-action@v0.1.5
+    - name: Deploy to server
+      uses: appleboy/ssh-action@v0.1.8
       with:
-        host: ${{ secrets.DO_HOST }}
-        username: ${{ secrets.DO_USERNAME }}
-        key: ${{ secrets.DO_SSH_KEY }}
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /var/www/poppymusic
           git pull origin main
-          npm install
+          npm ci
           npm run build
-          pm2 reload poppymusic || pm2 start npm --name "poppymusic" -- run preview
-          pm2 save
-          
-    - name: ✅ Deployment Status
-      run: echo "🎵 Poppy Music successfully deployed to http://161.35.43.87"
+          pm2 reload poppymusic
