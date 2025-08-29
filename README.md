@@ -1,6 +1,6 @@
-# SonicMemories - Label de Chansons Personnalisées Premium
+# Poppy Music - Studio de Production Musicale Premium
 
-Un site web premium pour **SonicMemories**, un label musical qui combine intelligence artificielle et expertise humaine pour créer des chansons personnalisées de haute qualité.
+Un site web premium pour **Poppy Music**, un studio de production musicale qui transforme vos idées en œuvres musicales authentiques grâce à l'alliance de l'intelligence artificielle et de l'expertise humaine.
 
 ## 🎵 Fonctionnalités
 
@@ -129,4 +129,4 @@ Ce projet est créé pour usage commercial. Adaptez selon vos besoins.
 
 ---
 
-**SonicMemories** - Des chansons qui donnent la chair de poule. 🎵✨
+**Poppy Music** - Devenez producteur de votre chanson. 🎵✨
