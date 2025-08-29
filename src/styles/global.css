@@ -11,6 +11,16 @@
   --text-muted: #9CA3AF;
 }
 
+/* Fix overflow global */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 /* Animations et transitions personnalisées */
 .hover-lift {
   transition: transform 200ms ease, opacity 200ms ease;
@@ -76,11 +86,21 @@ audio::-webkit-media-controls-panel {
   cursor: pointer;
 }
 
-/* Responsive pour mobile */
+/* Responsive pour mobile - Fix overflow */
 @media (max-width: 768px) {
   .album-container {
     width: 280px;
     height: 175px;
+  }
+  
+  /* Fix overflow horizontal */
+  body {
+    overflow-x: hidden;
+  }
+  
+  .container, .max-w-7xl, .max-w-4xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
@@ -88,6 +108,17 @@ audio::-webkit-media-controls-panel {
   .album-container {
     width: 240px;
     height: 150px;
+  }
+  
+  /* Réduire les paddings sur très petits écrans */
+  .container, .max-w-7xl, .max-w-4xl {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Réduire les gaps des grilles */
+  .grid {
+    gap: 2rem;
   }
 }
 
