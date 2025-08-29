@@ -1,16 +1,327 @@
 ---
+import '../styles/global.css';
+import UseCases from '../components/UseCases.astro';
+import ProductionsGrid from '../components/ProductionsGrid.astro';
 
+const BRAND_NAME = "Poppy Music";
+const TAGLINE = "Studio de Production Musicale";
 ---
 
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+	<title>{BRAND_NAME} - {TAGLINE}</title>
+	<meta name="description" content="Studio de production musicale. Création de chansons personnalisées, production artistique et distribution streaming." />
 	</head>
-	<body>
-		<h1>Astro</h1>
+<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased overflow-x-hidden">
+	
+	<!-- HEADER MINIMAL -->
+	<header class="fixed top-0 left-0 right-0 z-50 glass-effect">
+		<nav class="flex justify-between items-center px-8 py-6">
+			<div class="title-artistic text-2xl text-[#E7C873]">{BRAND_NAME}</div>
+			<div class="text-artistic text-sm text-gray-400 uppercase tracking-wider">{TAGLINE}</div>
+		</nav>
+	</header>
+
+	<!-- HERO SECTION -->
+	<section class="min-h-screen flex items-center justify-center noise-texture relative overflow-hidden">
+		<div class="absolute inset-0 hero-bg"></div>
+		<div class="relative z-10 text-center max-w-4xl mx-auto px-6">
+			<h1 class="title-artistic text-6xl md:text-8xl lg:text-9xl text-white mb-8 leading-none">
+				Deviens<br/>
+				<span class="text-[#E7C873]">Producteur</span>
+			</h1>
+			<p class="text-artistic text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
+				Produis ta chanson avec notre studio.<br/>
+				Ton histoire, ton message, ta signature sonore.
+			</p>
+			<div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+				<button class="bg-[#E7C873] text-black px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#d4b556] transition-all duration-300 hover:scale-105">
+					PRODUIRE MA CHANSON
+				</button>
+				<button class="border border-[#E7C873] text-[#E7C873] px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#E7C873] hover:text-black transition-all duration-300">
+					DÉCOUVRIR NOS PRODUCTIONS
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- QUI NOUS SOMMES -->
+	<section class="py-32 px-6">
+		<div class="max-w-7xl mx-auto">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+				<div>
+					<h2 class="title-artistic text-5xl md:text-6xl text-white mb-8 leading-tight">
+						Qui nous<br/>
+						<span class="text-[#E7C873]">sommes</span>
+					</h2>
+					<div class="text-artistic text-lg text-gray-300 space-y-6">
+						<p>
+							Poppy Music est un studio de production musicale où l'intelligence artificielle 
+							rencontre l'intuition humaine. Nous transformons vos idées en œuvres musicales 
+							authentiques et professionnelles.
+						</p>
+						<p>
+							Notre approche hybride vous place au centre du processus créatif. 
+							Vous devenez le producteur de votre chanson, avec votre nom dans les crédits 
+							et vos droits sur l'œuvre finale.
+						</p>
+						<p>
+							Chaque projet est une collaboration entre vous, nos compositeurs, nos ingénieurs du son 
+							et notre technologie propriétaire d'IA musicale.
+						</p>
+					</div>
+				</div>
+				<div class="relative">
+					<div class="album-container mx-auto" style="width: 400px; height: 250px;">
+						<div class="album-cover">
+							<div class="album-cover-closed">
+								<img src="/images/covers/poppy-music-closed.png" alt="Album fermé" class="w-full h-full object-cover" />
+							</div>
+							<div class="album-cover-opened">
+								<img src="/images/covers/poppy-music-opened.png" alt="Album ouvert avec vinyle" class="w-full h-full object-cover" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- PRODUCTIONS -->
+	<section class="py-32 px-6 bg-gradient-to-b from-[#0B0B0B] to-[#121212]">
+		<div class="max-w-7xl mx-auto">
+			<h2 class="title-artistic text-5xl md:text-6xl text-white text-center mb-4">
+				Nos <span class="text-[#E7C873]">Productions</span>
+			</h2>
+			<p class="text-artistic text-lg text-gray-400 text-center mb-8 max-w-3xl mx-auto">
+				Découvrez les créations de nos producteurs. Chaque chanson raconte une histoire, 
+				porte un message, exprime une émotion unique.
+			</p>
+			
+			<!-- Tags explicatifs -->
+			<div class="flex flex-wrap justify-center gap-4 mb-20">
+				<div class="flex items-center gap-2">
+					<span class="w-3 h-3 bg-purple-500 rounded-full"></span>
+					<span class="text-gray-400 text-sm">Anniversaire Adulte</span>
+				</div>
+				<div class="flex items-center gap-2">
+					<span class="w-3 h-3 bg-pink-500 rounded-full"></span>
+					<span class="text-gray-400 text-sm">Anniversaire Enfant</span>
+				</div>
+				<div class="flex items-center gap-2">
+					<span class="w-3 h-3 bg-blue-500 rounded-full"></span>
+					<span class="text-gray-400 text-sm">Entreprise</span>
+				</div>
+				<div class="flex items-center gap-2">
+					<span class="w-3 h-3 bg-green-500 rounded-full"></span>
+					<span class="text-gray-400 text-sm">Association</span>
+				</div>
+			</div>
+
+			<ProductionsGrid />
+		</div>
+	</section>
+
+	<!-- SERVICES CRÉATIFS -->
+	<section class="py-32 px-6">
+		<div class="max-w-7xl mx-auto">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+				<div>
+					<h2 class="title-artistic text-5xl md:text-6xl text-white mb-8 leading-tight">
+						Ton Projet<br/>
+						<span class="text-[#E7C873]">Musical</span>
+					</h2>
+					<div class="text-artistic text-lg text-gray-300 space-y-6 mb-12">
+						<p>
+							<strong>Tu deviens le producteur</strong> de ta propre chanson. Nous t'accompagnons 
+							de l'idée initiale jusqu'à la diffusion sur toutes les plateformes mondiales.
+						</p>
+						<p>
+							Que ce soit pour porter un message, célébrer un moment, ou créer ta signature sonore, 
+							<strong>ton nom apparaîtra dans les crédits</strong> comme producteur de l'œuvre.
+						</p>
+					</div>
+					
+					<div class="space-y-8">
+						<div class="flex items-start gap-6">
+							<div class="w-12 h-12 bg-[#E7C873] flex items-center justify-center text-black font-bold text-lg">01</div>
+							<div>
+								<h3 class="text-white font-semibold text-xl mb-2">Brief de Production</h3>
+								<p class="text-gray-400">Ton message, ton style, l'émotion que tu veux transmettre</p>
+							</div>
+						</div>
+						<div class="flex items-start gap-6">
+							<div class="w-12 h-12 bg-[#E7C873] flex items-center justify-center text-black font-bold text-lg">02</div>
+							<div>
+								<h3 class="text-white font-semibold text-xl mb-2">Pre-Production</h3>
+								<p class="text-gray-400">Exploration créative, maquettes et direction artistique</p>
+							</div>
+						</div>
+						<div class="flex items-start gap-6">
+							<div class="w-12 h-12 bg-[#E7C873] flex items-center justify-center text-black font-bold text-lg">03</div>
+							<div>
+								<h3 class="text-white font-semibold text-xl mb-2">Production Studio</h3>
+								<p class="text-gray-400">Enregistrement, composition, mix et mastering professionnel</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="mt-12">
+						<button class="bg-[#E7C873] text-black px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#d4b556] transition-all duration-300">
+							DÉMARRER MA PRODUCTION
+						</button>
+					</div>
+				</div>
+				
+				<div class="glass-effect p-12 rounded-lg">
+					<h3 class="title-artistic text-3xl text-white mb-8">Pack Production</h3>
+					<div class="space-y-6">
+						<div class="border-l-2 border-[#E7C873] pl-6">
+							<h4 class="text-white font-semibold mb-2">Ton Brief Producteur</h4>
+							<p class="text-gray-400 text-sm">Définis ton message, ton style, l'émotion que tu veux transmettre</p>
+						</div>
+						<div class="border-l-2 border-[#E7C873] pl-6">
+							<h4 class="text-white font-semibold mb-2">Pre-Production</h4>
+							<p class="text-gray-400 text-sm">Exploration créative, maquettes et direction artistique</p>
+						</div>
+						<div class="border-l-2 border-[#E7C873] pl-6">
+							<h4 class="text-white font-semibold mb-2">Production Studio</h4>
+							<p class="text-gray-400 text-sm">Enregistrement, composition, mix et mastering professionnel</p>
+						</div>
+						<div class="border-l-2 border-[#E7C873] pl-6">
+							<h4 class="text-white font-semibold mb-2">Post-Production</h4>
+							<p class="text-gray-400 text-sm">Finalisation, crédits producteur et distribution mondiale</p>
+						</div>
+					</div>
+					
+					<div class="mt-8 p-4 bg-black bg-opacity-30 rounded-lg">
+						<p class="text-[#E7C873] font-semibold mb-1">Inclus dans ton Pack Production :</p>
+						<p class="text-gray-300 text-sm">Chanson finale • Instrumental • Paroles • Crédits producteur • Distribution streaming</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CAS D'USAGE ÉLARGIS -->
+	<UseCases />
+
+	<!-- CONTACT -->
+	<section class="py-32 px-6 bg-gradient-to-t from-[#0B0B0B] to-[#121212]">
+		<div class="max-w-4xl mx-auto text-center">
+			<h2 class="title-artistic text-5xl md:text-6xl text-white mb-8">
+				Créons Ensemble
+			</h2>
+			<p class="text-artistic text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+				Prêt à explorer de nouveaux territoires sonores ?<br/>
+				Contactez-nous pour discuter de votre projet.
+			</p>
+			
+			<div class="flex flex-col md:flex-row gap-8 justify-center items-center mb-16">
+				<a href="mailto:hello@poppymusic.com" class="bg-[#E7C873] text-black px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#d4b556] transition-all duration-300">
+					HELLO@POPPYMUSIC.COM
+				</a>
+				<div class="text-gray-400 text-lg">ou</div>
+				<button class="border border-[#E7C873] text-[#E7C873] px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#E7C873] hover:text-black transition-all duration-300">
+					FORMULAIRE DE CONTACT
+				</button>
+			</div>
+			
+			<div class="flex justify-center gap-12 text-gray-400">
+				<a href="#" class="hover:text-[#E7C873] transition-colors">Instagram</a>
+				<a href="#" class="hover:text-[#E7C873] transition-colors">Spotify</a>
+				<a href="#" class="hover:text-[#E7C873] transition-colors">SoundCloud</a>
+				<a href="#" class="hover:text-[#E7C873] transition-colors">Bandcamp</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- FOOTER -->
+	<footer class="py-16 px-6 border-t border-gray-800">
+		<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+			<div>
+				<div class="title-artistic text-2xl text-[#E7C873] mb-2">{BRAND_NAME}</div>
+				<div class="text-artistic text-sm text-gray-400 uppercase tracking-wider">{TAGLINE}</div>
+			</div>
+			<div class="text-gray-500 text-sm mt-8 md:mt-0">
+				© 2024 Poppy Music Laboratory. Tous droits réservés.
+			</div>
+		</div>
+	</footer>
+
+	<!-- STICKY AUDIO PLAYER -->
+	<div class="sticky-player" id="stickyPlayer">
+		<div class="player-content">
+			<!-- Album Art -->
+			<div class="player-album-art">
+				<img id="playerAlbumArt" src="/images/covers/funky-thierry-closed.png" alt="Album cover" />
+			</div>
+			
+			<!-- Track Info -->
+			<div class="player-info">
+				<div class="player-title" id="playerTitle">Funky Thierry</div>
+				<div class="player-artist" id="playerArtist">Poppy Music</div>
+			</div>
+			
+			<!-- Controls -->
+			<div class="player-controls">
+				<button class="player-btn" id="prevBtn">
+					<svg viewBox="0 0 24 24">
+						<path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+					</svg>
+				</button>
+				
+				<button class="player-btn play-pause" id="playPauseBtn">
+					<svg viewBox="0 0 24 24">
+						<path d="M8 5v14l11-7z"/>
+					</svg>
+				</button>
+				
+				<button class="player-btn" id="nextBtn">
+					<svg viewBox="0 0 24 24">
+						<path d="M16 18h2V6h-2zm-2-6L6 6v12z"/>
+					</svg>
+				</button>
+			</div>
+			
+			<!-- Progress -->
+			<div class="player-progress">
+				<span class="progress-time" id="currentTime">0:00</span>
+				<div class="progress-bar" id="progressBar">
+					<div class="progress-fill" id="progressFill"></div>
+				</div>
+				<span class="progress-time" id="totalTime">0:00</span>
+			</div>
+			
+			<!-- Volume -->
+			<div class="player-volume">
+				<button class="player-btn" id="volumeBtn">
+					<svg viewBox="0 0 24 24">
+						<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+					</svg>
+				</button>
+				<div class="volume-slider" id="volumeSlider">
+					<div class="volume-fill" id="volumeFill" style="width: 70%;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="module">
+		// @ts-nocheck
+		import { StickyPlayer } from '/scripts/stickyPlayer.js';
+		import { initAlbumInteractions, initSmoothScroll } from '/scripts/albumInteractions.js';
+		
+		// Initialize application
+		document.addEventListener('DOMContentLoaded', () => {
+			const stickyPlayer = new StickyPlayer();
+			initAlbumInteractions(stickyPlayer);
+			initSmoothScroll();
+		});
+	</script>
 	</body>
 </html>

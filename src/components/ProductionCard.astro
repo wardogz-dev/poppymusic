@@ -1,0 +1,83 @@
+---
+export interface Props {
+	audioId: string;
+	title: string;
+	genre: string;
+	duration: string;
+	tag: string;
+	tagColor: 'anniversaire-adulte' | 'anniversaire-enfant' | 'entreprise' | 'association';
+	audioSrc: string;
+	audioType: 'wav' | 'mp3';
+	coverClosed: string;
+	coverOpened: string;
+	useCaseUrl: string;
+}
+
+const { 
+	audioId, 
+	title, 
+	genre, 
+	duration, 
+	tag, 
+	tagColor, 
+	audioSrc, 
+	audioType, 
+	coverClosed, 
+	coverOpened, 
+	useCaseUrl 
+} = Astro.props;
+
+const tagStyles = {
+	'anniversaire-adulte': 'bg-purple-500 bg-opacity-80 text-white border-purple-400',
+	'anniversaire-enfant': 'bg-pink-500 bg-opacity-80 text-white border-pink-400',
+	'entreprise': 'bg-blue-500 bg-opacity-80 text-white border-blue-400',
+	'association': 'bg-green-500 bg-opacity-80 text-white border-green-400'
+};
+---
+
+<div class="text-center">
+	<!-- Tag du type de production -->
+	<div class="mb-4">
+		<span class={`inline-block px-3 py-1 text-xs font-medium rounded-full border ${tagStyles[tagColor]}`}>
+			{tag}
+		</span>
+	</div>
+
+	<div class="album-container mb-8" data-audio={audioId}>
+		<div class="album-cover">
+			<div class="album-cover-closed">
+				<img src={coverClosed} alt="Album fermé" class="w-full h-full object-cover" />
+			</div>
+			<div class="album-cover-opened">
+				<img src={coverOpened} alt="Album ouvert avec vinyle" class="w-full h-full object-cover" />
+			</div>
+		</div>
+		<div class="album-play-button">
+			<svg viewBox="0 0 24 24">
+				<path d="M8 5v14l11-7z"/>
+			</svg>
+		</div>
+		<div class="waveform">
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+			<div class="waveform-bar"></div>
+		</div>
+		<audio data-title={title} data-artist="Poppy Music">
+			<source src={audioSrc} type={audioType === 'wav' ? 'audio/wav' : 'audio/mpeg'} />
+		</audio>
+	</div>
+	<h3 class="text-white font-medium text-lg mb-2">{title}</h3>
+	<p class="text-gray-400 text-sm">{genre} • {duration}</p>
+	<a href={useCaseUrl} class="inline-block mt-4 text-[#E7C873] text-sm hover:text-white transition-colors border-b border-[#E7C873] hover:border-white">
+		Découvrir le cas d'usage →
+	</a>
+</div>
