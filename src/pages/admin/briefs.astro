@@ -13,7 +13,7 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
 		<meta name="robots" content="noindex, nofollow" />
-		<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+		<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 	</head>
 	
 	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased">
@@ -114,11 +114,13 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 
 		<script>
 			// @ts-nocheck
-			// Configuration Supabase
-			const supabase = window.supabase.createClient(
-				'https://ntvnhcpkzpovqgcaiawx.supabase.co',
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50dm5oY3BrenBvdnFnY2FpYXd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2NTg5OTgsImV4cCI6MjA3MjIzNDk5OH0.GQfgar4VTEz3H73usQRb9Vqa3gBfOfomZgXjPlasTSw'
-			);
+			// Attendre que Supabase soit chargé
+			window.addEventListener('load', function() {
+				// Configuration Supabase
+				const supabase = window.supabase.createClient(
+					'https://ntvnhcpkzpovqgcaiawx.supabase.co',
+					'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50dm5oY3BrenBvdnFnY2FpYXd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2NTg5OTgsImV4cCI6MjA3MjIzNDk5OH0.GQfgar4VTEz3H73usQRb9Vqa3gBfOfomZgXjPlasTSw'
+				);
 
 			// Service d'authentification
 			const AuthService = {
@@ -330,6 +332,8 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 
 			// Charger les briefs au démarrage
 			loadBriefs();
+			
+			}); // Fermeture du window.addEventListener('load')
 		</script>
 	</body>
 </html>
