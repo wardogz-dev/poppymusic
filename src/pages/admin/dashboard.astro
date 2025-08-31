@@ -13,6 +13,7 @@ const title = "Dashboard Admin - Poppy Music";
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
 		<meta name="robots" content="noindex, nofollow" />
+		<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 	</head>
 	
 	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased">
@@ -124,8 +125,57 @@ const title = "Dashboard Admin - Poppy Music";
 			</div>
 		</main>
 
-		<script type="module">
-			import { BriefService, AuthService } from '/scripts/supabase-client.js';
+		<script>
+			// Configuration Supabase
+			const supabase = window.supabase.createClient(
+				'https://ntvnhcpkzpovqgcaiawx.supabase.co',
+				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50dm5oY3BrenBvdnFnY2FpYXd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2NTg5OTgsImV4cCI6MjA3MjIzNDk5OH0.GQfgar4VTEz3H73usQRb9Vqa3gBfOfomZgXjPlasTSw'
+			);
+
+			// Services
+			const AuthService = {
+				isAdminLoggedIn() {
+					const session = localStorage.getItem('poppy_admin_session');
+					if (!session) return false;
+					try {
+						const { loginTime } = JSON.parse(session);
+						return Date.now() - loginTime < 24 * 60 * 60 * 1000;
+					} catch { return false; }
+				},
+				logout() { localStorage.removeItem('poppy_admin_session'); }
+			};
+
+			const BriefService = {
+				async getDashboardStats() {
+					const { data: briefs, error } = await supabase
+						.from('client_briefs')
+						.select('status, payment_status, amount_paid');
+					
+					if (error) throw error;
+					
+					return {
+						total_briefs: briefs.length,
+						pending_briefs: briefs.filter(b => b.status === 'pending').length,
+						in_progress_briefs: briefs.filter(b => b.status === 'in_progress').length,
+						completed_briefs: briefs.filter(b => b.status === 'completed').length,
+						paid_briefs: briefs.filter(b => b.payment_status === 'paid').length,
+						total_revenue: briefs
+							.filter(b => b.payment_status === 'paid')
+							.reduce((sum, b) => sum + (b.amount_paid || 0), 0)
+					};
+				},
+
+				async getBriefs(page = 1, limit = 5) {
+					const { data, error } = await supabase
+						.from('client_briefs')
+						.select('*')
+						.order('created_at', { ascending: false })
+						.range((page - 1) * limit, page * limit - 1);
+					
+					if (error) throw error;
+					return { data };
+				}
+			};
 
 			// Vérifier l'authentification
 			if (!AuthService.isAdminLoggedIn()) {

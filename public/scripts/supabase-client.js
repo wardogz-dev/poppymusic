@@ -1,5 +1,6 @@
 // Client Supabase pour le navigateur
-import { createClient } from 'https://cdn.skypack.dev/@supabase/supabase-js';
+// Import via CDN pour éviter les problèmes de modules
+const { createClient } = window.supabase || await import('https://cdn.skypack.dev/@supabase/supabase-js');
 
 // Configuration Supabase
 const supabaseUrl = 'https://ntvnhcpkzpovqgcaiawx.supabase.co';

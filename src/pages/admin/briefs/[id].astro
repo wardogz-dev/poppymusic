@@ -148,6 +148,18 @@ const title = "Détails Brief - Poppy Music Admin";
 									<span class="text-gray-400 text-sm">Références artistiques :</span>
 									<p id="referenceArtists" class="text-white">-</p>
 								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Références musicales (liens) :</span>
+									<p id="musicalReferences" class="text-white break-words">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Éléments à éviter :</span>
+									<p id="avoidElements" class="text-white">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Notes supplémentaires :</span>
+									<p id="additionalNotes" class="text-white">-</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -232,6 +244,9 @@ const title = "Détails Brief - Poppy Music Admin";
 					document.getElementById('personalStory').textContent = brief.personal_story;
 					document.getElementById('keyWords').textContent = brief.key_words || 'Non spécifié';
 					document.getElementById('referenceArtists').textContent = brief.reference_artists || 'Non spécifié';
+					document.getElementById('musicalReferences').textContent = brief.musical_references || 'Non spécifié';
+					document.getElementById('avoidElements').textContent = brief.avoid_elements || 'Non spécifié';
+					document.getElementById('additionalNotes').textContent = brief.additional_notes || 'Non spécifié';
 					
 					// Statut et notes
 					document.getElementById('statusSelect').value = brief.status || 'pending';
