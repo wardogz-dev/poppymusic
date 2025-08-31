@@ -31,16 +31,18 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /var/www/poppymusic || exit 1
+          echo "🚀 Début du déploiement..."
+          cd /var/www/poppymusic
+          
+          echo "📥 Mise à jour du code..."
           git pull origin main
+          
+          echo "📦 Installation des dépendances..."
           npm ci
+          
+          echo "🏗️ Build du site statique..."
           npm run build
           
-          # Plus besoin de PM2 - site statique servi par Nginx
-          echo "✅ Build terminé - Site statique généré dans dist/"
-          echo "📁 Contenu du répertoire dist :"
-          ls -la dist/
-          
-          # Test que Nginx sert bien les fichiers
-          echo "🧪 Test du site local :"
-          curl -I http://localhost/ || echo "⚠️ Test local échoué"
+          echo "✅ Déploiement terminé !"
+          echo "📊 Taille du répertoire dist :"
+          du -sh dist/
