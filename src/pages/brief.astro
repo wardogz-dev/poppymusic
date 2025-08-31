@@ -307,12 +307,12 @@ const url = "https://poppymusic.fr/brief";
 
 		<script>
 			// Gestion du formulaire
-			document.getElementById('briefForm').addEventListener('submit', async function(e) {
+			document.getElementById('briefForm')?.addEventListener('submit', async function(e) {
 				e.preventDefault();
 				
 				// Collecte des données du formulaire
-				const formData = new FormData(this);
-				const briefData = {};
+				const formData = new FormData(this as HTMLFormElement);
+				const briefData: Record<string, any> = {};
 				
 				// Données simples
 				for (let [key, value] of formData.entries()) {
@@ -334,10 +334,12 @@ const url = "https://poppymusic.fr/brief";
 				}
 
 				// Désactiver le bouton pendant le traitement
-				const submitBtn = this.querySelector('button[type="submit"]');
-				const originalText = submitBtn.textContent;
-				submitBtn.disabled = true;
-				submitBtn.textContent = 'TRAITEMENT EN COURS...';
+				const submitBtn = this.querySelector('button[type="submit"]') as HTMLButtonElement;
+				const originalText = submitBtn?.textContent || '';
+				if (submitBtn) {
+					submitBtn.disabled = true;
+					submitBtn.textContent = 'TRAITEMENT EN COURS...';
+				}
 
 				try {
 					// Ici on enverra les données vers votre backend/API
@@ -356,15 +358,20 @@ const url = "https://poppymusic.fr/brief";
 					console.error('Erreur:', error);
 					alert('Une erreur est survenue. Veuillez réessayer.');
 				} finally {
-					submitBtn.disabled = false;
-					submitBtn.textContent = originalText;
+					if (submitBtn) {
+						submitBtn.disabled = false;
+						submitBtn.textContent = originalText;
+					}
 				}
 			});
 
 			// Définir la date minimum à aujourd'hui + 7 jours
 			const today = new Date();
 			const minDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
-			document.getElementById('deadline').min = minDate.toISOString().split('T')[0];
+			const deadlineInput = document.getElementById('deadline') as HTMLInputElement;
+			if (deadlineInput) {
+				deadlineInput.min = minDate.toISOString().split('T')[0];
+			}
 		</script>
 	</body>
 </html>
