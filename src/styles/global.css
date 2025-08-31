@@ -5,7 +5,7 @@
 :root {
   --bg-primary: #0B0B0B;
   --bg-secondary: #121212;
-  --accent-gold: #E7C873;
+  --accent-gold: #c76927;
   --text-primary: #F3F4F6;
   --text-secondary: #D1D5DB;
   --text-muted: #9CA3AF;
@@ -308,7 +308,7 @@ audio::-webkit-media-controls-panel {
 }
 
 .waveform-bar {
-  background: #E7C873;
+  background: #c76927;
   width: 3px;
   border-radius: 2px;
   animation: waveformPulse 1s ease-in-out infinite alternate;
@@ -484,19 +484,19 @@ audio::-webkit-media-controls-panel {
 }
 
 .player-btn:hover {
-  color: #E7C873;
+  color: #c76927;
   background: rgba(231, 200, 115, 0.1);
 }
 
 .player-btn.play-pause {
-  background: #E7C873;
+  background: #c76927;
   color: #000;
   width: 40px;
   height: 40px;
 }
 
 .player-btn.play-pause:hover {
-  background: #d4b556;
+  background: #a85520;
   color: #000;
 }
 
@@ -537,7 +537,7 @@ audio::-webkit-media-controls-panel {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #E7C873 0%, #d4b556 100%);
+  background: linear-gradient(90deg, #c76927 0%, #a85520 100%);
   border-radius: 3px;
   transition: width 0.1s ease;
   position: relative;
@@ -551,7 +551,7 @@ audio::-webkit-media-controls-panel {
   transform: translateY(-50%);
   width: 12px;
   height: 12px;
-  background: #E7C873;
+  background: #c76927;
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -577,7 +577,7 @@ audio::-webkit-media-controls-panel {
 
 .volume-fill {
   height: 100%;
-  background: #E7C873;
+  background: #c76927;
   border-radius: 2px;
   transition: width 0.1s ease;
 }

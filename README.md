@@ -15,7 +15,7 @@ Un site web premium pour **Poppy Music**, un studio de production musicale qui t
 - **Couleurs** :
   - Fond principal : `#0B0B0B`
   - Fond secondaire : `#121212`  
-  - Accent or : `#E7C873`
+  - Accent or : `#c76927`
   - Texte principal : `#F3F4F6`
   - Texte secondaire : `#D1D5DB`
 
