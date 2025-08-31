@@ -24,7 +24,16 @@ jobs:
     - name: Build project
       run: npm run build
       
-    - name: Deploy to server via webhook
-      run: |
-        echo "🚀 Déclenchement du déploiement via webhook..."
-        curl -f "https://poppymusic.fr/webhook-deploy.php?secret=poppymusic2025" || echo "⚠️ Webhook échoué"
+    - name: Deploy to server
+      uses: appleboy/ssh-action@v0.1.8
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          echo "🚀 Début du déploiement..."
+          cd /var/www/poppymusic
+          git pull origin main
+          npm ci
+          npm run build
+          echo "✅ Déploiement terminé !"
