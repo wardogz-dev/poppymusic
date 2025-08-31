@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'hybrid', // Permet d'avoir des pages statiques ET des API routes
+  output: 'server', // Mode server pour supporter les API routes
   adapter: node({
     mode: 'standalone'
   }),
