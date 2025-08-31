@@ -1,0 +1,370 @@
+---
+import '../styles/global.css';
+
+const title = "Brief Créatif - Poppy Music";
+const description = "Décrivez votre projet musical pour que nous puissions créer la chanson parfaite pour vous.";
+const image = "https://poppymusic.fr/og-image.png?v=3";
+const url = "https://poppymusic.fr/brief";
+---
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>{title}</title>
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Favicon -->
+		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
+		<link rel="alternate icon" href="/favicon.ico" />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={url} />
+		<meta property="og:image" content={image} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={image} />
+	</head>
+	
+	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased">
+		<!-- HEADER -->
+		<header class="fixed top-0 left-0 right-0 z-50 glass-effect">
+			<nav class="flex justify-between items-center px-8 py-6">
+				<a href="/" class="title-artistic text-2xl text-[#c76927] hover:opacity-80 transition-opacity">Poppy Music</a>
+				<div class="text-artistic text-sm text-gray-400 uppercase tracking-wider">Brief Créatif</div>
+			</nav>
+		</header>
+
+		<!-- MAIN CONTENT -->
+		<main class="pt-32 pb-20">
+			<div class="max-w-4xl mx-auto px-6">
+				<!-- INTRO -->
+				<div class="text-center mb-16">
+					<h1 class="title-artistic text-5xl md:text-6xl text-white mb-6">
+						Racontez-nous votre <span class="text-[#c76927]">Histoire</span>
+					</h1>
+					<p class="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+						Plus vous nous en direz, plus nous pourrons créer une chanson qui vous ressemble. 
+						Chaque détail compte pour faire de votre message une œuvre unique.
+					</p>
+				</div>
+
+				<!-- FORMULAIRE -->
+				<form id="briefForm" class="space-y-12">
+					<!-- SECTION 1: INFORMATIONS PERSONNELLES -->
+					<section class="bg-gray-900 bg-opacity-50 rounded-lg p-8">
+						<h2 class="text-2xl font-bold text-[#c76927] mb-6 flex items-center">
+							<span class="w-8 h-8 bg-[#c76927] text-black rounded-full flex items-center justify-center text-sm font-bold mr-4">1</span>
+							Informations personnelles
+						</h2>
+						
+						<div class="grid md:grid-cols-2 gap-6">
+							<div>
+								<label for="firstName" class="block text-sm font-medium text-gray-300 mb-2">Prénom *</label>
+								<input type="text" id="firstName" name="firstName" required 
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+							</div>
+							<div>
+								<label for="lastName" class="block text-sm font-medium text-gray-300 mb-2">Nom *</label>
+								<input type="text" id="lastName" name="lastName" required 
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+							</div>
+							<div>
+								<label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email *</label>
+								<input type="email" id="email" name="email" required 
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+							</div>
+							<div>
+								<label for="phone" class="block text-sm font-medium text-gray-300 mb-2">Téléphone</label>
+								<input type="tel" id="phone" name="phone" 
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+							</div>
+						</div>
+					</section>
+
+					<!-- SECTION 2: VOTRE PROJET -->
+					<section class="bg-gray-900 bg-opacity-50 rounded-lg p-8">
+						<h2 class="text-2xl font-bold text-[#c76927] mb-6 flex items-center">
+							<span class="w-8 h-8 bg-[#c76927] text-black rounded-full flex items-center justify-center text-sm font-bold mr-4">2</span>
+							Votre projet musical
+						</h2>
+						
+						<div class="space-y-6">
+							<div>
+								<label for="projectTitle" class="block text-sm font-medium text-gray-300 mb-2">Titre de votre chanson (si vous en avez un)</label>
+								<input type="text" id="projectTitle" name="projectTitle" 
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+							</div>
+
+							<div>
+								<label for="musicStyle" class="block text-sm font-medium text-gray-300 mb-2">Style musical souhaité *</label>
+								<select id="musicStyle" name="musicStyle" required 
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+									<option value="">Choisissez un style</option>
+									<option value="pop">Pop</option>
+									<option value="rock">Rock</option>
+									<option value="rap">Rap/Hip-Hop</option>
+									<option value="rnb">R&B</option>
+									<option value="electronic">Électronique</option>
+									<option value="acoustic">Acoustique</option>
+									<option value="jazz">Jazz</option>
+									<option value="reggae">Reggae</option>
+									<option value="country">Country</option>
+									<option value="other">Autre (préciser dans le message)</option>
+								</select>
+							</div>
+
+							<div>
+								<label for="projectPurpose" class="block text-sm font-medium text-gray-300 mb-2">À quelle occasion cette chanson sera-t-elle utilisée ? *</label>
+								<select id="projectPurpose" name="projectPurpose" required 
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+									<option value="">Choisissez une occasion</option>
+									<option value="wedding">Mariage</option>
+									<option value="birthday">Anniversaire</option>
+									<option value="love">Déclaration d'amour</option>
+									<option value="friendship">Amitié</option>
+									<option value="family">Famille</option>
+									<option value="business">Entreprise/Marque</option>
+									<option value="personal">Projet personnel</option>
+									<option value="gift">Cadeau</option>
+									<option value="other">Autre</option>
+								</select>
+							</div>
+
+							<div>
+								<label for="targetAudience" class="block text-sm font-medium text-gray-300 mb-2">Qui va écouter cette chanson ? *</label>
+								<textarea id="targetAudience" name="targetAudience" rows="3" required 
+									placeholder="Ex: Ma femme pour notre anniversaire de mariage, mes employés pour motiver l'équipe, mes amis pour mon anniversaire..."
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							</div>
+						</div>
+					</section>
+
+					<!-- SECTION 3: VOTRE MESSAGE -->
+					<section class="bg-gray-900 bg-opacity-50 rounded-lg p-8">
+						<h2 class="text-2xl font-bold text-[#c76927] mb-6 flex items-center">
+							<span class="w-8 h-8 bg-[#c76927] text-black rounded-full flex items-center justify-center text-sm font-bold mr-4">3</span>
+							Votre message en musique
+						</h2>
+						
+						<div class="space-y-6">
+							<div>
+								<label for="mainMessage" class="block text-sm font-medium text-gray-300 mb-2">Quel est le message principal que vous voulez faire passer ? *</label>
+								<textarea id="mainMessage" name="mainMessage" rows="4" required 
+									placeholder="Ex: Je veux dire à ma femme à quel point je l'aime après 10 ans de mariage, remercier mes employés pour leur travail exceptionnel cette année..."
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							</div>
+
+							<div>
+								<label for="emotions" class="block text-sm font-medium text-gray-300 mb-2">Quelles émotions voulez-vous transmettre ? *</label>
+								<div class="grid md:grid-cols-3 gap-4">
+									<label class="flex items-center space-x-3 cursor-pointer">
+										<input type="checkbox" name="emotions" value="love" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927]">
+										<span>Amour</span>
+									</label>
+									<label class="flex items-center space-x-3 cursor-pointer">
+										<input type="checkbox" name="emotions" value="joy" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927]">
+										<span>Joie</span>
+									</label>
+									<label class="flex items-center space-x-3 cursor-pointer">
+										<input type="checkbox" name="emotions" value="gratitude" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927]">
+										<span>Gratitude</span>
+									</label>
+									<label class="flex items-center space-x-3 cursor-pointer">
+										<input type="checkbox" name="emotions" value="nostalgia" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927]">
+										<span>Nostalgie</span>
+									</label>
+									<label class="flex items-center space-x-3 cursor-pointer">
+										<input type="checkbox" name="emotions" value="motivation" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927]">
+										<span>Motivation</span>
+									</label>
+									<label class="flex items-center space-x-3 cursor-pointer">
+										<input type="checkbox" name="emotions" value="celebration" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927]">
+										<span>Célébration</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label for="keyWords" class="block text-sm font-medium text-gray-300 mb-2">Mots-clés ou phrases importantes à inclure</label>
+								<textarea id="keyWords" name="keyWords" rows="3" 
+									placeholder="Ex: 'Notre aventure', 'Merci pour tout', noms spécifiques, dates importantes..."
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							</div>
+
+							<div>
+								<label for="personalStory" class="block text-sm font-medium text-gray-300 mb-2">Racontez-nous votre histoire *</label>
+								<textarea id="personalStory" name="personalStory" rows="5" required 
+									placeholder="Plus vous nous en direz, plus la chanson sera personnalisée. Parlez-nous de votre relation, de moments importants, d'anecdotes..."
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							</div>
+						</div>
+					</section>
+
+					<!-- SECTION 4: RÉFÉRENCES -->
+					<section class="bg-gray-900 bg-opacity-50 rounded-lg p-8">
+						<h2 class="text-2xl font-bold text-[#c76927] mb-6 flex items-center">
+							<span class="w-8 h-8 bg-[#c76927] text-black rounded-full flex items-center justify-center text-sm font-bold mr-4">4</span>
+							Références et inspirations
+						</h2>
+						
+						<div class="space-y-6">
+							<div>
+								<label for="referenceArtists" class="block text-sm font-medium text-gray-300 mb-2">Artistes ou chansons qui vous inspirent</label>
+								<input type="text" id="referenceArtists" name="referenceArtists" 
+									placeholder="Ex: Ed Sheeran, Coldplay, 'Perfect' de Ed Sheeran..."
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+							</div>
+
+							<div>
+								<label for="musicalReferences" class="block text-sm font-medium text-gray-300 mb-2">Liens vers des références musicales (YouTube, Spotify...)</label>
+								<textarea id="musicalReferences" name="musicalReferences" rows="3" 
+									placeholder="Collez ici les liens vers des chansons qui correspondent à l'ambiance souhaitée..."
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							</div>
+
+							<div>
+								<label for="avoidElements" class="block text-sm font-medium text-gray-300 mb-2">Éléments à éviter</label>
+								<textarea id="avoidElements" name="avoidElements" rows="2" 
+									placeholder="Ex: Pas de guitare électrique, éviter les paroles trop mélancoliques..."
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							</div>
+						</div>
+					</section>
+
+					<!-- SECTION 5: DÉLAIS ET BUDGET -->
+					<section class="bg-gray-900 bg-opacity-50 rounded-lg p-8">
+						<h2 class="text-2xl font-bold text-[#c76927] mb-6 flex items-center">
+							<span class="w-8 h-8 bg-[#c76927] text-black rounded-full flex items-center justify-center text-sm font-bold mr-4">5</span>
+							Délais et formule
+						</h2>
+						
+						<div class="space-y-6">
+							<div>
+								<label for="deadline" class="block text-sm font-medium text-gray-300 mb-2">Date souhaitée de livraison *</label>
+								<input type="date" id="deadline" name="deadline" required 
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+							</div>
+
+							<div>
+								<label for="package" class="block text-sm font-medium text-gray-300 mb-2">Formule choisie *</label>
+								<div class="space-y-4">
+									<label class="flex items-start space-x-4 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+										<input type="radio" name="package" value="standard" required class="mt-1 w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 focus:ring-[#c76927]">
+										<div>
+											<div class="font-semibold text-white">Formule Standard - 199€</div>
+											<div class="text-sm text-gray-400">Chanson personnalisée (3-4 minutes) + paroles + mélodie + arrangement simple</div>
+										</div>
+									</label>
+									<label class="flex items-start space-x-4 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+										<input type="radio" name="package" value="premium" class="mt-1 w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 focus:ring-[#c76927]">
+										<div>
+											<div class="font-semibold text-white">Formule Premium - 399€</div>
+											<div class="text-sm text-gray-400">Formule Standard + production professionnelle + mixage/mastering + 2 révisions</div>
+										</div>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label for="additionalNotes" class="block text-sm font-medium text-gray-300 mb-2">Notes supplémentaires</label>
+								<textarea id="additionalNotes" name="additionalNotes" rows="3" 
+									placeholder="Toute information supplémentaire qui pourrait nous aider..."
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							</div>
+						</div>
+					</section>
+
+					<!-- BOUTON VALIDATION -->
+					<div class="text-center pt-8">
+						<button type="submit" 
+							class="bg-[#c76927] text-black px-16 py-4 text-xl font-bold tracking-wide hover:bg-[#a85520] transition-all duration-300 hover:scale-105 rounded-md">
+							VALIDER MON BRIEF ET PROCÉDER AU PAIEMENT
+						</button>
+						<p class="text-sm text-gray-400 mt-4">
+							Vous serez redirigé vers une page de paiement sécurisée Stripe
+						</p>
+					</div>
+				</form>
+			</div>
+		</main>
+
+		<!-- FOOTER -->
+		<footer class="bg-gray-900 py-12">
+			<div class="max-w-6xl mx-auto px-6 text-center">
+				<div class="title-artistic text-2xl text-[#c76927] mb-2">Poppy Music</div>
+				<p class="text-gray-400">Votre message en musique</p>
+			</div>
+		</footer>
+
+		<script>
+			// Gestion du formulaire
+			document.getElementById('briefForm').addEventListener('submit', async function(e) {
+				e.preventDefault();
+				
+				// Collecte des données du formulaire
+				const formData = new FormData(this);
+				const briefData = {};
+				
+				// Données simples
+				for (let [key, value] of formData.entries()) {
+					if (key === 'emotions') {
+						if (!briefData.emotions) briefData.emotions = [];
+						briefData.emotions.push(value);
+					} else {
+						briefData[key] = value;
+					}
+				}
+
+				// Validation basique
+				const requiredFields = ['firstName', 'lastName', 'email', 'musicStyle', 'projectPurpose', 'targetAudience', 'mainMessage', 'personalStory', 'deadline', 'package'];
+				const missingFields = requiredFields.filter(field => !briefData[field]);
+				
+				if (missingFields.length > 0) {
+					alert('Veuillez remplir tous les champs obligatoires.');
+					return;
+				}
+
+				// Désactiver le bouton pendant le traitement
+				const submitBtn = this.querySelector('button[type="submit"]');
+				const originalText = submitBtn.textContent;
+				submitBtn.disabled = true;
+				submitBtn.textContent = 'TRAITEMENT EN COURS...';
+
+				try {
+					// Ici on enverra les données vers votre backend/API
+					console.log('Brief data:', briefData);
+					
+					// Simulation d'envoi vers Stripe
+					// Dans la vraie version, vous enverrez briefData à votre API
+					// qui créera une session Stripe et retournera l'URL de paiement
+					
+					alert('Brief reçu ! Redirection vers le paiement...');
+					
+					// Redirection vers Stripe (à remplacer par la vraie URL)
+					// window.location.href = stripeCheckoutUrl;
+					
+				} catch (error) {
+					console.error('Erreur:', error);
+					alert('Une erreur est survenue. Veuillez réessayer.');
+				} finally {
+					submitBtn.disabled = false;
+					submitBtn.textContent = originalText;
+				}
+			});
+
+			// Définir la date minimum à aujourd'hui + 7 jours
+			const today = new Date();
+			const minDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+			document.getElementById('deadline').min = minDate.toISOString().split('T')[0];
+		</script>
+	</body>
+</html>
