@@ -131,4 +131,4 @@ Ce projet est créé pour usage commercial. Adaptez selon vos besoins.
 
 **Poppy Music** - Devenez producteur de votre chanson. 🎵✨
 
-*Déployé automatiquement sur Digital Ocean via GitHub Actions* 🚀 (Clé SSH propre)
+*Déployé automatiquement sur Digital Ocean via GitHub Actions* 🚀 ✅ **FONCTIONNE !**
