@@ -342,17 +342,28 @@ const url = "https://poppymusic.fr/brief";
 				}
 
 				try {
-					// Ici on enverra les données vers votre backend/API
-					console.log('Brief data:', briefData);
-					
-					// Simulation d'envoi vers Stripe
-					// Dans la vraie version, vous enverrez briefData à votre API
-					// qui créera une session Stripe et retournera l'URL de paiement
-					
-					alert('Brief reçu ! Redirection vers le paiement...');
-					
-					// Redirection vers Stripe (à remplacer par la vraie URL)
-					// window.location.href = stripeCheckoutUrl;
+					// Envoyer les données vers l'API Supabase
+					const response = await fetch('/api/briefs/submit', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(briefData)
+					});
+
+					const result = await response.json();
+
+					if (result.success) {
+						alert('Brief enregistré avec succès ! Redirection vers le paiement...');
+						
+						// TODO: Redirection vers Stripe quand configuré
+						// window.location.href = result.stripeUrl;
+						
+						// Pour l'instant, redirection vers une page de confirmation
+						window.location.href = `/confirmation?briefId=${result.briefId}`;
+					} else {
+						throw new Error(result.message || 'Erreur lors de l\'enregistrement');
+					}
 					
 				} catch (error) {
 					console.error('Erreur:', error);

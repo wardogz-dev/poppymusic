@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+
+const title = "Brief Envoyé - Poppy Music";
+const description = "Votre brief créatif a été envoyé avec succès. Nous vous contacterons bientôt.";
+---
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>{title}</title>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
+		<meta name="robots" content="noindex, nofollow" />
+	</head>
+	
+	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased min-h-screen flex items-center justify-center">
+		<div class="max-w-2xl w-full mx-auto px-6 text-center">
+			<!-- SUCCÈS -->
+			<div class="mb-8">
+				<div class="w-20 h-20 bg-green-500 bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6">
+					<span class="text-green-400 text-4xl">✅</span>
+				</div>
+				<h1 class="title-artistic text-4xl md:text-5xl text-white mb-4">
+					Brief <span class="text-[#c76927]">Envoyé</span> !
+				</h1>
+				<p class="text-xl text-gray-300 leading-relaxed">
+					Votre demande créative a été enregistrée avec succès. 
+					Nous allons l'étudier et vous contacter dans les 24h.
+				</p>
+			</div>
+
+			<!-- PROCHAINES ÉTAPES -->
+			<div class="bg-gray-900 bg-opacity-50 rounded-lg p-8 mb-8">
+				<h2 class="text-2xl font-bold text-[#c76927] mb-6">Prochaines étapes</h2>
+				
+				<div class="space-y-4 text-left">
+					<div class="flex items-start space-x-4">
+						<div class="w-8 h-8 bg-[#c76927] text-black rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</div>
+						<div>
+							<h3 class="font-semibold text-white">Analyse de votre brief</h3>
+							<p class="text-gray-400 text-sm">Notre équipe étudie votre demande et prépare une proposition personnalisée.</p>
+						</div>
+					</div>
+					
+					<div class="flex items-start space-x-4">
+						<div class="w-8 h-8 bg-[#c76927] text-black rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">2</div>
+						<div>
+							<h3 class="font-semibold text-white">Contact et validation</h3>
+							<p class="text-gray-400 text-sm">Nous vous contacterons pour affiner les détails et valider le projet.</p>
+						</div>
+					</div>
+					
+					<div class="flex items-start space-x-4">
+						<div class="w-8 h-8 bg-[#c76927] text-black rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">3</div>
+						<div>
+							<h3 class="font-semibold text-white">Paiement et production</h3>
+							<p class="text-gray-400 text-sm">Une fois le paiement effectué, nous commençons la création de votre chanson.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- INFORMATIONS DE CONTACT -->
+			<div class="text-center">
+				<p class="text-gray-400 mb-4">Une question ? Contactez-nous :</p>
+				<a href="mailto:hello@poppymusic.com" class="text-[#c76927] hover:text-white transition-colors font-medium">
+					hello@poppymusic.com
+				</a>
+			</div>
+
+			<!-- RETOUR ACCUEIL -->
+			<div class="mt-8">
+				<a href="/" class="inline-block border border-[#c76927] text-[#c76927] px-8 py-3 font-medium tracking-wide hover:bg-[#c76927] hover:text-black transition-all duration-300 rounded-md">
+					RETOUR À L'ACCUEIL
+				</a>
+			</div>
+		</div>
+
+		<script>
+			// Afficher l'ID du brief si disponible dans l'URL
+			const urlParams = new URLSearchParams(window.location.search);
+			const briefId = urlParams.get('briefId');
+			
+			if (briefId) {
+				console.log('Brief ID:', briefId);
+				// Optionnel: afficher l'ID pour le suivi client
+			}
+		</script>
+	</body>
+</html>
