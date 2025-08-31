@@ -36,15 +36,11 @@ jobs:
           npm ci
           npm run build
           
-          # Vérifier si l'app PM2 existe, sinon la créer
-          if pm2 describe poppymusic > /dev/null 2>&1; then
-            echo "Application PM2 trouvée, rechargement..."
-            pm2 reload poppymusic
-          else
-            echo "Application PM2 non trouvée, création..."
-            pm2 start npm --name "poppymusic" -- run preview
-            pm2 save
-          fi
+          # Plus besoin de PM2 - site statique servi par Nginx
+          echo "✅ Build terminé - Site statique généré dans dist/"
+          echo "📁 Contenu du répertoire dist :"
+          ls -la dist/
           
-          # Vérifier le statut
-          pm2 status poppymusic
+          # Test que Nginx sert bien les fichiers
+          echo "🧪 Test du site local :"
+          curl -I http://localhost/ || echo "⚠️ Test local échoué"
