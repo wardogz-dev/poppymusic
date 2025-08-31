@@ -5,16 +5,39 @@ import ProductionsGrid from '../components/ProductionsGrid.astro';
 
 const BRAND_NAME = "Poppy Music";
 const TAGLINE = "Studio de Production Musicale";
+
+// Open Graph metadata
+const title = "Poppy Music — crée ta chanson sur-mesure";
+const description = "Commande une chanson unique en 24h, écrite et produite pour toi.";
+const image = "https://poppymusic.fr/og-image.png?v=3"; // versionne pour casser le cache
+const url = "https://poppymusic.fr/";
 ---
 
 <html lang="fr">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/icon-2025.svg" />
+		<title>{title}</title>
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-	<title>{BRAND_NAME} - {TAGLINE}</title>
-	<meta name="description" content="Studio de production musicale. Création de chansons personnalisées, production artistique et distribution streaming." />
+
+		<!-- Favicon -->
+		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
+		<link rel="alternate icon" href="/favicon.ico" />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={url} />
+		<meta property="og:image" content={image} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={image} />
 	</head>
 <body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased overflow-x-hidden">
 	
