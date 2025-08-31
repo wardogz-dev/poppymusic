@@ -31,8 +31,20 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /var/www/poppymusic
+          cd /var/www/poppymusic || exit 1
           git pull origin main
           npm ci
           npm run build
-          pm2 reload poppymusic
+          
+          # Vérifier si l'app PM2 existe, sinon la créer
+          if pm2 describe poppymusic > /dev/null 2>&1; then
+            echo "Application PM2 trouvée, rechargement..."
+            pm2 reload poppymusic
+          else
+            echo "Application PM2 non trouvée, création..."
+            pm2 start npm --name "poppymusic" -- run preview
+            pm2 save
+          fi
+          
+          # Vérifier le statut
+          pm2 status poppymusic
