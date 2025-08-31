@@ -125,7 +125,7 @@ const title = "Dashboard Admin - Poppy Music";
 		</main>
 
 		<script type="module">
-			import { BriefService, AuthService } from '/src/lib/supabase.ts';
+			import { BriefService, AuthService } from '/scripts/supabase-client.js';
 
 			// Vérifier l'authentification
 			if (!AuthService.isAdminLoggedIn()) {

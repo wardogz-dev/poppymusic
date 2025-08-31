@@ -112,7 +112,7 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 		</div>
 
 		<script type="module">
-			import { BriefService, AuthService } from '/src/lib/supabase.ts';
+			import { BriefService, AuthService } from '/scripts/supabase-client.js';
 
 			// Vérifier l'authentification
 			if (!AuthService.isAdminLoggedIn()) {
