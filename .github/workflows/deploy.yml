@@ -24,16 +24,24 @@ jobs:
     - name: Build project
       run: npm run build
       
-    - name: Deploy to server
+    - name: Deploy to server (SSH Primary)
+      id: ssh_deploy
+      continue-on-error: true
       uses: appleboy/ssh-action@v0.1.8
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          echo "🚀 Début du déploiement..."
+          echo "🚀 Début du déploiement SSH..."
           cd /var/www/poppymusic
           git pull origin main
           npm ci
           npm run build
-          echo "✅ Déploiement terminé !"
+          echo "✅ Déploiement SSH terminé !"
+          
+    - name: Deploy to server (Webhook Fallback)
+      if: steps.ssh_deploy.outcome == 'failure'
+      run: |
+        echo "⚠️ SSH échoué, utilisation du webhook de secours..."
+        curl -f -X POST "https://poppymusic.fr/webhook-deploy.php?secret=poppymusic2025" || echo "❌ Les deux méthodes ont échoué"
