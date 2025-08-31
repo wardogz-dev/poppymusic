@@ -1,0 +1,304 @@
+---
+import '../../../styles/global.css';
+
+export const prerender = false;
+
+const title = "Détails Brief - Poppy Music Admin";
+---
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>{title}</title>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
+		<meta name="robots" content="noindex, nofollow" />
+	</head>
+	
+	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased">
+		<!-- HEADER ADMIN -->
+		<header class="bg-gray-900 border-b border-gray-800">
+			<nav class="flex justify-between items-center px-8 py-4">
+				<div class="flex items-center space-x-6">
+					<h1 class="title-artistic text-2xl text-[#c76927]">Poppy Music Admin</h1>
+					<div class="flex space-x-4">
+						<a href="/admin/dashboard" class="text-gray-400 hover:text-white transition-colors">Dashboard</a>
+						<a href="/admin/briefs" class="text-gray-400 hover:text-white transition-colors">← Retour aux briefs</a>
+					</div>
+				</div>
+				<div class="flex items-center space-x-4">
+					<span class="text-sm text-gray-400">Connecté en tant que <span id="adminUsername" class="text-white">admin</span></span>
+					<button id="logoutBtn" class="text-gray-400 hover:text-red-400 transition-colors">Déconnexion</button>
+				</div>
+			</nav>
+		</header>
+
+		<!-- MAIN CONTENT -->
+		<main class="p-8">
+			<div class="max-w-6xl mx-auto">
+				<!-- LOADING STATE -->
+				<div id="loadingState" class="text-center py-20">
+					<div class="text-4xl mb-4">🔄</div>
+					<p class="text-gray-400">Chargement du brief...</p>
+				</div>
+
+				<!-- BRIEF DETAILS -->
+				<div id="briefDetails" class="hidden">
+					<!-- HEADER BRIEF -->
+					<div class="bg-gray-900 rounded-lg p-6 mb-8">
+						<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center">
+							<div>
+								<h1 id="briefTitle" class="text-3xl font-bold text-white mb-2">Brief Client</h1>
+								<p id="briefMeta" class="text-gray-400">Créé le...</p>
+							</div>
+							<div class="flex space-x-4 mt-4 lg:mt-0">
+								<select id="statusSelect" class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927]">
+									<option value="pending">En attente</option>
+									<option value="in_progress">En cours</option>
+									<option value="completed">Terminé</option>
+									<option value="cancelled">Annulé</option>
+								</select>
+								<button id="saveStatusBtn" class="px-4 py-2 bg-[#c76927] text-black font-medium rounded-md hover:bg-[#a85520] transition-colors">
+									Sauvegarder
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- GRID DETAILS -->
+					<div class="grid lg:grid-cols-2 gap-8">
+						<!-- INFORMATIONS CLIENT -->
+						<div class="bg-gray-900 rounded-lg p-6">
+							<h2 class="text-xl font-bold text-[#c76927] mb-4">Informations Client</h2>
+							<div class="space-y-3">
+								<div>
+									<span class="text-gray-400 text-sm">Nom complet :</span>
+									<p id="clientName" class="text-white font-medium">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Email :</span>
+									<p id="clientEmail" class="text-white">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Téléphone :</span>
+									<p id="clientPhone" class="text-white">-</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- PROJET MUSICAL -->
+						<div class="bg-gray-900 rounded-lg p-6">
+							<h2 class="text-xl font-bold text-[#c76927] mb-4">Projet Musical</h2>
+							<div class="space-y-3">
+								<div>
+									<span class="text-gray-400 text-sm">Titre :</span>
+									<p id="projectTitle" class="text-white font-medium">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Style :</span>
+									<p id="musicStyle" class="text-white">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Occasion :</span>
+									<p id="projectPurpose" class="text-white">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Formule :</span>
+									<p id="packageType" class="text-white">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Délai :</span>
+									<p id="deadline" class="text-white">-</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- MESSAGE PRINCIPAL -->
+						<div class="bg-gray-900 rounded-lg p-6">
+							<h2 class="text-xl font-bold text-[#c76927] mb-4">Message Principal</h2>
+							<div class="space-y-3">
+								<div>
+									<span class="text-gray-400 text-sm">Public cible :</span>
+									<p id="targetAudience" class="text-white">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Message :</span>
+									<p id="mainMessage" class="text-white">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Émotions :</span>
+									<p id="emotions" class="text-white">-</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- HISTOIRE PERSONNELLE -->
+						<div class="bg-gray-900 rounded-lg p-6">
+							<h2 class="text-xl font-bold text-[#c76927] mb-4">Histoire & Références</h2>
+							<div class="space-y-3">
+								<div>
+									<span class="text-gray-400 text-sm">Histoire personnelle :</span>
+									<p id="personalStory" class="text-white">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Mots-clés :</span>
+									<p id="keyWords" class="text-white">-</p>
+								</div>
+								<div>
+									<span class="text-gray-400 text-sm">Références artistiques :</span>
+									<p id="referenceArtists" class="text-white">-</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- NOTES ADMIN -->
+					<div class="bg-gray-900 rounded-lg p-6 mt-8">
+						<h2 class="text-xl font-bold text-[#c76927] mb-4">Notes Admin</h2>
+						<textarea id="adminNotes" rows="4" 
+							class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"
+							placeholder="Ajoutez vos notes sur ce projet..."></textarea>
+						<div class="mt-4">
+							<button id="saveNotesBtn" class="bg-[#c76927] text-black px-6 py-2 font-medium rounded-md hover:bg-[#a85520] transition-colors">
+								Sauvegarder les notes
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- ERROR STATE -->
+				<div id="errorState" class="hidden text-center py-20">
+					<div class="text-4xl mb-4">❌</div>
+					<p class="text-red-400">Erreur lors du chargement du brief</p>
+					<a href="/admin/briefs" class="inline-block mt-4 text-[#c76927] hover:text-white transition-colors">
+						← Retour à la liste
+					</a>
+				</div>
+			</div>
+		</main>
+
+		<script type="module">
+			import { supabase, AuthService } from '/scripts/supabase-client.js';
+
+			// Vérifier l'authentification
+			if (!AuthService.isAdminLoggedIn()) {
+				window.location.href = '/admin/login';
+			}
+
+			// Récupérer l'ID du brief depuis l'URL
+			const briefId = window.location.pathname.split('/').pop();
+			
+			// Gestion de la déconnexion
+			document.getElementById('logoutBtn')?.addEventListener('click', () => {
+				AuthService.logout();
+				window.location.href = '/admin/login';
+			});
+
+			// Charger les détails du brief
+			async function loadBriefDetails() {
+				try {
+					const { data: brief, error } = await supabase
+						.from('client_briefs')
+						.select('*')
+						.eq('id', briefId)
+						.single();
+
+					if (error || !brief) {
+						throw new Error('Brief non trouvé');
+					}
+
+					// Remplir les informations
+					document.getElementById('briefTitle').textContent = `${brief.project_title || 'Brief'} - ${brief.first_name} ${brief.last_name}`;
+					document.getElementById('briefMeta').textContent = `Créé le ${new Date(brief.created_at).toLocaleDateString('fr-FR')} à ${new Date(brief.created_at).toLocaleTimeString('fr-FR')}`;
+					
+					// Informations client
+					document.getElementById('clientName').textContent = `${brief.first_name} ${brief.last_name}`;
+					document.getElementById('clientEmail').textContent = brief.email;
+					document.getElementById('clientPhone').textContent = brief.phone || 'Non renseigné';
+					
+					// Projet
+					document.getElementById('projectTitle').textContent = brief.project_title || 'Sans titre';
+					document.getElementById('musicStyle').textContent = brief.music_style;
+					document.getElementById('projectPurpose').textContent = brief.project_purpose;
+					document.getElementById('packageType').textContent = brief.package === 'premium' ? 'Premium (399€)' : 'Standard (199€)';
+					document.getElementById('deadline').textContent = new Date(brief.deadline).toLocaleDateString('fr-FR');
+					
+					// Message
+					document.getElementById('targetAudience').textContent = brief.target_audience;
+					document.getElementById('mainMessage').textContent = brief.main_message;
+					document.getElementById('emotions').textContent = (brief.emotions || []).join(', ') || 'Non spécifié';
+					
+					// Histoire
+					document.getElementById('personalStory').textContent = brief.personal_story;
+					document.getElementById('keyWords').textContent = brief.key_words || 'Non spécifié';
+					document.getElementById('referenceArtists').textContent = brief.reference_artists || 'Non spécifié';
+					
+					// Statut et notes
+					document.getElementById('statusSelect').value = brief.status || 'pending';
+					document.getElementById('adminNotes').value = brief.admin_notes || '';
+
+					// Afficher le contenu
+					document.getElementById('loadingState').classList.add('hidden');
+					document.getElementById('briefDetails').classList.remove('hidden');
+
+				} catch (error) {
+					console.error('Erreur:', error);
+					document.getElementById('loadingState').classList.add('hidden');
+					document.getElementById('errorState').classList.remove('hidden');
+				}
+			}
+
+			// Sauvegarder le statut
+			document.getElementById('saveStatusBtn')?.addEventListener('click', async () => {
+				const newStatus = document.getElementById('statusSelect').value;
+				
+				try {
+					const { error } = await supabase
+						.from('client_briefs')
+						.update({ status: newStatus })
+						.eq('id', briefId);
+
+					if (error) throw error;
+					
+					alert('Statut mis à jour !');
+				} catch (error) {
+					console.error('Erreur:', error);
+					alert('Erreur lors de la mise à jour du statut');
+				}
+			});
+
+			// Sauvegarder les notes
+			document.getElementById('saveNotesBtn')?.addEventListener('click', async () => {
+				const notes = document.getElementById('adminNotes').value;
+				
+				try {
+					const { error } = await supabase
+						.from('client_briefs')
+						.update({ admin_notes: notes })
+						.eq('id', briefId);
+
+					if (error) throw error;
+					
+					alert('Notes sauvegardées !');
+				} catch (error) {
+					console.error('Erreur:', error);
+					alert('Erreur lors de la sauvegarde des notes');
+				}
+			});
+
+			// Afficher le nom d'utilisateur
+			const session = localStorage.getItem('poppy_admin_session');
+			if (session) {
+				try {
+					const { username } = JSON.parse(session);
+					document.getElementById('adminUsername').textContent = username;
+				} catch (e) {
+					console.error('Erreur session:', e);
+				}
+			}
+
+			// Charger les détails au démarrage
+			loadBriefDetails();
+		</script>
+	</body>
+</html>

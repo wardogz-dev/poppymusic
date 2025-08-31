@@ -250,8 +250,7 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 
 			// Voir les détails d'un brief
 			window.viewBrief = function(briefId) {
-				// TODO: Charger et afficher les détails dans le modal
-				console.log('Voir brief:', briefId);
+				window.location.href = `/admin/briefs/${briefId}`;
 			};
 
 			// Modifier un brief
