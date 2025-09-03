@@ -75,9 +75,15 @@ const tagStyles = {
 			<source src={audioSrc} type={audioType === 'wav' ? 'audio/wav' : 'audio/mpeg'} />
 		</audio>
 	</div>
-	<h3 class="text-white font-medium text-lg mb-2 flex items-center justify-center gap-2">
+	<h3 class="text-white font-medium text-lg mb-2 flex items-center justify-center gap-2 mt-4">
 		{title}
-		<img src="/images/spotify.svg" alt="Spotify" class="w-5 h-5" />
+		<a href="https://open.spotify.com/playlist/2utrwtRZQ190B4uWxOfzk8?si=62738390a74e42ca" 
+		   target="_blank" 
+		   rel="noopener noreferrer" 
+		   class="hover:scale-110 transition-transform"
+		   title="Écouter sur Spotify">
+			<img src="/images/spotify.svg" alt="Spotify" class="w-5 h-5" />
+		</a>
 	</h3>
 	<p class="text-gray-400 text-sm">{genre} • {duration}</p>
 	<a href={useCaseUrl} class="inline-block mt-4 text-[#c76927] text-sm hover:text-white transition-colors border-b border-[#c76927] hover:border-white">

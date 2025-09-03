@@ -29,19 +29,20 @@ const {
 	artist
 } = Astro.props;
 
-// Configuration des couleurs de tags
+// Configuration des couleurs de tags (comme sur la home)
 const tagColors = {
-	'Anniversaire Adulte': 'bg-purple-500 bg-opacity-20 text-purple-400',
-	'Anniversaire Enfant': 'bg-pink-500 bg-opacity-20 text-pink-400',
-	'Mariage': 'bg-red-500 bg-opacity-20 text-red-400',
-	'Entreprise': 'bg-blue-500 bg-opacity-20 text-blue-400',
-	'Association': 'bg-green-500 bg-opacity-20 text-green-400',
-	'Particulier': 'bg-[#c76927] bg-opacity-20 text-[#c76927]',
-	'Professionnel': 'bg-gray-500 bg-opacity-20 text-gray-400'
+	'Anniversaire Adulte': 'bg-purple-500 bg-opacity-20 text-white border border-purple-500 border-opacity-30',
+	'Anniversaire Enfant': 'bg-pink-500 bg-opacity-20 text-white border border-pink-500 border-opacity-30',
+	'Mariage': 'bg-red-500 bg-opacity-20 text-white border border-red-500 border-opacity-30',
+	'Entreprise': 'bg-blue-500 bg-opacity-20 text-white border border-blue-500 border-opacity-30',
+	'Association': 'bg-green-500 bg-opacity-20 text-white border border-green-500 border-opacity-30',
+	'Particulier': 'bg-[#c76927] bg-opacity-20 text-white border border-[#c76927] border-opacity-30',
+	'Professionnel': 'bg-gray-500 bg-opacity-20 text-white border border-gray-500 border-opacity-30'
 };
 
-const displayTag = tag || clientType;
-const tagColorClass = tagColors[displayTag] || tagColors['Particulier'];
+// N'afficher le tag que s'il existe (pas clientType)
+const displayTag = tag;
+const tagColorClass = tag ? (tagColors[tag] || tagColors['Particulier']) : null;
 
 import '../styles/global.css';
 ---
@@ -57,16 +58,49 @@ import '../styles/global.css';
 
 <body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased">
 	
-	<!-- HEADER -->
+	<!-- HEADER AVEC NAVIGATION -->
 	<header class="fixed top-0 left-0 right-0 z-50 glass-effect">
-		<nav class="flex justify-between items-center px-8 py-6">
-			<a href="/" class="title-artistic text-2xl text-[#c76927] hover:opacity-80 transition-opacity">
-				Poppy Music
-			</a>
-			<div class="text-artistic text-sm text-gray-400 uppercase tracking-wider">
-				Studio de Production
+		<nav class="flex justify-between items-center px-4 sm:px-8 py-4 sm:py-6">
+			<a href="/" class="title-artistic text-xl sm:text-2xl text-[#c76927] hover:opacity-80 transition-opacity">Poppy Music</a>
+			
+			<!-- Navigation Desktop -->
+			<div class="hidden md:flex items-center space-x-8">
+				<a href="/" class="text-gray-300 hover:text-[#c76927] transition-colors text-sm font-medium">Accueil</a>
+				<a href="/#productions" class="text-gray-300 hover:text-[#c76927] transition-colors text-sm font-medium">Productions</a>
+				<a href="/#faq" class="text-gray-300 hover:text-[#c76927] transition-colors text-sm font-medium">FAQ</a>
+				<a href="/brief" class="bg-[#c76927] text-black px-6 py-2 text-sm font-medium rounded-md hover:bg-[#a85520] transition-all">
+					Créer ma chanson
+				</a>
+			</div>
+
+			<!-- Navigation Mobile -->
+			<div class="md:hidden flex items-center space-x-4">
+				<div class="text-artistic text-xs text-gray-400 uppercase tracking-wider">Cas d'Usage</div>
+				<button id="mobileMenuBtn" class="text-gray-300 hover:text-[#c76927] transition-colors">
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+					</svg>
+				</button>
 			</div>
 		</nav>
+
+		<!-- Menu Mobile (sans fond bleu) -->
+		<div id="mobileMenu" class="md:hidden hidden bg-gray-900 bg-opacity-95 backdrop-blur-sm border-t border-gray-800">
+			<div class="px-4 py-6 space-y-4">
+				<a href="/" class="block text-gray-300 hover:text-[#c76927] transition-colors text-base font-medium py-2" onclick="closeMobileMenu()">
+					Accueil
+				</a>
+				<a href="/#productions" class="block text-gray-300 hover:text-[#c76927] transition-colors text-base font-medium py-2" onclick="closeMobileMenu()">
+					Productions
+				</a>
+				<a href="/#faq" class="block text-gray-300 hover:text-[#c76927] transition-colors text-base font-medium py-2" onclick="closeMobileMenu()">
+					FAQ
+				</a>
+				<a href="/brief" class="block bg-[#c76927] text-black px-6 py-3 text-base font-medium rounded-md hover:bg-[#a85520] transition-all text-center" onclick="closeMobileMenu()">
+					Créer ma chanson
+				</a>
+			</div>
+		</div>
 	</header>
 
 	<!-- HERO CAS D'USAGE -->
@@ -76,11 +110,13 @@ import '../styles/global.css';
 				
 				<!-- CONTENU -->
 				<div>
-					<div class="mb-6">
-						<span class={`inline-block px-4 py-2 text-sm font-medium rounded-full mb-4 ${tagColorClass}`}>
-							{displayTag}
-						</span>
-					</div>
+					{displayTag && (
+						<div class="mb-6">
+							<span class={`inline-block px-4 py-2 text-sm font-medium rounded-full mb-4 ${tagColorClass}`}>
+								{displayTag}
+							</span>
+						</div>
+					)}
 					
 					<h1 class="title-artistic text-5xl md:text-6xl text-white mb-6 leading-tight">
 						{title}
@@ -154,9 +190,9 @@ import '../styles/global.css';
 	</section>
 
 	<!-- PROCESSUS POUR CE CAS -->
-	<section class="py-20 px-6 bg-gradient-to-b from-[#0B0B0B] to-[#121212]">
+	<section class="py-12 md:py-16 px-6 bg-gradient-to-b from-[#0B0B0B] to-[#121212]">
 		<div class="max-w-4xl mx-auto text-center">
-			<h2 class="title-artistic text-4xl text-white mb-12">
+			<h2 class="title-artistic text-4xl text-white mb-8 md:mb-10">
 				Comment nous avons <span class="text-[#c76927]">produit</span> cette chanson
 			</h2>
 			
@@ -269,5 +305,34 @@ import '../styles/global.css';
 			}
 		});
 	</script>
-</body>
+	<!-- Menu burger mobile script -->
+	<script>
+		// @ts-nocheck
+		document.addEventListener('DOMContentLoaded', () => {
+			const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+			const mobileMenu = document.getElementById('mobileMenu');
+			
+			window.closeMobileMenu = function() {
+				if (mobileMenu) {
+					mobileMenu.classList.add('hidden');
+					if (mobileMenuBtn) {
+						mobileMenuBtn.querySelector('svg').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+					}
+				}
+			};
+			
+			mobileMenuBtn?.addEventListener('click', function() {
+				const isHidden = mobileMenu.classList.contains('hidden');
+				
+				if (isHidden) {
+					mobileMenu.classList.remove('hidden');
+					this.querySelector('svg').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+				} else {
+					closeMobileMenu();
+				}
+			});
+		});
+	</script>
+
+	</body>
 </html>
