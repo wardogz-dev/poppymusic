@@ -41,12 +41,45 @@ const url = "https://poppymusic.fr/";
 	</head>
 <body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased overflow-x-hidden">
 	
-	<!-- HEADER MINIMAL -->
+	<!-- HEADER AVEC NAVIGATION -->
 	<header class="fixed top-0 left-0 right-0 z-50 glass-effect">
 		<nav class="flex justify-between items-center px-4 sm:px-8 py-4 sm:py-6">
 			<div class="title-artistic text-xl sm:text-2xl text-[#c76927]">{BRAND_NAME}</div>
-			<div class="text-artistic text-xs sm:text-sm text-gray-400 uppercase tracking-wider">{TAGLINE}</div>
+			
+			<!-- Navigation Desktop -->
+			<div class="hidden md:flex items-center space-x-8">
+				<a href="#productions" class="text-gray-300 hover:text-[#c76927] transition-colors text-sm font-medium">Productions</a>
+				<a href="#faq" class="text-gray-300 hover:text-[#c76927] transition-colors text-sm font-medium">FAQ</a>
+				<a href="/brief" class="bg-[#c76927] text-black px-6 py-2 text-sm font-medium rounded-md hover:bg-[#a85520] transition-all">
+					Créer ma chanson
+				</a>
+			</div>
+
+			<!-- Navigation Mobile -->
+			<div class="md:hidden flex items-center space-x-4">
+				<div class="text-artistic text-xs text-gray-400 uppercase tracking-wider">{TAGLINE}</div>
+				<button id="mobileMenuBtn" class="text-gray-300 hover:text-[#c76927] transition-colors">
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+					</svg>
+				</button>
+			</div>
 		</nav>
+
+		<!-- Menu Mobile (caché par défaut) -->
+		<div id="mobileMenu" class="md:hidden hidden bg-gray-900 bg-opacity-95 backdrop-blur-sm border-t border-gray-800">
+			<div class="px-4 py-6 space-y-4">
+				<a href="#productions" class="block text-gray-300 hover:text-[#c76927] transition-colors text-base font-medium py-2" onclick="closeMobileMenu()">
+					Productions
+				</a>
+				<a href="#faq" class="block text-gray-300 hover:text-[#c76927] transition-colors text-base font-medium py-2" onclick="closeMobileMenu()">
+					FAQ
+				</a>
+				<a href="/brief" class="block bg-[#c76927] text-black px-6 py-3 text-base font-medium rounded-md hover:bg-[#a85520] transition-all text-center" onclick="closeMobileMenu()">
+					Créer ma chanson
+				</a>
+			</div>
+		</div>
 	</header>
 
 	<!-- HERO SECTION -->
@@ -65,9 +98,9 @@ const url = "https://poppymusic.fr/";
 				<a href="/brief" class="bg-[#c76927] text-black px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#a85520] transition-all duration-300 hover:scale-105 rounded-md inline-block text-center">
 					PRODUIRE VOTRE CHANSON
 				</a>
-				<button class="border border-[#c76927] text-[#c76927] px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#c76927] hover:text-black transition-all duration-300 rounded-md">
+				<a href="#productions" class="border border-[#c76927] text-[#c76927] px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#c76927] hover:text-black transition-all duration-300 rounded-md inline-block text-center">
 					DÉCOUVRIR NOS PRODUCTIONS
-				</button>
+				</a>
 			</div>
 		</div>
 	</section>
@@ -115,7 +148,7 @@ const url = "https://poppymusic.fr/";
 	</section>
 
 	<!-- PRODUCTIONS -->
-	<section class="py-32 px-6 bg-gradient-to-b from-[#0B0B0B] to-[#121212]">
+	<section id="productions" class="py-32 px-6 bg-gradient-to-b from-[#0B0B0B] to-[#121212]">
 		<div class="max-w-7xl mx-auto">
 			<h2 class="title-artistic text-5xl md:text-6xl text-white text-center mb-4">
 				Nos <span class="text-[#c76927]">Productions</span>
@@ -264,7 +297,7 @@ const url = "https://poppymusic.fr/";
 	</section>
 
 	<!-- FAQ SECTION -->
-	<section class="py-20 px-6 bg-gradient-to-b from-[#121212] to-[#0B0B0B]">
+	<section id="faq" class="py-20 px-6 bg-gradient-to-b from-[#121212] to-[#0B0B0B]">
 		<div class="max-w-4xl mx-auto">
 			<div class="text-center mb-16">
 				<h2 class="title-artistic text-4xl md:text-5xl text-white mb-6">
@@ -552,6 +585,27 @@ const url = "https://poppymusic.fr/";
 			const stickyPlayer = new StickyPlayer();
 			initAlbumInteractions(stickyPlayer);
 			initSmoothScroll();
+			
+			// Menu burger mobile
+			const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+			const mobileMenu = document.getElementById('mobileMenu');
+			
+			window.closeMobileMenu = function() {
+				mobileMenu.classList.add('hidden');
+				mobileMenuBtn.querySelector('svg').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+			};
+			
+			mobileMenuBtn?.addEventListener('click', function() {
+				const isHidden = mobileMenu.classList.contains('hidden');
+				
+				if (isHidden) {
+					mobileMenu.classList.remove('hidden');
+					// Icône X
+					this.querySelector('svg').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+				} else {
+					closeMobileMenu();
+				}
+			});
 			
 			// Gestion des accordéons FAQ
 			const faqTriggers = document.querySelectorAll('.faq-trigger');
