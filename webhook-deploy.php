@@ -22,11 +22,14 @@ log_message("🚀 Début du déploiement webhook");
 // Changer de répertoire
 chdir('/var/www/poppymusic');
 
-// Commandes de déploiement
+// Commandes de déploiement avec nettoyage forcé
 $commands = [
-    'git pull origin main 2>&1',
+    'git fetch origin main 2>&1',
+    'git reset --hard origin/main 2>&1',
+    'git clean -fd 2>&1',
     'npm ci 2>&1', 
-    'npm run build 2>&1'
+    'npm run build 2>&1',
+    'cp webhook-deploy.php dist/ 2>&1'
 ];
 
 $output = [];

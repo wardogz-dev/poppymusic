@@ -14,9 +14,15 @@ cd /var/www/poppymusic
 echo "💾 Sauvegarde des changements..."
 git stash
 
+# Nettoyer le cache Git et forcer la mise à jour
+echo "🧹 Nettoyage du cache Git..."
+git reset --hard HEAD
+git clean -fd
+
 # Récupérer les dernières mises à jour
 echo "📥 Récupération des mises à jour GitHub..."
-git pull origin main
+git fetch origin main
+git reset --hard origin/main
 
 # Installation/mise à jour des dépendances
 echo "📦 Mise à jour des dépendances..."
