@@ -1,47 +1,36 @@
-name: Deploy to Digital Ocean
+name: 🚀 Deploy Poppy Music
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
+    - name: 📥 Checkout code
       uses: actions/checkout@v3
       
-    - name: Setup Node.js
+    - name: 🔧 Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18'
         cache: 'npm'
         
-    - name: Install dependencies
+    - name: 📦 Install dependencies
       run: npm ci
       
-    - name: Build project
+    - name: 🏗️ Build project
       run: npm run build
       
-    - name: Deploy to server (SSH Primary)
-      id: ssh_deploy
-      continue-on-error: true
-      uses: appleboy/ssh-action@v0.1.8
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          echo "🚀 Début du déploiement SSH..."
-          cd /var/www/poppymusic
-          git pull origin main
-          npm ci
-          npm run build
-          echo "✅ Déploiement SSH terminé !"
-          
-    - name: Deploy to server (Webhook Fallback)
-      if: steps.ssh_deploy.outcome == 'failure'
+    - name: 🚀 Deploy via webhook
       run: |
-        echo "⚠️ SSH échoué, utilisation du webhook de secours..."
-        curl -f -X POST "https://poppymusic.fr/webhook-deploy.php?secret=poppymusic2025" || echo "❌ Les deux méthodes ont échoué"
+        echo "🔗 Déclenchement du webhook de déploiement..."
+        curl -f -X GET "https://poppymusic.fr/webhook-deploy.php?secret=poppymusic2025" || echo "❌ Webhook échoué"
+        
+    - name: ✅ Deployment complete
+      run: |
+        echo "✅ Déploiement terminé !"
+        echo "🌐 Site accessible : https://poppymusic.fr"
