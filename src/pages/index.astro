@@ -7,7 +7,7 @@ const BRAND_NAME = "Poppy Music";
 const TAGLINE = "Votre message en musique";
 
 // Open Graph metadata
-const title = "Poppy Music — crée ta chanson sur-mesure";
+const title = "Poppy Music — fais passer un message en musique";
 const description = "Fais passer un message en musique. Crée ta chanson personnalisée et unique.";
 const image = "https://poppymusic.fr/og-image.png?v=3"; // versionne pour casser le cache
 const url = "https://poppymusic.fr/";
@@ -43,7 +43,7 @@ const url = "https://poppymusic.fr/";
 	
 	<!-- HEADER AVEC NAVIGATION -->
 	<header class="fixed top-0 left-0 right-0 z-50 glass-effect">
-		<nav class="flex justify-between items-center px-4 sm:px-8 py-4 sm:py-6">
+		<nav class="flex justify-between items-center px-4 sm:px-8 py-3 sm:py-6">
 			<div class="title-artistic text-xl sm:text-2xl text-[#c76927]">{BRAND_NAME}</div>
 			
 			<!-- Navigation Desktop -->
@@ -58,8 +58,7 @@ const url = "https://poppymusic.fr/";
 			</div>
 
 			<!-- Navigation Mobile -->
-			<div class="md:hidden flex items-center space-x-4">
-				<div class="text-artistic text-xs text-gray-400 uppercase tracking-wider">{TAGLINE}</div>
+			<div class="md:hidden flex items-center">
 				<button id="mobileMenuBtn" class="text-gray-300 hover:text-[#c76927] transition-colors">
 					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
