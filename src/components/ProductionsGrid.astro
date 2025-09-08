@@ -4,9 +4,24 @@ import ProductionCard from './ProductionCard.astro';
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-12 justify-items-center">
 	
-	<!-- 1. Funky Thierry - Anniversaire Adulte -->
+	<!-- 1. C'est Chez Moi - Anniversaire Adulte -->
 	<ProductionCard 
 		audioId="1"
+		title="C'est Chez Moi"
+		genre="Chanson d'Amour"
+		duration="3:45"
+		tag="Anniversaire Adulte"
+		tagColor="anniversaire-adulte"
+		audioSrc="/music/cest-chez-moi.mp3"
+		audioType="mp3"
+		coverClosed="/images/covers/cest-chez-moi-closed.png"
+		coverOpened="/images/covers/cest-chez-moi-opened.png"
+		useCaseUrl="/cas-usage/cest-chez-moi"
+	/>
+
+	<!-- 2. Funky Thierry - Anniversaire Adulte -->
+	<ProductionCard 
+		audioId="2"
 		title="Funky Thierry"
 		genre="Funk"
 		duration="4:18"
@@ -19,9 +34,9 @@ import ProductionCard from './ProductionCard.astro';
 		useCaseUrl="/cas-usage/funky-thierry"
 	/>
 
-	<!-- 2. Titres Français - Entreprise -->
+	<!-- 3. Titres Français - Entreprise -->
 	<ProductionCard 
-		audioId="2"
+		audioId="3"
 		title="Titres Français"
 		genre="Rap"
 		duration="4:12"
@@ -36,7 +51,7 @@ import ProductionCard from './ProductionCard.astro';
 
 	<!-- 3. Raph King - Anniversaire Enfant -->
 	<ProductionCard 
-		audioId="3"
+		audioId="4"
 		title="Raph King"
 		genre="Rap"
 		duration="2:48"
