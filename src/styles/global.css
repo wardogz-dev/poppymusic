@@ -92,6 +92,23 @@ audio::-webkit-media-controls-panel {
   100% { background-position: 0% 50%; }
 }
 
+/* Filtres de production */
+.filter-tag {
+  transition: all 0.3s ease;
+}
+
+.filter-tag.active {
+  transform: scale(1.05);
+}
+
+.filter-tag:not(.active):hover {
+  transform: translateY(-2px);
+}
+
+.production-card {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
 /* Album Cover Opening Animation - Style Ninja Tune */
 .album-container {
   position: relative;
