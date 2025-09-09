@@ -45,6 +45,12 @@ const tagColors = {
 const displayTag = tag;
 const tagColorClass = tag ? (tagColors[tag] || tagColors['Particulier']) : null;
 
+// Open Graph metadata
+const ogTitle = `Écoute ce titre - ${songTitle}`;
+const ogDescription = `Découvrez l'histoire de ${songTitle}, une création ${genre} de Poppy Music Studio. ${objective}`;
+const ogImage = `https://poppymusic.fr${coverClosed}`;
+const ogUrl = `https://poppymusic.fr/cas-usage/${songTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`;
+
 import '../styles/global.css';
 ---
 
@@ -54,7 +60,25 @@ import '../styles/global.css';
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	<meta name="viewport" content="width=device-width" />
 	<title>{title} - Poppy Music Studio</title>
-	<meta name="description" content={`Cas d'usage ${songTitle} - Studio de production musicale Poppy Music`} />
+	<meta name="description" content={ogDescription} />
+
+	<!-- Favicon -->
+	<link rel="alternate icon" href="/favicon.ico" />
+
+	<!-- Open Graph -->
+	<meta property="og:title" content={ogTitle} />
+	<meta property="og:description" content={ogDescription} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={ogUrl} />
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:image:width" content="800" />
+	<meta property="og:image:height" content="800" />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={ogTitle} />
+	<meta name="twitter:description" content={ogDescription} />
+	<meta name="twitter:image" content={ogImage} />
 
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XM9JLS953"></script>
