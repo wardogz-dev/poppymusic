@@ -77,18 +77,17 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 							<thead class="bg-gray-800">
 								<tr>
 									<th class="text-left p-4 text-sm font-medium text-gray-300">Client</th>
-									<th class="text-left p-4 text-sm font-medium text-gray-300">Projet</th>
-									<th class="text-left p-4 text-sm font-medium text-gray-300">Style</th>
-									<th class="text-left p-4 text-sm font-medium text-gray-300">Formule</th>
-									<th class="text-left p-4 text-sm font-medium text-gray-300">Délai</th>
+									<th class="text-left p-4 text-sm font-medium text-gray-300">Personne Ciblée</th>
+									<th class="text-left p-4 text-sm font-medium text-gray-300">Catégorie</th>
+									<th class="text-left p-4 text-sm font-medium text-gray-300">Étape</th>
 									<th class="text-left p-4 text-sm font-medium text-gray-300">Statut</th>
 									<th class="text-left p-4 text-sm font-medium text-gray-300">Paiement</th>
 									<th class="text-left p-4 text-sm font-medium text-gray-300">Actions</th>
 								</tr>
 							</thead>
 							<tbody id="briefsTable" class="divide-y divide-gray-800">
-								<tr>
-									<td colspan="8" class="p-8 text-center text-gray-400">
+							<tr>
+								<td colspan="7" class="p-8 text-center text-gray-400">
 										<div class="flex flex-col items-center">
 											<span class="text-4xl mb-2">🔄</span>
 											<p>Chargement des briefs...</p>
@@ -152,24 +151,22 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 				}
 			};
 
-			// Service pour les briefs
+			// Service pour les briefs (utilise la nouvelle API)
 			const BriefService = {
 				async getBriefs(page = 1, limit = 20, status = '') {
-					let query = supabase
-						.from('client_briefs')
-						.select('*')
-						.order('created_at', { ascending: false });
-					
-					if (status) {
-						query = query.eq('status', status);
+					try {
+						const response = await fetch(`/api/admin/briefs-steps?page=${page}&limit=${limit}&status=${status}`);
+						const result = await response.json();
+						
+						if (result.success) {
+							return { data: result.data, total: result.total };
+						} else {
+							throw new Error(result.message);
+						}
+					} catch (error) {
+						console.error('Erreur BriefService:', error);
+						throw error;
 					}
-					
-					const { data, error, count } = await query
-						.range((page - 1) * limit, page * limit - 1)
-						.limit(limit);
-					
-					if (error) throw error;
-					return { data, total: count || 0 };
 				}
 			};
 
@@ -196,7 +193,7 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 					if (!briefs || briefs.length === 0) {
 						tbody.innerHTML = `
 							<tr>
-								<td colspan="8" class="p-8 text-center text-gray-400">
+								<td colspan="7" class="p-8 text-center text-gray-400">
 									<div class="flex flex-col items-center">
 										<span class="text-4xl mb-2">📭</span>
 										<p>Aucun brief trouvé</p>
@@ -221,33 +218,48 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 							refunded: 'bg-gray-100 text-gray-800'
 						};
 
+						// Extraire les infos de la personne cible depuis target_audience
+						const targetInfo = brief.target_audience || '';
+						const targetParts = targetInfo.split(' - ');
+						const targetRelation = targetParts[0] || 'Relation inconnue';
+						const targetName = targetParts[1] || 'Nom inconnu';
+						
+						// Déterminer le statut selon l'étape
+						let displayStatus = 'En cours';
+						if (brief.is_completed && brief.is_paid) {
+							displayStatus = 'Terminé';
+						} else if (brief.is_completed && !brief.is_paid) {
+							displayStatus = 'En attente paiement';
+						} else {
+							displayStatus = `Étape ${brief.current_step || 1}/12`;
+						}
+						
 						return `
 							<tr class="hover:bg-gray-800 transition-colors">
 								<td class="p-4">
 									<div>
-										<div class="font-medium text-white">${brief.first_name} ${brief.last_name}</div>
-										<div class="text-sm text-gray-400">${brief.email}</div>
+										<div class="font-medium text-white">${brief.first_name || 'Prénom'} ${brief.last_name || 'Nom'}</div>
+										<div class="text-sm text-gray-400">${brief.email || 'Email non fourni'}</div>
 									</div>
 								</td>
 								<td class="p-4">
-									<div class="font-medium text-white">${brief.project_title || 'Sans titre'}</div>
-									<div class="text-sm text-gray-400">${brief.project_purpose}</div>
+									<div class="font-medium text-white">${targetName}</div>
+									<div class="text-sm text-gray-400">${targetRelation}</div>
 								</td>
-								<td class="p-4 text-gray-300">${brief.music_style}</td>
+								<td class="p-4 text-gray-300">${brief.purpose_tag || 'Non définie'}</td>
 								<td class="p-4">
-									<span class="px-2 py-1 text-xs rounded-full ${brief.package === 'premium' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'}">
-										${brief.package === 'premium' ? 'Premium (399€)' : 'Standard (199€)'}
-									</span>
-								</td>
-								<td class="p-4 text-gray-300">${new Date(brief.deadline).toLocaleDateString('fr-FR')}</td>
-								<td class="p-4">
-									<span class="px-2 py-1 text-xs rounded-full ${statusColors[brief.status] || statusColors.pending}">
-										${brief.status || 'pending'}
+									<span class="px-2 py-1 text-xs rounded-full ${brief.current_step === 12 ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">
+										${displayStatus}
 									</span>
 								</td>
 								<td class="p-4">
-									<span class="px-2 py-1 text-xs rounded-full ${paymentColors[brief.payment_status] || paymentColors.unpaid}">
-										${brief.payment_status || 'unpaid'}
+									<span class="px-2 py-1 text-xs rounded-full ${brief.is_completed ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+										${brief.is_completed ? 'Terminé' : 'En cours'}
+									</span>
+								</td>
+								<td class="p-4">
+									<span class="px-2 py-1 text-xs rounded-full ${brief.is_paid ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+										${brief.is_paid ? 'Payé' : 'Non payé'}
 									</span>
 								</td>
 								<td class="p-4">
@@ -255,10 +267,6 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 										<button onclick="viewBrief('${brief.id}')" 
 											class="text-[#c76927] hover:text-white transition-colors text-sm">
 											Voir
-										</button>
-										<button onclick="editBrief('${brief.id}')" 
-											class="text-blue-400 hover:text-white transition-colors text-sm">
-											Modifier
 										</button>
 									</div>
 								</td>
@@ -309,7 +317,7 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 
 			// Voir les détails d'un brief
 			window.viewBrief = function(briefId) {
-				window.location.href = `/admin/briefs/${briefId}`;
+				window.location.href = `/admin/brief-detail?id=${briefId}`;
 			};
 
 			// Modifier un brief

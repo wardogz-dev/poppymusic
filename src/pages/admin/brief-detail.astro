@@ -1,0 +1,283 @@
+---
+import '../../styles/global.css';
+
+export const prerender = false;
+
+const title = "Détails Brief - Poppy Music Admin";
+---
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>{title}</title>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
+		<meta name="robots" content="noindex, nofollow" />
+
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XM9JLS953"></script>
+		<script>
+			// @ts-nocheck
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-7XM9JLS953');
+		</script>
+	</head>
+	
+	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased">
+		<!-- HEADER ADMIN -->
+		<header class="bg-gray-900 border-b border-gray-800">
+			<nav class="flex justify-between items-center px-8 py-4">
+				<div class="flex items-center space-x-6">
+					<h1 class="title-artistic text-2xl text-[#c76927]">Poppy Music Admin</h1>
+					<div class="flex space-x-4">
+						<a href="/admin/dashboard" class="text-gray-400 hover:text-white transition-colors">Dashboard</a>
+						<a href="/admin/briefs" class="text-gray-400 hover:text-white transition-colors">← Retour aux briefs</a>
+					</div>
+				</div>
+				<div class="flex items-center space-x-4">
+					<span class="text-sm text-gray-400">Connecté: <span id="adminUsername" class="text-white">admin</span></span>
+					<button id="logoutBtn" class="text-gray-400 hover:text-red-400 transition-colors">Déconnexion</button>
+				</div>
+			</nav>
+		</header>
+
+		<!-- MAIN CONTENT -->
+		<main class="p-8">
+			<div class="max-w-6xl mx-auto">
+				<!-- LOADING STATE -->
+				<div id="loadingState" class="text-center py-20">
+					<div class="text-4xl mb-4">🔄</div>
+					<p class="text-gray-400">Chargement du brief...</p>
+				</div>
+
+				<!-- BRIEF DETAILS -->
+				<div id="briefDetails" class="hidden">
+					<!-- Contenu généré dynamiquement -->
+				</div>
+			</div>
+		</main>
+
+		<script>
+			// @ts-nocheck
+			document.addEventListener('DOMContentLoaded', async () => {
+				// Vérifier l'authentification
+				const session = localStorage.getItem('poppy_admin_session');
+				if (!session) {
+					window.location.href = '/admin/login';
+					return;
+				}
+
+				// Récupérer l'ID du brief depuis l'URL
+				const urlParams = new URLSearchParams(window.location.search);
+				const briefId = urlParams.get('id');
+				
+				if (!briefId) {
+					alert('ID du brief manquant');
+					window.location.href = '/admin/briefs';
+					return;
+				}
+
+				// Charger les détails du brief
+				await loadBriefDetails(briefId);
+
+				// Gestion de la déconnexion
+				document.getElementById('logoutBtn').addEventListener('click', () => {
+					localStorage.removeItem('poppy_admin_session');
+					window.location.href = '/admin/login';
+				});
+			});
+
+			async function loadBriefDetails(briefId) {
+				try {
+					const response = await fetch(`/api/admin/brief-detail?id=${briefId}`);
+					const result = await response.json();
+
+					if (result.success) {
+						displayBriefDetails(result.brief);
+					} else {
+						showError('Brief non trouvé');
+					}
+				} catch (error) {
+					console.error('Erreur:', error);
+					showError('Erreur de chargement');
+				}
+			}
+
+			function displayBriefDetails(brief) {
+				const loadingState = document.getElementById('loadingState');
+				const briefDetails = document.getElementById('briefDetails');
+				
+				// Extraire les infos de la personne cible
+				const targetInfo = brief.target_audience || '';
+				const targetParts = targetInfo.split(' - ');
+				const targetRelation = targetParts[0] || 'Relation inconnue';
+				const targetName = targetParts[1] || 'Nom inconnu';
+
+				const emotionsArray = Array.isArray(brief.emotions) ? brief.emotions : [];
+				const inspirationsArray = Array.isArray(brief.artist_inspirations) ? brief.artist_inspirations : [];
+
+				briefDetails.innerHTML = `
+					<div class="space-y-8">
+						<!-- EN-TÊTE -->
+						<div class="bg-gray-900 rounded-lg p-6">
+							<div class="flex justify-between items-start">
+								<div>
+									<h1 class="text-2xl font-bold text-white mb-2">Brief #${brief.id.substring(0, 8)}</h1>
+									<p class="text-gray-400">Créé le ${new Date(brief.created_at).toLocaleDateString('fr-FR')}</p>
+								</div>
+								<div class="text-right">
+									<span class="px-3 py-1 text-sm rounded-full ${brief.is_completed ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">
+										${brief.is_completed ? 'Terminé' : `Étape ${brief.current_step}/12`}
+									</span>
+									<div class="mt-2">
+										<span class="px-3 py-1 text-sm rounded-full ${brief.is_paid ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+											${brief.is_paid ? 'Payé' : 'Non payé'}
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- INFORMATIONS CLIENT -->
+						<div class="bg-gray-900 rounded-lg p-6">
+							<h2 class="text-xl font-bold text-white mb-4">👤 Informations Client</h2>
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+								<div>
+									<h3 class="font-semibold text-gray-300 mb-2">Contact</h3>
+									<p class="text-white">${brief.first_name} ${brief.last_name}</p>
+									<p class="text-gray-400">${brief.email}</p>
+									<p class="text-gray-400">${brief.phone || 'Téléphone non fourni'}</p>
+								</div>
+								<div>
+									<h3 class="font-semibold text-gray-300 mb-2">Catégorie du projet</h3>
+									<p class="text-white">${brief.purpose_tag || 'Non définie'}</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- PERSONNE CIBLÉE -->
+						<div class="bg-gray-900 rounded-lg p-6">
+							<h2 class="text-xl font-bold text-white mb-4">🎯 Personne Ciblée par la Chanson</h2>
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+								<div>
+									<h3 class="font-semibold text-gray-300 mb-2">Identité</h3>
+									<p class="text-white text-lg">${targetName}</p>
+									<p class="text-gray-400">${targetRelation}</p>
+								</div>
+								<div>
+									<h3 class="font-semibold text-gray-300 mb-2">Informations</h3>
+									<p class="text-gray-400">Informations détaillées dans target_audience</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- CONTENU CRÉATIF -->
+						<div class="bg-gray-900 rounded-lg p-6">
+							<h2 class="text-xl font-bold text-white mb-4">🎵 Contenu Créatif</h2>
+							<div class="space-y-6">
+								${brief.song_title ? `
+									<div>
+										<h3 class="font-semibold text-gray-300 mb-2">Titre de la chanson</h3>
+										<p class="text-white">"${brief.song_title}"</p>
+									</div>
+								` : ''}
+								
+								${brief.main_message ? `
+									<div>
+										<h3 class="font-semibold text-gray-300 mb-2">Message principal</h3>
+										<p class="text-white">${brief.main_message}</p>
+									</div>
+								` : ''}
+
+								${emotionsArray.length > 0 ? `
+									<div>
+										<h3 class="font-semibold text-gray-300 mb-2">Émotions à transmettre</h3>
+										<div class="flex flex-wrap gap-2">
+											${emotionsArray.map(emotion => `<span class="px-3 py-1 bg-[#c76927] bg-opacity-20 text-[#c76927] rounded-full text-sm">${emotion}</span>`).join('')}
+										</div>
+									</div>
+								` : ''}
+
+								${brief.music_style ? `
+									<div>
+										<h3 class="font-semibold text-gray-300 mb-2">Univers musical</h3>
+										<p class="text-white">${brief.music_style}</p>
+									</div>
+								` : ''}
+
+								${brief.about_subject ? `
+									<div>
+										<h3 class="font-semibold text-gray-300 mb-2">Description de la personne</h3>
+										<p class="text-gray-300 leading-relaxed">${brief.about_subject}</p>
+									</div>
+								` : ''}
+
+								${brief.keywords_anecdotes ? `
+									<div>
+										<h3 class="font-semibold text-gray-300 mb-2">Anecdotes et mots-clés</h3>
+										<p class="text-gray-300 leading-relaxed">${brief.keywords_anecdotes}</p>
+									</div>
+								` : ''}
+
+								${inspirationsArray.length > 0 ? `
+									<div>
+										<h3 class="font-semibold text-gray-300 mb-2">Inspirations artistiques</h3>
+										<ul class="space-y-1">
+											${inspirationsArray.map(inspiration => `<li class="text-gray-300">• ${inspiration}</li>`).join('')}
+										</ul>
+									</div>
+								` : ''}
+							</div>
+						</div>
+
+						<!-- ACTIONS -->
+						<div class="bg-gray-900 rounded-lg p-6">
+							<h2 class="text-xl font-bold text-white mb-4">⚡ Actions</h2>
+							<div class="flex flex-wrap gap-4">
+								<button onclick="markAsCompleted('${brief.id}')" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors">
+									Marquer comme terminé
+								</button>
+								<button onclick="markAsPaid('${brief.id}')" class="bg-[#c76927] text-black px-4 py-2 rounded-md hover:bg-[#a85520] transition-colors">
+									Marquer comme payé
+								</button>
+								<button onclick="downloadBrief('${brief.id}')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+									Télécharger PDF
+								</button>
+							</div>
+						</div>
+					</div>
+				`;
+
+				loadingState.classList.add('hidden');
+				briefDetails.classList.remove('hidden');
+			}
+
+			function showError(message) {
+				const loadingState = document.getElementById('loadingState');
+				loadingState.innerHTML = `
+					<div class="text-center py-20">
+						<div class="text-4xl mb-4">❌</div>
+						<p class="text-red-400">${message}</p>
+						<a href="/admin/briefs" class="text-[#c76927] hover:underline mt-4 inline-block">← Retour aux briefs</a>
+					</div>
+				`;
+			}
+
+			// Fonctions d'action (à implémenter)
+			window.markAsCompleted = function(briefId) {
+				alert('Fonction à implémenter : marquer comme terminé');
+			};
+
+			window.markAsPaid = function(briefId) {
+				alert('Fonction à implémenter : marquer comme payé');
+			};
+
+			window.downloadBrief = function(briefId) {
+				alert('Fonction à implémenter : télécharger PDF');
+			};
+		</script>
+	</body>
+</html>

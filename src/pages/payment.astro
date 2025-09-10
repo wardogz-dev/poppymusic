@@ -1,0 +1,247 @@
+---
+import '../styles/global.css';
+
+export const prerender = false;
+
+const title = "Paiement - Poppy Music";
+const description = "Finalisez votre commande de chanson personnalisée.";
+---
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>{title}</title>
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Favicon -->
+		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
+		<link rel="alternate icon" href="/favicon.ico" />
+
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XM9JLS953"></script>
+		<script>
+			// @ts-nocheck
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-7XM9JLS953');
+		</script>
+	</head>
+	
+	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased min-h-screen">
+		<!-- HEADER MINIMAL -->
+		<header class="fixed top-0 left-0 right-0 z-50 bg-[#0B0B0B] bg-opacity-95 backdrop-blur-sm border-b border-gray-800">
+			<nav class="flex justify-between items-center px-4 sm:px-8 py-4">
+				<a href="/" class="title-artistic text-xl sm:text-2xl text-[#c76927] hover:opacity-80 transition-opacity">Poppy Music</a>
+				<div class="text-artistic text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Paiement sécurisé</div>
+			</nav>
+		</header>
+
+		<!-- MAIN CONTENT -->
+		<main class="pt-24 pb-24 min-h-screen flex items-center justify-center">
+			<div class="w-full max-w-4xl mx-auto px-4 sm:px-6">
+				
+				<div class="text-center mb-8">
+					<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+						Finalisez votre<br/>
+						<span class="text-[#c76927]">commande</span>
+					</h1>
+					<p class="text-gray-400 text-lg">Votre brief est terminé, procédons au paiement sécurisé</p>
+				</div>
+
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					<!-- RÉCAPITULATIF -->
+					<div class="bg-gray-900 bg-opacity-50 rounded-lg p-6">
+						<h2 class="text-xl font-bold text-white mb-6">📋 Récapitulatif de votre projet</h2>
+						<div id="payment-recap">
+							<!-- Chargé dynamiquement -->
+						</div>
+					</div>
+
+					<!-- PAIEMENT -->
+					<div class="bg-gray-900 bg-opacity-50 rounded-lg p-6">
+						<h2 class="text-xl font-bold text-white mb-6">💳 Paiement</h2>
+						
+						<!-- FORMULE -->
+						<div class="border border-[#c76927] rounded-lg p-4 mb-6">
+							<div class="flex items-center justify-between">
+								<div>
+									<h3 class="font-semibold text-white">Formule Standard</h3>
+									<p class="text-gray-400 text-sm">Chanson personnalisée complète</p>
+								</div>
+								<div class="text-right">
+									<div class="text-2xl font-bold text-[#c76927]">199€</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- INCLUS -->
+						<div class="mb-6">
+							<h4 class="font-semibold text-white mb-3">✨ Inclus dans votre formule :</h4>
+							<ul class="space-y-2 text-sm text-gray-300">
+								<li class="flex items-center gap-2">
+									<span class="text-green-400">✓</span>
+									Chanson personnalisée (48h pour validation)
+								</li>
+								<li class="flex items-center gap-2">
+									<span class="text-green-400">✓</span>
+									Création de paroles sur mesure
+								</li>
+								<li class="flex items-center gap-2">
+									<span class="text-green-400">✓</span>
+									Mélodie & Arrangement
+								</li>
+								<li class="flex items-center gap-2">
+									<span class="text-green-400">✓</span>
+									Illustration image personnalisable
+								</li>
+								<li class="flex items-center gap-2">
+									<span class="text-green-400">✓</span>
+									Distribution sur Spotify / Apple Music / Deezer
+								</li>
+								<li class="flex items-center gap-2">
+									<span class="text-green-400">✓</span>
+									Utilisation sur Instagram / TikTok en bibliothèque de son
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- GARANTIES -->
+				<div class="mt-12 bg-gray-900 bg-opacity-30 rounded-lg p-6">
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+						<div>
+							<div class="text-2xl mb-2">🔒</div>
+							<h4 class="font-semibold text-white mb-1">Paiement Sécurisé</h4>
+							<p class="text-gray-400 text-sm">Stripe • SSL • Cryptage</p>
+						</div>
+						<div>
+							<div class="text-2xl mb-2">↩️</div>
+							<h4 class="font-semibold text-white mb-1">Remboursement</h4>
+							<p class="text-gray-400 text-sm">Garanti si non satisfait</p>
+						</div>
+						<div>
+							<div class="text-2xl mb-2">⚡</div>
+							<h4 class="font-semibold text-white mb-1">Process Rapide</h4>
+							<p class="text-gray-400 text-sm">48h validation + 5 jours distribution</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- BOUTON PAIEMENT STICKY -->
+		<div class="fixed bottom-0 left-0 right-0 z-40 bg-[#0B0B0B] bg-opacity-95 backdrop-blur-sm border-t border-gray-800">
+			<div class="px-4 sm:px-8 py-4">
+				<button id="stripe-payment-btn" class="w-full bg-[#c76927] text-black px-8 py-4 text-lg font-bold tracking-wide hover:bg-[#a85520] transition-all duration-300 hover:scale-105 rounded-md">
+					PAYER 199€
+				</button>
+				<p class="text-gray-500 text-xs text-center mt-2">Paiement sécurisé par Stripe</p>
+			</div>
+		</div>
+
+		<script>
+			// @ts-nocheck
+			document.addEventListener('DOMContentLoaded', async () => {
+				// Récupérer les paramètres URL
+				const urlParams = new URLSearchParams(window.location.search);
+				const briefId = urlParams.get('briefId');
+				const sessionId = urlParams.get('sessionId');
+
+				if (!briefId && !sessionId) {
+					alert('Erreur: Brief non trouvé');
+					window.location.href = '/brief-new';
+					return;
+				}
+
+				// Charger le récapitulatif du brief
+				await loadBriefRecap(briefId, sessionId);
+
+				// Gestion du paiement Stripe
+				document.getElementById('stripe-payment-btn').addEventListener('click', () => {
+					// TODO: Intégrer Stripe Payment
+					alert('Intégration Stripe à venir...\nBrief ID: ' + briefId);
+				});
+			});
+
+			function calculateAge(birthDate) {
+				const today = new Date();
+				const birth = new Date(birthDate);
+				let age = today.getFullYear() - birth.getFullYear();
+				const monthDiff = today.getMonth() - birth.getMonth();
+				
+				if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+					age--;
+				}
+				
+				return age;
+			}
+
+			async function loadBriefRecap(briefId, sessionId) {
+				try {
+					// Récupérer les données du brief
+					const response = await fetch(`/api/briefs/get-brief?briefId=${briefId}&sessionId=${sessionId}`);
+					const result = await response.json();
+					
+					const recapContainer = document.getElementById('payment-recap');
+					
+					if (result.success && result.brief) {
+						const brief = result.brief;
+						// Extraction des données depuis target_audience temporaire
+						const targetInfo = brief.target_audience || '';
+						const parts = targetInfo.split(' - ');
+						const relation = parts[0] || 'Relation non précisée';
+						const fullName = parts[1] || 'Nom non précisé';
+						
+						recapContainer.innerHTML = `
+							<div class="space-y-4">
+								<div class="border-b border-gray-700 pb-3">
+									<h4 class="font-semibold text-white mb-2">👤 Personne ciblée par la chanson</h4>
+									<p class="text-gray-300 text-lg font-medium">${fullName}</p>
+									<p class="text-gray-400">${relation}</p>
+								</div>
+								<div class="border-b border-gray-700 pb-3">
+									<h4 class="font-semibold text-white mb-2">🎯 Catégorie du projet</h4>
+									<p class="text-gray-300">${brief.purpose_tag}</p>
+								</div>
+								<div>
+									<h4 class="font-semibold text-white mb-2">⏱️ Processus</h4>
+									<p class="text-gray-300">48h ouvrées → Version finale pour validation</p>
+									<p class="text-gray-400 text-sm">Puis distribution sous 5 jours après validation</p>
+								</div>
+							</div>
+						`;
+					} else {
+						// Fallback si pas de données
+						recapContainer.innerHTML = `
+							<div class="space-y-4">
+								<div class="border-b border-gray-700 pb-3">
+									<h4 class="font-semibold text-white mb-2">👤 Personne ciblée</h4>
+									<p class="text-gray-300">Informations en cours de chargement...</p>
+								</div>
+								<div>
+									<h4 class="font-semibold text-white mb-2">⏱️ Processus</h4>
+									<p class="text-gray-300">48h ouvrées → Version finale pour validation</p>
+									<p class="text-gray-400 text-sm">Puis distribution sous 5 jours après validation</p>
+								</div>
+							</div>
+						`;
+					}
+				} catch (error) {
+					console.error('Erreur chargement récap:', error);
+					// Afficher un récap minimal en cas d'erreur
+					const recapContainer = document.getElementById('payment-recap');
+					recapContainer.innerHTML = `
+						<div class="text-center text-gray-400">
+							<p>🎵 Votre chanson personnalisée</p>
+							<p class="text-sm mt-2">Récapitulatif en cours de chargement...</p>
+						</div>
+					`;
+				}
+			}
+		</script>
+	</body>
+</html>

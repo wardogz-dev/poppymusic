@@ -1,0 +1,1118 @@
+---
+import '../styles/global.css';
+
+const title = "Créer ma chanson - Poppy Music";
+const description = "Créez votre chanson personnalisée en quelques étapes simples.";
+const image = "https://poppymusic.fr/og-image.png?v=3";
+const url = "https://poppymusic.fr/brief";
+---
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>{title}</title>
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Favicon -->
+		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
+		<link rel="alternate icon" href="/favicon.ico" />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={url} />
+		<meta property="og:image" content={image} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={image} />
+
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XM9JLS953"></script>
+		<script>
+			// @ts-nocheck
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-7XM9JLS953');
+		</script>
+	</head>
+	
+	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased min-h-screen">
+		<!-- HEADER MINIMAL -->
+		<header class="fixed top-0 left-0 right-0 z-50 bg-[#0B0B0B] bg-opacity-95 backdrop-blur-sm border-b border-gray-800">
+			<nav class="flex justify-between items-center px-4 sm:px-8 py-4">
+				<a href="/" class="title-artistic text-xl sm:text-2xl text-[#c76927] hover:opacity-80 transition-opacity">Poppy Music</a>
+				<div class="text-artistic text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Créer ma chanson</div>
+			</nav>
+		</header>
+
+		<!-- PROGRESS BAR -->
+		<div class="fixed top-16 left-0 right-0 z-40 bg-[#0B0B0B] bg-opacity-95 backdrop-blur-sm border-b border-gray-800">
+			<div class="px-4 sm:px-8 py-3">
+				<div class="flex items-center justify-between mb-2">
+					<span class="text-sm text-gray-400">Étape <span id="current-step">1</span> sur 12</span>
+					<span class="text-sm text-gray-400"><span id="progress-percent">8</span>%</span>
+				</div>
+					<div class="w-full bg-gray-800 rounded-full h-2">
+						<div id="progress-bar" class="bg-[#c76927] h-2 rounded-full transition-all duration-500" style="width: 8%"></div>
+					</div>
+			</div>
+		</div>
+
+		<!-- MAIN CONTENT -->
+		<main class="pt-32 pb-24 min-h-screen flex items-center justify-center">
+			<div class="w-full max-w-2xl mx-auto px-4 sm:px-6">
+				
+				<!-- FORM CONTAINER -->
+				<div id="form-container" class="relative">
+					
+					<!-- ÉTAPE 1: INFORMATIONS PERSONNELLES -->
+					<div id="step-1" class="step-content active">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Pour commencer,<br/>
+								<span class="text-[#c76927]">présentez-vous</span>
+							</h1>
+							<p class="text-gray-400 text-lg">Nous avons besoin de quelques informations pour personnaliser votre expérience</p>
+						</div>
+
+						<div class="space-y-6">
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+								<div>
+									<label for="firstName" class="block text-sm font-medium text-gray-300 mb-2">Prénom *</label>
+									<input type="text" id="firstName" name="firstName" required 
+										class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+								</div>
+								<div>
+									<label for="lastName" class="block text-sm font-medium text-gray-300 mb-2">Nom *</label>
+									<input type="text" id="lastName" name="lastName" required 
+										class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+								</div>
+							</div>
+							<div>
+								<label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email *</label>
+								<input type="email" id="email" name="email" required 
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+							</div>
+							<div>
+								<label for="phone" class="block text-sm font-medium text-gray-300 mb-2">Téléphone *</label>
+								<input type="tel" id="phone" name="phone" required 
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+							</div>
+						</div>
+					</div>
+
+					<!-- ÉTAPE 2: SLIDE INSPIRANTE -->
+					<div id="step-2" class="step-content">
+						<div class="text-center">
+							<div class="mb-8">
+								<div class="w-20 h-20 bg-[#c76927] bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6">
+									<span class="text-[#c76927] text-4xl">🎵</span>
+								</div>
+								<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-6 leading-tight">
+									Vous entrez maintenant dans un<br/>
+									<span class="text-[#c76927]">processus de création</span>
+								</h1>
+							</div>
+
+							<div class="max-w-2xl mx-auto space-y-6 text-lg text-gray-300 leading-relaxed">
+								<p class="text-xl text-[#c76927] font-medium">
+									Plus vous nous donnerez d'informations précises,<br/>
+									plus nous pourrons créer un son qui dépassera vos attentes.
+								</p>
+								
+								<div class="bg-gray-900 bg-opacity-50 rounded-lg p-6">
+									<p class="text-gray-300 mb-4">
+										<strong class="text-white">Prenez le temps</strong> de nous raconter votre histoire comme vous la ressentez.
+									</p>
+									<p class="text-gray-400">
+										Écrivez comme vous le sentez, pas la peine de vous embêter avec la forme. 
+										<strong class="text-[#c76927]">Nous avons besoin de comprendre l'essence de votre projet</strong> - 
+										nous nous occupons de la forme.
+									</p>
+								</div>
+
+								<div class="flex items-center justify-center gap-8 text-sm text-gray-500 mt-8">
+									<div class="flex items-center gap-2">
+										<span class="w-2 h-2 bg-[#c76927] rounded-full"></span>
+										<span>Votre histoire</span>
+									</div>
+									<div class="flex items-center gap-2">
+										<span class="w-2 h-2 bg-[#c76927] rounded-full"></span>
+										<span>Notre créativité</span>
+									</div>
+									<div class="flex items-center gap-2">
+										<span class="w-2 h-2 bg-[#c76927] rounded-full"></span>
+										<span>Votre chanson</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ÉTAPE 3: POURQUOI CETTE CHANSON -->
+					<div id="step-3" class="step-content">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Pourquoi voulez-vous<br/>
+								<span class="text-[#c76927]">créer cette chanson ?</span>
+							</h1>
+							<p class="text-gray-400 text-lg">Choisissez la catégorie qui correspond le mieux à votre projet</p>
+						</div>
+
+						<div class="flex flex-wrap justify-center gap-3" id="purpose-tags">
+							<!-- Tags générés dynamiquement -->
+						</div>
+
+						<!-- CHAMP AUTRE (masqué par défaut) -->
+						<div id="other-purpose-field" class="mt-6 hidden">
+							<label for="otherPurpose" class="block text-sm font-medium text-gray-300 mb-2">Précisez votre cas :</label>
+							<input type="text" id="otherPurpose" name="otherPurpose" 
+								placeholder="Ex: Cadeau de réconciliation, surprise pour ma grand-mère..."
+								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+						</div>
+					</div>
+
+					<!-- ÉTAPE 4: QUI EST CETTE PERSONNE POUR VOUS -->
+					<div id="step-4" class="step-content">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Qui est cette personne<br/>
+								<span class="text-[#c76927]">pour vous ?</span>
+							</h1>
+							<p class="text-gray-400 text-lg" id="target-example">Parlez-nous de cette personne spéciale</p>
+						</div>
+
+						<div class="space-y-6">
+							<!-- Informations de base -->
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+								<div>
+									<label for="targetFirstName" class="block text-sm font-medium text-gray-300 mb-2">Prénom de la personne *</label>
+									<input type="text" id="targetFirstName" name="targetFirstName" required 
+										placeholder="Ex: Lucas, Marie, Jean..."
+										class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+								</div>
+								<div>
+									<label for="targetLastName" class="block text-sm font-medium text-gray-300 mb-2">Nom de famille *</label>
+									<input type="text" id="targetLastName" name="targetLastName" required 
+										placeholder="Ex: Dupont, Martin..."
+										class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+								</div>
+							</div>
+
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+								<div>
+									<label for="targetBirthDate" class="block text-sm font-medium text-gray-300 mb-2">Date de naissance *</label>
+									<input type="date" id="targetBirthDate" name="targetBirthDate" required 
+										class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+								</div>
+								<div>
+									<label for="targetGender" class="block text-sm font-medium text-gray-300 mb-2">Genre *</label>
+									<select id="targetGender" name="targetGender" required 
+										class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+										<option value="">Choisir...</option>
+										<option value="homme">Homme</option>
+										<option value="femme">Femme</option>
+									</select>
+								</div>
+							</div>
+
+							<!-- Relation -->
+							<div>
+								<label for="targetRelation" class="block text-sm font-medium text-gray-300 mb-2">Qui est cette personne pour vous ? *</label>
+								<textarea id="targetRelation" name="targetRelation" rows="3" required 
+									placeholder=""
+									minlength="10"
+									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+								<div class="text-right text-xs text-gray-500 mt-1">
+									<span id="target-char-count">0</span> / 10 caractères minimum
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ÉTAPE 5: ÉMOTIONS -->
+					<div id="step-5" class="step-content">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Quelles émotions voulez-vous<br/>
+								<span class="text-[#c76927]">transmettre ?</span>
+							</h1>
+							<p class="text-gray-400 text-lg">Sélectionnez au minimum 2 émotions qui correspondent à votre message</p>
+						</div>
+
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="joie" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">😊 Joie</span>
+									<p class="text-gray-400 text-xs">énergie, euphorie, célébration</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="amour" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">❤️ Amour</span>
+									<p class="text-gray-400 text-xs">tendresse, passion, douceur</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="colere" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">😡 Colère</span>
+									<p class="text-gray-400 text-xs">rage, frustration, rébellion</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="espoir" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">✨ Espoir</span>
+									<p class="text-gray-400 text-xs">élan, inspiration, lumière</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="excitation" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🎉 Excitation</span>
+									<p class="text-gray-400 text-xs">adrénaline, fête, impatience</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="desir" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">💋 Désir</span>
+									<p class="text-gray-400 text-xs">envie, sensualité, séduction</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="solitude" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🌙 Solitude</span>
+									<p class="text-gray-400 text-xs">isolement, vide, introspection</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="fierte" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🏆 Fierté</span>
+									<p class="text-gray-400 text-xs">puissance, accomplissement, dignité</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="spiritualite" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🙏 Spiritualité</span>
+									<p class="text-gray-400 text-xs">élévation, transcendance, mysticisme</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="humour" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">😄 Humour</span>
+									<p class="text-gray-400 text-xs">légèreté, ironie, jeu</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="nostalgie" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🌅 Nostalgie</span>
+									<p class="text-gray-400 text-xs">souvenirs, temps passé, chaleur</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="determination" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">💪 Détermination</span>
+									<p class="text-gray-400 text-xs">courage, force intérieure, persévérance</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="liberte" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🕊️ Liberté</span>
+									<p class="text-gray-400 text-xs">émancipation, ouverture, voyage</p>
+								</div>
+							</label>
+							<label class="emotion-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="emotions" value="gratitude" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🙏 Gratitude</span>
+									<p class="text-gray-400 text-xs">reconnaissance, chaleur, connexion</p>
+								</div>
+							</label>
+						</div>
+						<p class="text-center text-gray-500 text-sm mt-4" id="emotion-selection-count">0 / 2 émotions minimum</p>
+					</div>
+
+					<!-- ÉTAPE 6: PARLEZ-NOUS DE CETTE PERSONNE -->
+					<div id="step-6" class="step-content">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Parlez-nous de<br/>
+								<span class="text-[#c76927]">cette personne</span>
+							</h1>
+							<p class="text-gray-400 text-lg">Plus vous nous en direz, plus la chanson sera personnalisée</p>
+						</div>
+
+						<div>
+							<textarea id="aboutSubject" name="aboutSubject" rows="7" required 
+								minlength="200"
+								placeholder="Ex: Mon fils Lucas, 10 ans, passionné de football et de jeux vidéo, très timide mais adorable. Il adore les histoires de super-héros et rêve de devenir astronaute. C'est un enfant sensible qui a parfois du mal à exprimer ses émotions mais qui a un cœur en or..."
+								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							<div class="text-right text-xs text-gray-500 mt-1">
+								<span id="about-char-count">0</span> / 200 caractères minimum
+							</div>
+						</div>
+					</div>
+
+					<!-- ÉTAPE 7: MESSAGE À FAIRE PASSER -->
+					<div id="step-7" class="step-content">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Quel message voulez-vous<br/>
+								<span class="text-[#c76927]">faire passer ?</span>
+							</h1>
+							<p class="text-gray-400 text-lg" id="message-example">Le cœur de votre chanson : votre message principal</p>
+						</div>
+
+						<div>
+							<textarea id="mainMessage" name="mainMessage" rows="4" required 
+								maxlength="100"
+								placeholder=""
+								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							<div class="text-right text-xs text-gray-500 mt-1">
+								<span id="message-char-count">0</span> / 100 caractères maximum
+							</div>
+						</div>
+					</div>
+
+					<!-- ÉTAPE 8: MOTS-CLÉS ET ANECDOTES -->
+					<div id="step-8" class="step-content">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Des mots-clés ou<br/>
+								<span class="text-[#c76927]">anecdotes spéciales ?</span>
+							</h1>
+							<p class="text-gray-400 text-lg">Phrases, souvenirs ou expressions à absolument inclure dans la chanson</p>
+						</div>
+
+						<div>
+							<textarea id="keywordsAnecdotes" name="keywordsAnecdotes" rows="6" required
+								minlength="200"
+								placeholder="Ex: 'Notre petit champion', son surnom 'Lulu', le jour où il a marqué son premier but, sa phrase favorite 'Je peux le faire'. Il y a cette fois où il était si fier d'avoir aidé un camarade de classe qu'il m'en a parlé pendant des heures. C'est aussi celui qui me fait des câlins spontanés et qui dit toujours 'je t'aime papa' avant de se coucher..."
+								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							<div class="text-right text-xs text-gray-500 mt-1">
+								<span id="anecdotes-char-count">0</span> / 200 caractères minimum
+							</div>
+						</div>
+					</div>
+
+					<!-- ÉTAPE 9: TYPE DE MUSIQUE -->
+					<div id="step-9" class="step-content">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Quel univers<br/>
+								<span class="text-[#c76927]">musical ?</span>
+							</h1>
+							<p class="text-gray-400 text-lg">Choisissez 1 ou 2 univers maximum</p>
+						</div>
+
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="music-styles">
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="rock" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🎸 Rock</span>
+									<p class="text-gray-400 text-xs">classique, énergique, guitare</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="hip-hop" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🎤 Hip-Hop / Rap</span>
+									<p class="text-gray-400 text-xs">rythme, flow, attitude</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="rnb" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🎶 R&B</span>
+									<p class="text-gray-400 text-xs">sensuel, groove, émotion</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="electro" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🔊 Électro / EDM</span>
+									<p class="text-gray-400 text-xs">fête, montée d'énergie, club</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="afrobeat" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🌍 Afrobeat / Afro-pop</span>
+									<p class="text-gray-400 text-xs">dansant, solaire, percussif</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="reggaeton" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🌴 Reggaeton / Latino</span>
+									<p class="text-gray-400 text-xs">rythme chaloupé, festif, été</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="funk" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🕺 Funk / Disco</span>
+									<p class="text-gray-400 text-xs">groove, danse, rétro cool</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="soul" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🎙️ Soul</span>
+									<p class="text-gray-400 text-xs">émotion brute, voix puissantes</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="jazz" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🎺 Jazz léger</span>
+									<p class="text-gray-400 text-xs">chill, élégant, lounge</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="chanson-francaise" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🇫🇷 Chanson française / Variété</span>
+									<p class="text-gray-400 text-xs">texte, proximité, storytelling</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="folk" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🎻 Folk / Acoustique</span>
+									<p class="text-gray-400 text-xs">intimiste, guitare, simplicité</p>
+								</div>
+							</label>
+							<label class="music-style-option flex items-start space-x-3 p-4 border border-gray-700 rounded-md cursor-pointer hover:border-[#c76927] transition-colors">
+								<input type="checkbox" name="musicStyle" value="trap" class="w-4 h-4 text-[#c76927] bg-gray-800 border-gray-600 rounded focus:ring-[#c76927] mt-1">
+								<div>
+									<span class="text-white font-medium">🔥 Trap / Drill light</span>
+									<p class="text-gray-400 text-xs">urbain, impact, moderne</p>
+								</div>
+							</label>
+						</div>
+						<p class="text-center text-gray-500 text-sm mt-4" id="music-selection-count">0 / 2 univers sélectionnés</p>
+					</div>
+
+					<!-- ÉTAPE 10: TITRE DE LA CHANSON -->
+					<div id="step-10" class="step-content">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Quel titre aimeriez-vous donner<br/>
+								<span class="text-[#c76927]">à votre chanson ?</span>
+							</h1>
+							<p class="text-gray-400 text-lg">Si vous avez une idée de titre, sinon nous en proposerons</p>
+						</div>
+
+						<div>
+							<input type="text" id="songTitle" name="songTitle"
+								placeholder="Ex: 'Mon petit champion', 'Merci l'équipe', 'Lucas mon héros'..."
+								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+							<p class="text-gray-500 text-sm mt-2">💡 Pas d'inspiration ? Laissez vide, nous vous proposerons des titres personnalisés</p>
+						</div>
+					</div>
+
+					<!-- ÉTAPE 11: INSPIRATIONS -->
+					<div id="step-11" class="step-content">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Des inspirations<br/>
+								<span class="text-[#c76927]">artistiques ?</span>
+							</h1>
+							<p class="text-gray-400 text-lg">Artistes, chansons ou liens qui vous inspirent (optionnel)</p>
+						</div>
+
+						<div class="space-y-4">
+							<div id="inspiration-inputs">
+								<div class="inspiration-input-group flex gap-2">
+									<input type="text" name="inspiration" placeholder="Ex: Ed Sheeran, 'Perfect' ou lien YouTube/Spotify..."
+										class="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+									<button type="button" class="remove-inspiration px-3 py-3 text-gray-400 hover:text-red-400 transition-colors" style="display: none;">
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+										</svg>
+									</button>
+								</div>
+							</div>
+							<button type="button" id="add-inspiration" class="flex items-center gap-2 text-[#c76927] hover:text-white transition-colors">
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+								</svg>
+								Ajouter une inspiration
+							</button>
+						</div>
+					</div>
+
+					<!-- ÉTAPE 12: SUJETS SENSIBLES À ÉVITER -->
+					<div id="step-12" class="step-content">
+						<div class="text-center mb-8">
+							<h1 class="title-artistic text-3xl sm:text-4xl text-white mb-4">
+								Y a-t-il des sujets sensibles<br/>
+								<span class="text-[#c76927]">à éviter ?</span>
+							</h1>
+							<p class="text-gray-400 text-lg">Thèmes que nous ne mentionnerons pas dans la chanson (optionnel)</p>
+						</div>
+
+						<div>
+							<textarea id="sensitiveTopics" name="sensitiveTopics" rows="3"
+								placeholder="Ex: Éviter de parler de divorce, de maladie, de problèmes familiaux..."
+								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
+							<p class="text-gray-500 text-sm mt-2">💡 Ces informations nous aident à créer une chanson respectueuse et appropriée</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</main>
+
+		<!-- NAVIGATION BUTTONS STICKY -->
+		<div class="fixed bottom-0 left-0 right-0 z-40 bg-[#0B0B0B] bg-opacity-95 backdrop-blur-sm border-t border-gray-800">
+			<div class="flex justify-between items-center px-4 sm:px-8 py-4">
+				<button id="prev-btn" class="px-6 py-3 text-gray-400 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+					← Précédent
+				</button>
+				<button id="next-btn" class="bg-[#c76927] text-black px-8 py-3 font-medium rounded-md hover:bg-[#a85520] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+					Suivant →
+				</button>
+			</div>
+		</div>
+
+		<script>
+			// @ts-nocheck
+			class BriefFormWizard {
+				constructor() {
+					this.currentStep = 1;
+					this.totalSteps = 12;
+					this.sessionId = this.generateSessionId();
+					this.formData = {};
+					this.briefId = null;
+					this.init();
+				}
+
+				generateSessionId() {
+					return 'brief_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+				}
+
+				init() {
+					this.bindEvents();
+					this.createPurposeTags();
+					this.updateProgress();
+					this.initCharCounters();
+				}
+
+				bindEvents() {
+					const nextBtn = document.getElementById('next-btn');
+					const prevBtn = document.getElementById('prev-btn');
+
+					nextBtn.addEventListener('click', () => this.nextStep());
+					prevBtn.addEventListener('click', () => this.prevStep());
+
+					// Auto-save sur les changements de champs
+					document.addEventListener('input', (e) => {
+						if (e.target.matches('input, textarea, select')) {
+							this.autoSave();
+							this.updateCharCounters(e.target);
+						}
+					});
+
+					document.addEventListener('change', (e) => {
+						if (e.target.matches('input[type="checkbox"], input[type="radio"]')) {
+							this.autoSave();
+						}
+					});
+				}
+
+				initCharCounters() {
+					// Compteur pour "relation avec cette personne"
+					const targetTextarea = document.getElementById('targetRelation');
+					if (targetTextarea) {
+						targetTextarea.addEventListener('input', () => {
+							const count = targetTextarea.value.length;
+							document.getElementById('target-char-count').textContent = count;
+						});
+					}
+
+					// Compteur pour "message à faire passer"
+					const messageTextarea = document.getElementById('mainMessage');
+					if (messageTextarea) {
+						messageTextarea.addEventListener('input', () => {
+							const count = messageTextarea.value.length;
+							document.getElementById('message-char-count').textContent = count;
+						});
+					}
+
+					// Compteur pour "parlez-nous de cette personne"
+					const aboutTextarea = document.getElementById('aboutSubject');
+					if (aboutTextarea) {
+						aboutTextarea.addEventListener('input', () => {
+							const count = aboutTextarea.value.length;
+							document.getElementById('about-char-count').textContent = count;
+						});
+					}
+
+					// Compteur pour "anecdotes spéciales"
+					const anecdotesTextarea = document.getElementById('keywordsAnecdotes');
+					if (anecdotesTextarea) {
+						anecdotesTextarea.addEventListener('input', () => {
+							const count = anecdotesTextarea.value.length;
+							document.getElementById('anecdotes-char-count').textContent = count;
+						});
+					}
+
+					// Compteur d'émotions
+					document.addEventListener('change', (e) => {
+						if (e.target.matches('input[name="emotions"]')) {
+							const emotionCount = document.querySelectorAll('input[name="emotions"]:checked').length;
+							document.getElementById('emotion-selection-count').textContent = `${emotionCount} / 2 émotions minimum`;
+						}
+					});
+				}
+
+				updateCharCounters(element) {
+					if (element.id === 'targetRelation') {
+						document.getElementById('target-char-count').textContent = element.value.length;
+					} else if (element.id === 'mainMessage') {
+						document.getElementById('message-char-count').textContent = element.value.length;
+					} else if (element.id === 'aboutSubject') {
+						document.getElementById('about-char-count').textContent = element.value.length;
+					} else if (element.id === 'keywordsAnecdotes') {
+						document.getElementById('anecdotes-char-count').textContent = element.value.length;
+					}
+				}
+
+				createPurposeTags() {
+					const container = document.getElementById('purpose-tags');
+					
+					const tags = [
+						{ name: 'Anniversaire', color: 'bg-purple-500', textColor: 'text-purple-100' },
+						{ name: 'Club', color: 'bg-orange-500', textColor: 'text-orange-100' },
+						{ name: 'Entreprise', color: 'bg-blue-500', textColor: 'text-blue-100' },
+						{ name: 'Association', color: 'bg-green-500', textColor: 'text-green-100' },
+						{ name: 'Nouvelle vie', color: 'bg-pink-500', textColor: 'text-pink-100' },
+						{ name: 'Départ à l\'étranger', color: 'bg-cyan-500', textColor: 'text-cyan-100' },
+						{ name: 'Départ à la retraite', color: 'bg-yellow-500', textColor: 'text-yellow-900' },
+						{ name: 'Permis de conduire', color: 'bg-red-500', textColor: 'text-red-100' },
+						{ name: 'Diplôme', color: 'bg-indigo-500', textColor: 'text-indigo-100' },
+						{ name: 'Mariage', color: 'bg-rose-500', textColor: 'text-rose-100' },
+						{ name: 'Naissance', color: 'bg-emerald-500', textColor: 'text-emerald-100' },
+						{ name: 'Amitié', color: 'bg-teal-500', textColor: 'text-teal-100' },
+						{ name: 'Autre', color: 'bg-gray-500', textColor: 'text-gray-100' }
+					];
+
+					tags.forEach(tag => {
+						const tagElement = document.createElement('button');
+						tagElement.className = `purpose-tag px-4 py-3 rounded-full text-sm font-medium transition-all hover:scale-105 border-2 border-transparent ${tag.color} bg-opacity-20 ${tag.textColor} hover:bg-opacity-30`;
+						tagElement.dataset.tag = tag.name;
+						tagElement.textContent = tag.name;
+
+						tagElement.addEventListener('click', () => this.selectPurpose(tag.name, tagElement));
+						container.appendChild(tagElement);
+					});
+				}
+
+				selectPurpose(tag, element) {
+					// Désélectionner tous les autres
+					document.querySelectorAll('.purpose-tag').forEach(opt => {
+						opt.classList.remove('border-[#c76927]', 'bg-opacity-40');
+						opt.classList.add('bg-opacity-20', 'border-transparent');
+					});
+
+					// Sélectionner celui-ci
+					element.classList.remove('border-transparent', 'bg-opacity-20');
+					element.classList.add('border-[#c76927]', 'bg-opacity-40');
+
+					// Gérer le champ "Autre"
+					const otherField = document.getElementById('other-purpose-field');
+					if (tag === 'Autre') {
+						otherField.classList.remove('hidden');
+						document.getElementById('otherPurpose').focus();
+					} else {
+						otherField.classList.add('hidden');
+						document.getElementById('otherPurpose').value = '';
+					}
+
+					this.formData.purposeTag = tag;
+					this.updatePlaceholders(tag);
+					this.autoSave();
+				}
+
+				updatePlaceholders(tag) {
+					// Mettre à jour les placeholders selon la catégorie
+					const targetTextarea = document.getElementById('targetAudience');
+					const messageTextarea = document.getElementById('mainMessage');
+					const targetExample = document.getElementById('target-example');
+					const messageExample = document.getElementById('message-example');
+
+					const examples = {
+						'Anniversaire': {
+							target: 'Ex: Mon fils, ma femme, mon père...',
+							message: 'Ex: Dire à mon fils à quel point je suis fier de lui et qu\'il peut réaliser tous ses rêves',
+							targetDesc: 'Qui fête son anniversaire ?'
+						},
+						'Entreprise': {
+							target: 'Ex: Mes employés, mes clients, mon équipe...',
+							message: 'Ex: Remercier nos employés pour leur dévouement et les motiver pour l\'année à venir',
+							targetDesc: 'À qui s\'adresse cette chanson d\'entreprise ?'
+						},
+						'Mariage': {
+							target: 'Ex: Ma future épouse, mon futur mari...',
+							message: 'Ex: Exprimer mon amour éternel et ma joie de construire notre vie ensemble',
+							targetDesc: 'Qui se marie ?'
+						}
+					};
+
+					const example = examples[tag] || {
+						target: 'Ex: Cette personne spéciale...',
+						message: 'Ex: Le message que vous voulez transmettre...',
+						targetDesc: 'Décrivez votre relation avec cette personne'
+					};
+
+					if (targetTextarea) targetTextarea.placeholder = example.target;
+					if (messageTextarea) messageTextarea.placeholder = example.message;
+					if (targetExample) targetExample.textContent = example.targetDesc;
+				}
+
+				async nextStep() {
+					if (!this.validateCurrentStep()) {
+						this.showValidationError();
+						return;
+					}
+
+					if (this.currentStep < this.totalSteps) {
+						this.hideStep(this.currentStep);
+						this.currentStep++;
+						this.showStep(this.currentStep);
+						this.updateProgress();
+						await this.autoSave();
+					} else if (this.currentStep === this.totalSteps) {
+						// Étape 11 terminée, rediriger vers le paiement
+						await this.proceedToPayment();
+					}
+				}
+
+				validateCurrentStep() {
+					switch (this.currentStep) {
+						case 1:
+							const firstName = document.getElementById('firstName').value.trim();
+							const lastName = document.getElementById('lastName').value.trim();
+							const email = document.getElementById('email').value.trim();
+							const phone = document.getElementById('phone').value.trim();
+							return firstName && lastName && email && phone;
+						case 2:
+							return true; // Slide inspirante, pas de validation
+						case 3:
+							if (this.formData.purposeTag === 'Autre') {
+								const otherText = document.getElementById('otherPurpose').value.trim();
+								return this.formData.purposeTag && otherText.length > 0;
+							}
+							return this.formData.purposeTag;
+						case 4:
+							const targetFirstName = document.getElementById('targetFirstName').value.trim();
+							const targetLastName = document.getElementById('targetLastName').value.trim();
+							const targetBirthDate = document.getElementById('targetBirthDate').value.trim();
+							const targetGender = document.getElementById('targetGender').value.trim();
+							const targetRelation = document.getElementById('targetRelation').value.trim();
+							return targetFirstName && targetLastName && targetBirthDate && targetGender && targetRelation.length >= 10;
+						case 5:
+							const checkedEmotions = document.querySelectorAll('input[name="emotions"]:checked');
+							return checkedEmotions.length >= 2;
+						case 6:
+							const aboutSubject = document.getElementById('aboutSubject').value.trim();
+							return aboutSubject.length >= 200;
+						case 7:
+							const mainMessage = document.getElementById('mainMessage').value.trim();
+							return mainMessage.length > 0 && mainMessage.length <= 100;
+						case 8:
+							const anecdotes = document.getElementById('keywordsAnecdotes').value.trim();
+							return anecdotes.length >= 200;
+						case 9:
+							const selectedStyles = document.querySelectorAll('input[name="musicStyle"]:checked');
+							return selectedStyles.length >= 1 && selectedStyles.length <= 2;
+						case 10:
+							return true; // Titre optionnel
+						case 11:
+							return true; // Inspirations optionnelles
+						case 12:
+							return true; // Sujets sensibles optionnels
+						default:
+							return true;
+					}
+				}
+
+				collectFormData() {
+					const data = { ...this.formData };
+
+					// Étape 1 - Informations personnelles
+					data.firstName = document.getElementById('firstName')?.value || '';
+					data.lastName = document.getElementById('lastName')?.value || '';
+					data.email = document.getElementById('email')?.value || '';
+					data.phone = document.getElementById('phone')?.value || '';
+
+					// Étape 3 - Catégorie (avec cas "Autre")
+					if (this.formData.purposeTag === 'Autre') {
+						data.purposeTag = document.getElementById('otherPurpose')?.value || 'Autre';
+					}
+
+					// Étape 4 - Informations sur la personne cible
+					data.targetFirstName = document.getElementById('targetFirstName')?.value || '';
+					data.targetLastName = document.getElementById('targetLastName')?.value || '';
+					data.targetBirthDate = document.getElementById('targetBirthDate')?.value || '';
+					data.targetGender = document.getElementById('targetGender')?.value || '';
+					data.targetRelation = document.getElementById('targetRelation')?.value || '';
+
+					// Étape 5 - Émotions
+					const emotions = Array.from(document.querySelectorAll('input[name="emotions"]:checked'))
+						.map(input => input.value);
+					data.emotions = emotions;
+
+					// Étape 6 - Parlez-nous de cette personne
+					data.aboutSubject = document.getElementById('aboutSubject')?.value || '';
+
+					// Étape 7 - Message à faire passer
+					data.mainMessage = document.getElementById('mainMessage')?.value || '';
+
+					// Étape 8 - Mots-clés et anecdotes
+					data.keywordsAnecdotes = document.getElementById('keywordsAnecdotes')?.value || '';
+
+					// Étape 9 - Styles musicaux (plusieurs possibles)
+					const selectedStyles = Array.from(document.querySelectorAll('input[name="musicStyle"]:checked'))
+						.map(input => input.value);
+					data.musicStyle = selectedStyles.join(', ');
+
+					// Étape 10 - Titre de la chanson
+					data.songTitle = document.getElementById('songTitle')?.value || '';
+
+					// Étape 11 - Inspirations
+					const inspirations = Array.from(document.querySelectorAll('input[name="inspiration"]'))
+						.map(input => input.value)
+						.filter(value => value.trim() !== '');
+					data.artistInspirations = inspirations;
+
+					// Étape 12 - Sujets sensibles
+					data.sensitiveTopics = document.getElementById('sensitiveTopics')?.value || '';
+
+					return data;
+				}
+
+				async autoSave() {
+					const data = this.collectFormData();
+					data.sessionId = this.sessionId;
+					data.currentStep = this.currentStep;
+
+					try {
+						const response = await fetch('/api/briefs/save-step', {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify(data)
+						});
+
+						const result = await response.json();
+						
+						if (result.success) {
+							console.log('✅ Brief sauvegardé automatiquement');
+							this.briefId = result.briefId;
+						} else {
+							console.error('❌ Erreur sauvegarde:', result.message);
+						}
+					} catch (error) {
+						console.error('❌ Erreur réseau:', error);
+					}
+				}
+
+				async proceedToPayment() {
+					this.formData.isCompleted = true;
+					await this.autoSave();
+					window.location.href = `/payment?briefId=${this.briefId}&sessionId=${this.sessionId}`;
+				}
+
+				prevStep() {
+					if (this.currentStep > 1) {
+						this.hideStep(this.currentStep);
+						this.currentStep--;
+						this.showStep(this.currentStep);
+						this.updateProgress();
+					}
+				}
+
+				initStepEvents(step) {
+					if (step === 9) {
+						// Initialiser les événements des styles musicaux
+						document.querySelectorAll('.music-style-option').forEach(option => {
+							option.addEventListener('click', () => {
+								const checkbox = option.querySelector('input[type="checkbox"]');
+								const currentChecked = document.querySelectorAll('input[name="musicStyle"]:checked').length;
+								
+								if (checkbox.checked) {
+									// Décocher
+									checkbox.checked = false;
+									option.classList.remove('border-[#c76927]', 'bg-[#c76927]', 'bg-opacity-10');
+									option.classList.add('border-gray-700');
+								} else {
+									// Vérifier la limite de 2 choix
+									if (currentChecked >= 2) {
+										alert('Vous ne pouvez sélectionner que 2 styles maximum');
+										return;
+									}
+									// Cocher
+									checkbox.checked = true;
+									option.classList.remove('border-gray-700');
+									option.classList.add('border-[#c76927]', 'bg-[#c76927]', 'bg-opacity-10');
+								}
+								
+								// Mettre à jour le compteur
+								const newCount = document.querySelectorAll('input[name="musicStyle"]:checked').length;
+								document.getElementById('music-selection-count').textContent = `${newCount} / 2 styles sélectionnés`;
+								
+								this.autoSave();
+							});
+						});
+					}
+
+					if (step === 11) {
+						// Initialiser les événements des inspirations
+						this.initInspirationEvents();
+					}
+				}
+
+				initInspirationEvents() {
+					const addBtn = document.getElementById('add-inspiration');
+					if (addBtn) {
+						addBtn.replaceWith(addBtn.cloneNode(true));
+						const newAddBtn = document.getElementById('add-inspiration');
+						newAddBtn.addEventListener('click', () => {
+							this.addInspirationInput();
+						});
+					}
+				}
+
+				addInspirationInput() {
+					const container = document.getElementById('inspiration-inputs');
+					const inputGroup = document.createElement('div');
+					inputGroup.className = 'inspiration-input-group flex gap-2 mb-4';
+					
+					inputGroup.innerHTML = `
+						<input type="text" name="inspiration" placeholder="Artiste, chanson ou lien..."
+							class="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all">
+						<button type="button" class="remove-inspiration px-3 py-3 text-gray-400 hover:text-red-400 transition-colors">
+							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+							</svg>
+						</button>
+					`;
+
+					inputGroup.querySelector('.remove-inspiration').addEventListener('click', () => {
+						inputGroup.remove();
+						this.updateRemoveButtons();
+						this.autoSave();
+					});
+
+					container.appendChild(inputGroup);
+					this.updateRemoveButtons();
+				}
+
+				updateRemoveButtons() {
+					const groups = document.querySelectorAll('.inspiration-input-group');
+					groups.forEach(group => {
+						const removeBtn = group.querySelector('.remove-inspiration');
+						if (groups.length > 1) {
+							removeBtn.style.display = 'block';
+						} else {
+							removeBtn.style.display = 'none';
+						}
+					});
+				}
+
+				// Fonctions utilitaires...
+				showStep(step) {
+					const stepElement = document.getElementById(`step-${step}`);
+					if (stepElement) {
+						stepElement.classList.add('active');
+					}
+					this.initStepEvents(step);
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+				}
+
+				hideStep(step) {
+					const stepElement = document.getElementById(`step-${step}`);
+					if (stepElement) {
+						stepElement.classList.remove('active');
+					}
+				}
+
+				updateProgress() {
+					const progressPercent = Math.round((this.currentStep / this.totalSteps) * 100);
+					document.getElementById('current-step').textContent = this.currentStep;
+					document.getElementById('progress-percent').textContent = progressPercent;
+					document.getElementById('progress-bar').style.width = progressPercent + '%';
+
+					const prevBtn = document.getElementById('prev-btn');
+					const nextBtn = document.getElementById('next-btn');
+
+					prevBtn.disabled = this.currentStep === 1;
+					nextBtn.textContent = this.currentStep === this.totalSteps ? 'Finaliser le brief' : 'Suivant →';
+				}
+
+				showValidationError() {
+					alert('Veuillez remplir tous les champs requis avant de continuer.');
+				}
+			}
+
+			// Initialiser le wizard au chargement de la page
+			let briefWizard;
+			document.addEventListener('DOMContentLoaded', () => {
+				briefWizard = new BriefFormWizard();
+			});
+		</script>
+
+		<style>
+			.step-content {
+				display: none;
+			}
+			
+			.step-content.active {
+				display: block;
+				animation: fadeIn 0.3s ease-in-out;
+			}
+
+			@keyframes fadeIn {
+				from { opacity: 0; transform: translateY(10px); }
+				to { opacity: 1; transform: translateY(0); }
+			}
+
+			.purpose-tag.selected {
+				border-color: #c76927 !important;
+				background-color: rgba(199, 105, 39, 0.4) !important;
+			}
+
+			.emotion-option:has(input:checked) {
+				border-color: #c76927;
+				background-color: rgba(199, 105, 39, 0.1);
+			}
+
+			.music-style-option:has(input:checked) {
+				border-color: #c76927 !important;
+				background-color: rgba(199, 105, 39, 0.1);
+			}
+		</style>
+	</body>
+</html>
