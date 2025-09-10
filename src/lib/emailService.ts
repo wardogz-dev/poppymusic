@@ -45,8 +45,16 @@ export class EmailService {
         briefId: briefData.id
       });
 
+      console.log('📧 Tentative d\'envoi email à:', briefData.email);
+      console.log('📧 Données brief:', {
+        id: briefData.id,
+        firstName: briefData.firstName,
+        lastName: briefData.lastName,
+        songTitle: briefData.songTitle
+      });
+
       const { data, error } = await resend.emails.send({
-        from: 'Poppy Music <onboarding@resend.dev>', // Utiliser le domaine par défaut Resend ou ton domaine vérifié
+        from: 'Poppy Music <hello@poppymusic.fr>', // Utiliser votre domaine vérifié
         to: [briefData.email],
         subject: `🎵 Confirmation de commande - ${songTitle}`,
         html: emailHtml,
@@ -198,8 +206,10 @@ export class EmailService {
         ? `${briefData.targetFirstName} ${briefData.targetLastName}`
         : 'Non spécifié';
 
+      console.log('📧 Envoi notification équipe pour:', briefData.id);
+
       const { data, error } = await resend.emails.send({
-        from: 'Poppy Music <onboarding@resend.dev>', // Utiliser le domaine par défaut Resend ou ton domaine vérifié
+        from: 'Poppy Music <hello@poppymusic.fr>', // Utiliser votre domaine vérifié
         to: ['hello@poppymusic.fr'], // Email de l'équipe
         subject: `🔔 Nouvelle commande payée - ${briefData.firstName} ${briefData.lastName}`,
         html: `

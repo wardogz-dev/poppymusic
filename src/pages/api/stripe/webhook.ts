@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
-import { EmailService } from '../../lib/emailService';
+import { EmailService } from '../../../lib/emailService';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-06-20',
@@ -35,22 +35,27 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
+    console.log('🎯 Webhook Stripe reçu:', event.type, 'ID:', event.id);
+    
     // Gérer les différents types d'événements
     switch (event.type) {
       case 'checkout.session.completed':
+        console.log('💳 Traitement checkout.session.completed');
         await handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
         break;
       
       case 'payment_intent.succeeded':
+        console.log('✅ Traitement payment_intent.succeeded');
         await handlePaymentSucceeded(event.data.object as Stripe.PaymentIntent);
         break;
       
       case 'payment_intent.payment_failed':
+        console.log('❌ Traitement payment_intent.payment_failed');
         await handlePaymentFailed(event.data.object as Stripe.PaymentIntent);
         break;
       
       default:
-        console.log(`Événement non géré: ${event.type}`);
+        console.log(`⚠️ Événement non géré: ${event.type}`);
     }
 
     return new Response('OK', { status: 200 });
@@ -61,13 +66,24 @@ export const POST: APIRoute = async ({ request }) => {
 };
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
+  console.log('📋 Session Stripe reçue:', {
+    id: session.id,
+    customer_email: session.customer_details?.email,
+    metadata: session.metadata,
+    amount_total: session.amount_total,
+    currency: session.currency
+  });
+
   const briefId = session.metadata?.briefId;
   const sessionIdBrief = session.metadata?.sessionId;
 
   if (!briefId && !sessionIdBrief) {
-    console.error('Métadonnées manquantes dans la session Stripe');
+    console.error('❌ Métadonnées manquantes dans la session Stripe');
+    console.error('Session metadata:', session.metadata);
     return;
   }
+
+  console.log('🔍 Brief ID trouvé:', briefId || sessionIdBrief);
 
   try {
     // Mettre à jour le brief comme payé
@@ -104,6 +120,13 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         .single();
 
       if (!briefError && briefDetails) {
+        console.log('📧 Données brief récupérées pour email:', {
+          id: briefDetails.id,
+          email: briefDetails.email,
+          firstName: briefDetails.first_name,
+          songTitle: briefDetails.song_title
+        });
+
         // Envoyer email de confirmation au client
         const emailResult = await EmailService.sendPaymentConfirmation({
           id: briefDetails.id,
