@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
+import { EmailService } from '../../lib/emailService';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-06-20',
@@ -95,8 +96,56 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     } else {
       console.log('✅ Brief marqué comme payé:', briefId || sessionIdBrief);
       
-      // TODO: Envoyer email de confirmation
-      // TODO: Notifier l'équipe de production
+      // Récupérer les données du brief pour l'email
+      const { data: briefDetails, error: briefError } = await supabase
+        .from('client_briefs_steps')
+        .select('*')
+        .eq(briefId ? 'id' : 'session_id', briefId || sessionIdBrief)
+        .single();
+
+      if (!briefError && briefDetails) {
+        // Envoyer email de confirmation au client
+        const emailResult = await EmailService.sendPaymentConfirmation({
+          id: briefDetails.id,
+          firstName: briefDetails.first_name,
+          lastName: briefDetails.last_name,
+          email: briefDetails.email,
+          songTitle: briefDetails.song_title,
+          targetFirstName: briefDetails.target_first_name,
+          targetLastName: briefDetails.target_last_name,
+          targetRelation: briefDetails.target_relation,
+          purposeTag: briefDetails.purpose_tag,
+          amountPaid: session.amount_total,
+          stripeSessionId: session.id
+        });
+
+        if (emailResult.success) {
+          console.log('✅ Email confirmation envoyé au client');
+        } else {
+          console.error('❌ Erreur email client:', emailResult.error);
+        }
+
+        // Notifier l'équipe
+        const teamNotification = await EmailService.sendTeamNotification({
+          id: briefDetails.id,
+          firstName: briefDetails.first_name,
+          lastName: briefDetails.last_name,
+          email: briefDetails.email,
+          songTitle: briefDetails.song_title,
+          targetFirstName: briefDetails.target_first_name,
+          targetLastName: briefDetails.target_last_name,
+          targetRelation: briefDetails.target_relation,
+          purposeTag: briefDetails.purpose_tag,
+          amountPaid: session.amount_total,
+          stripeSessionId: session.id
+        });
+
+        if (teamNotification.success) {
+          console.log('✅ Notification équipe envoyée');
+        } else {
+          console.error('❌ Erreur notification équipe:', teamNotification.error);
+        }
+      }
     }
   } catch (error) {
     console.error('Erreur handleCheckoutCompleted:', error);
