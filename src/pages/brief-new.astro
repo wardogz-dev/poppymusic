@@ -624,6 +624,13 @@ const url = "https://poppymusic.fr/brief";
 				}
 
 				init() {
+					// Analytics - Tracker début de formulaire
+					gtag('event', 'form_started', {
+						'event_category': 'Brief Form',
+						'event_label': 'Form Initialized',
+						'step_number': 1
+					});
+
 					this.bindEvents();
 					this.createPurposeTags();
 					this.updateProgress();
@@ -795,6 +802,14 @@ const url = "https://poppymusic.fr/brief";
 					element.classList.remove('border-transparent', 'bg-opacity-20');
 					element.classList.add('border-[#c76927]', 'bg-opacity-40');
 
+					// Analytics - Tracker sélection objectif
+					gtag('event', 'form_purpose_selected', {
+						'event_category': 'Brief Form',
+						'event_label': tag,
+						'purpose_type': tag,
+						'step_number': 3
+					});
+
 					// Gérer le champ "Autre"
 					const otherField = document.getElementById('other-purpose-field');
 					if (tag === 'Autre') {
@@ -852,13 +867,37 @@ const url = "https://poppymusic.fr/brief";
 						return;
 					}
 
+					// Analytics - Tracker progression étapes
+					gtag('event', 'form_step_completed', {
+						'event_category': 'Brief Form',
+						'event_label': `Step ${this.currentStep}`,
+						'step_number': this.currentStep,
+						'step_name': this.getStepName(this.currentStep)
+					});
+
 					if (this.currentStep < this.totalSteps) {
 						this.hideStep(this.currentStep);
 						this.currentStep++;
+						
+						// Analytics - Nouvelle étape commencée
+						gtag('event', 'form_step_started', {
+							'event_category': 'Brief Form',
+							'event_label': `Step ${this.currentStep}`,
+							'step_number': this.currentStep,
+							'step_name': this.getStepName(this.currentStep)
+						});
+
 						this.showStep(this.currentStep);
 						this.updateProgress();
 						await this.autoSave();
 					} else if (this.currentStep === this.totalSteps) {
+						// Analytics - Formulaire terminé
+						gtag('event', 'form_completed', {
+							'event_category': 'Brief Form',
+							'event_label': 'All Steps Completed',
+							'value': 199
+						});
+						
 						// Étape 11 terminée, rediriger vers le paiement
 						await this.proceedToPayment();
 					}
@@ -994,6 +1033,13 @@ const url = "https://poppymusic.fr/brief";
 				}
 
 				async proceedToPayment() {
+					// Analytics - Tracker redirection vers paiement
+					gtag('event', 'form_proceed_to_payment', {
+						'event_category': 'Brief Form',
+						'event_label': 'Redirect to Payment',
+						'value': 199
+					});
+
 					this.formData.isCompleted = true;
 					await this.autoSave();
 					window.location.href = `/payment?briefId=${this.briefId}&sessionId=${this.sessionId}`;
@@ -1001,11 +1047,35 @@ const url = "https://poppymusic.fr/brief";
 
 				prevStep() {
 					if (this.currentStep > 1) {
+						// Analytics - Tracker retour en arrière
+						gtag('event', 'form_step_back', {
+							'event_category': 'Brief Form',
+							'event_label': `Back from Step ${this.currentStep} to ${this.currentStep - 1}`,
+							'step_number': this.currentStep
+						});
+
 						this.hideStep(this.currentStep);
 						this.currentStep--;
 						this.showStep(this.currentStep);
 						this.updateProgress();
 					}
+				}
+
+				getStepName(step) {
+					const stepNames = {
+						1: 'Informations personnelles',
+						2: 'Inspiration',
+						3: 'Objectif de la chanson',
+						4: 'Personne ciblée',
+						5: 'Émotions à transmettre',
+						6: 'À propos du sujet',
+						7: 'Message principal',
+						8: 'Mots-clés et anecdotes',
+						9: 'Univers musical',
+						10: 'Titre de la chanson',
+						11: 'Sujets sensibles'
+					};
+					return stepNames[step] || `Étape ${step}`;
 				}
 
 				initStepEvents(step) {
@@ -1135,6 +1205,18 @@ const url = "https://poppymusic.fr/brief";
 			let briefWizard;
 			document.addEventListener('DOMContentLoaded', () => {
 				briefWizard = new BriefFormWizard();
+			});
+
+			// Analytics - Tracker abandon de formulaire
+			window.addEventListener('beforeunload', () => {
+				if (briefWizard && briefWizard.currentStep < briefWizard.totalSteps && !briefWizard.formData.isCompleted) {
+					gtag('event', 'form_abandoned', {
+						'event_category': 'Brief Form',
+						'event_label': `Abandoned at Step ${briefWizard.currentStep}`,
+						'step_number': briefWizard.currentStep,
+						'step_name': briefWizard.getStepName(briefWizard.currentStep)
+					});
+				}
 			});
 		</script>
 

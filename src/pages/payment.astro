@@ -173,6 +173,13 @@ const description = "Finalisez votre commande de chanson personnalisée.";
 					return;
 				}
 
+				// Analytics - Tracker arrivée sur page de paiement
+				gtag('event', 'payment_page_view', {
+					'event_category': 'Payment',
+					'event_label': 'Payment Page Loaded',
+					'value': 199
+				});
+
 				// Charger le récapitulatif du brief
 				await loadBriefRecap(briefId, sessionId);
 
@@ -182,6 +189,13 @@ const description = "Finalisez votre commande de chanson personnalisée.";
 					const originalText = btn.textContent;
 					
 					try {
+						// Analytics - Tracker clic bouton paiement
+						gtag('event', 'payment_button_click', {
+							'event_category': 'Payment',
+							'event_label': 'Payment Button Clicked',
+							'value': 199
+						});
+
 						// État de chargement
 						btn.disabled = true;
 						btn.textContent = 'Préparation du paiement...';
@@ -196,6 +210,13 @@ const description = "Finalisez votre commande de chanson personnalisée.";
 						const result = await response.json();
 
 						if (result.success) {
+							// Analytics - Tracker redirection vers Stripe
+							gtag('event', 'payment_redirect_stripe', {
+								'event_category': 'Payment',
+								'event_label': 'Redirect to Stripe Checkout',
+								'value': 199
+							});
+
 							// Rediriger vers Stripe Checkout
 							window.location.href = result.url;
 						} else {
