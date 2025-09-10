@@ -8,7 +8,7 @@ echo "====================================="
 
 # Forcer la synchronisation complète
 echo "📥 Synchronisation Git forcée..."
-git fetch origin
+git fetch --all --prune
 git reset --hard origin/main
 
 # Vérifier la correction
