@@ -368,7 +368,7 @@ const url = "https://poppymusic.fr/brief";
 
 						<div>
 							<textarea id="aboutSubject" name="aboutSubject" rows="7" required 
-								minlength="200"
+								minlength="50"
 								placeholder="Ex: Mon fils Lucas, 10 ans, passionné de football et de jeux vidéo, très timide mais adorable. Il adore les histoires de super-héros et rêve de devenir astronaute. C'est un enfant sensible qui a parfois du mal à exprimer ses émotions mais qui a un cœur en or..."
 								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
 							<div class="text-right text-xs mt-1">
@@ -391,7 +391,7 @@ const url = "https://poppymusic.fr/brief";
 
 						<div>
 							<textarea id="mainMessage" name="mainMessage" rows="6" required 
-								minlength="200"
+								minlength="50"
 								placeholder=""
 								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
 							<div class="text-right text-xs mt-1">
@@ -414,7 +414,7 @@ const url = "https://poppymusic.fr/brief";
 
 						<div>
 							<textarea id="keywordsAnecdotes" name="keywordsAnecdotes" rows="6" required
-								minlength="200"
+								minlength="50"
 								placeholder="Ex: 'Notre petit champion', son surnom 'Lulu', le jour où il a marqué son premier but, sa phrase favorite 'Je peux le faire'. Il y a cette fois où il était si fier d'avoir aidé un camarade de classe qu'il m'en a parlé pendant des heures. C'est aussi celui qui me fait des câlins spontanés et qui dit toujours 'je t'aime papa' avant de se coucher..."
 								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
 							<div class="text-right text-xs mt-1">
@@ -664,10 +664,10 @@ const url = "https://poppymusic.fr/brief";
 				initCharCounters() {
 					// Configuration des compteurs
 					const counters = [
-						{ textareaId: 'targetRelation', counterId: 'target-char-count', min: 10 },
-						{ textareaId: 'aboutSubject', counterId: 'about-char-count', min: 200 },
-						{ textareaId: 'mainMessage', counterId: 'message-char-count', min: 200 },
-						{ textareaId: 'keywordsAnecdotes', counterId: 'anecdotes-char-count', min: 200 }
+						{ textareaId: 'targetRelation', counterId: 'target-char-count', min: 10, recommended: 50 },
+						{ textareaId: 'aboutSubject', counterId: 'about-char-count', min: 50, recommended: 200 },
+						{ textareaId: 'mainMessage', counterId: 'message-char-count', min: 50, recommended: 200 },
+						{ textareaId: 'keywordsAnecdotes', counterId: 'anecdotes-char-count', min: 50, recommended: 200 }
 					];
 
 					counters.forEach(config => {
@@ -693,24 +693,32 @@ const url = "https://poppymusic.fr/brief";
 
 				updateCharCounter(textarea, counter, config) {
 					const currentCount = textarea.value.length;
-					const currentSpan = counter.querySelector('.count-current');
 					
-					// Mettre à jour le nombre
-					currentSpan.textContent = currentCount;
+					// Message adapté selon la progression
+					let message = `${currentCount} caractères`;
+					let colorClass = 'char-counter text-red-400';
 					
-					// Logique de couleur
-					if (config.min) {
-						// Compteur avec minimum
-						if (currentCount >= config.min) {
-							counter.className = 'char-counter text-green-400';
-						} else if (currentCount >= config.min * 0.5) {
-							counter.className = 'char-counter text-yellow-400';
-						} else {
-							counter.className = 'char-counter text-red-400';
+					if (config.recommended && currentCount >= config.recommended) {
+						message += ' ✨ Parfait !';
+						colorClass = 'char-counter text-green-400';
+					} else if (currentCount >= config.min) {
+						if (config.recommended) {
+							message += ` (${config.recommended} recommandés)`;
 						}
-					} else if (config.max) {
-						// Compteur avec maximum
+						colorClass = 'char-counter text-yellow-400';
+					} else {
+						message += ` (minimum ${config.min})`;
+						colorClass = 'char-counter text-red-400';
+					}
+					
+					counter.textContent = message;
+					counter.className = colorClass;
+					
+					// Gestion spéciale pour les champs avec maximum
+					if (config.max) {
 						const percentage = currentCount / config.max;
+						counter.textContent = `${currentCount}/${config.max} caractères`;
+						
 						if (percentage <= 0.8) {
 							counter.className = 'char-counter text-green-400';
 						} else if (percentage <= 0.95) {
@@ -751,10 +759,10 @@ const url = "https://poppymusic.fr/brief";
 					if (counterId) {
 						const counter = document.getElementById(counterId);
 						const config = {
-							'target-char-count': { min: 10 },
-							'about-char-count': { min: 200 },
-							'message-char-count': { min: 200 },
-							'anecdotes-char-count': { min: 200 }
+							'target-char-count': { min: 10, recommended: 50 },
+							'about-char-count': { min: 50, recommended: 200 },
+							'message-char-count': { min: 50, recommended: 200 },
+							'anecdotes-char-count': { min: 50, recommended: 200 }
 						}[counterId];
 						
 						if (counter && config) {
@@ -941,13 +949,13 @@ const url = "https://poppymusic.fr/brief";
 							return checkedEmotions.length >= 2;
 						case 6:
 							const aboutSubject = document.getElementById('aboutSubject').value.trim();
-							return aboutSubject.length >= 200;
+							return aboutSubject.length >= 50;
 						case 7:
 							const mainMessage = document.getElementById('mainMessage').value.trim();
-							return mainMessage.length >= 200;
+							return mainMessage.length >= 50;
 						case 8:
 							const anecdotes = document.getElementById('keywordsAnecdotes').value.trim();
-							return anecdotes.length >= 200;
+							return anecdotes.length >= 50;
 						case 9:
 							const selectedStyles = document.querySelectorAll('input[name="musicStyle"]:checked');
 							return selectedStyles.length >= 1 && selectedStyles.length <= 2;
