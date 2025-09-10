@@ -161,9 +161,38 @@ const description = "Finalisez votre commande de chanson personnalisée.";
 				await loadBriefRecap(briefId, sessionId);
 
 				// Gestion du paiement Stripe
-				document.getElementById('stripe-payment-btn').addEventListener('click', () => {
-					// TODO: Intégrer Stripe Payment
-					alert('Intégration Stripe à venir...\nBrief ID: ' + briefId);
+				document.getElementById('stripe-payment-btn').addEventListener('click', async () => {
+					const btn = document.getElementById('stripe-payment-btn');
+					const originalText = btn.textContent;
+					
+					try {
+						// État de chargement
+						btn.disabled = true;
+						btn.textContent = 'Préparation du paiement...';
+						
+						// Créer la session de paiement
+						const response = await fetch('/api/stripe/create-checkout-session', {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify({ briefId, sessionId })
+						});
+
+						const result = await response.json();
+
+						if (result.success) {
+							// Rediriger vers Stripe Checkout
+							window.location.href = result.url;
+						} else {
+							throw new Error(result.message);
+						}
+					} catch (error) {
+						console.error('Erreur paiement:', error);
+						alert('Erreur lors de la création du paiement. Veuillez réessayer.');
+						
+						// Restaurer le bouton
+						btn.disabled = false;
+						btn.textContent = originalText;
+					}
 				});
 			});
 

@@ -258,9 +258,12 @@ const title = "Gestion des Briefs - Poppy Music Admin";
 									</span>
 								</td>
 								<td class="p-4">
-									<span class="px-2 py-1 text-xs rounded-full ${brief.is_paid ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
-										${brief.is_paid ? 'Payé' : 'Non payé'}
-									</span>
+									<div>
+										<span class="px-2 py-1 text-xs rounded-full ${brief.is_paid ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+											${brief.is_paid ? 'Payé' : 'Non payé'}
+										</span>
+										${brief.amount_paid ? `<div class="text-xs text-gray-400 mt-1">${(brief.amount_paid / 100).toFixed(2)}€</div>` : ''}
+									</div>
 								</td>
 								<td class="p-4">
 									<div class="flex space-x-2">
