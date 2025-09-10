@@ -232,9 +232,11 @@ const url = "https://poppymusic.fr/brief";
 									placeholder=""
 									minlength="10"
 									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
-								<div class="text-right text-xs text-gray-500 mt-1">
-									<span id="target-char-count">0</span> / 10 caractères minimum
-								</div>
+							<div class="text-right text-xs mt-1">
+								<span id="target-char-count" class="char-counter" data-min="10" data-current="0">
+									<span class="count-current">0</span> / <span class="count-min">10</span> caractères minimum
+								</span>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -349,7 +351,9 @@ const url = "https://poppymusic.fr/brief";
 								</div>
 							</label>
 						</div>
-						<p class="text-center text-gray-500 text-sm mt-4" id="emotion-selection-count">0 / 2 émotions minimum</p>
+						<p class="text-center text-red-400 text-sm mt-4" id="emotion-selection-count">
+							<span class="count-current">0</span> / 2 émotions minimum
+						</p>
 					</div>
 
 					<!-- ÉTAPE 6: PARLEZ-NOUS DE CETTE PERSONNE -->
@@ -367,8 +371,10 @@ const url = "https://poppymusic.fr/brief";
 								minlength="200"
 								placeholder="Ex: Mon fils Lucas, 10 ans, passionné de football et de jeux vidéo, très timide mais adorable. Il adore les histoires de super-héros et rêve de devenir astronaute. C'est un enfant sensible qui a parfois du mal à exprimer ses émotions mais qui a un cœur en or..."
 								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
-							<div class="text-right text-xs text-gray-500 mt-1">
-								<span id="about-char-count">0</span> / 200 caractères minimum
+							<div class="text-right text-xs mt-1">
+								<span id="about-char-count" class="char-counter" data-min="200" data-current="0">
+									<span class="count-current">0</span> / <span class="count-min">200</span> caractères minimum
+								</span>
 							</div>
 						</div>
 					</div>
@@ -388,8 +394,10 @@ const url = "https://poppymusic.fr/brief";
 								maxlength="100"
 								placeholder=""
 								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
-							<div class="text-right text-xs text-gray-500 mt-1">
-								<span id="message-char-count">0</span> / 100 caractères maximum
+							<div class="text-right text-xs mt-1">
+								<span id="message-char-count" class="char-counter" data-max="100" data-current="0">
+									<span class="count-current">0</span> / <span class="count-max">100</span> caractères maximum
+								</span>
 							</div>
 						</div>
 					</div>
@@ -409,8 +417,10 @@ const url = "https://poppymusic.fr/brief";
 								minlength="200"
 								placeholder="Ex: 'Notre petit champion', son surnom 'Lulu', le jour où il a marqué son premier but, sa phrase favorite 'Je peux le faire'. Il y a cette fois où il était si fier d'avoir aidé un camarade de classe qu'il m'en a parlé pendant des heures. C'est aussi celui qui me fait des câlins spontanés et qui dit toujours 'je t'aime papa' avant de se coucher..."
 								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
-							<div class="text-right text-xs text-gray-500 mt-1">
-								<span id="anecdotes-char-count">0</span> / 200 caractères minimum
+							<div class="text-right text-xs mt-1">
+								<span id="anecdotes-char-count" class="char-counter" data-min="200" data-current="0">
+									<span class="count-current">0</span> / <span class="count-min">200</span> caractères minimum
+								</span>
 							</div>
 						</div>
 					</div>
@@ -643,60 +653,104 @@ const url = "https://poppymusic.fr/brief";
 				}
 
 				initCharCounters() {
-					// Compteur pour "relation avec cette personne"
-					const targetTextarea = document.getElementById('targetRelation');
-					if (targetTextarea) {
-						targetTextarea.addEventListener('input', () => {
-							const count = targetTextarea.value.length;
-							document.getElementById('target-char-count').textContent = count;
-						});
-					}
+					// Configuration des compteurs
+					const counters = [
+						{ textareaId: 'targetRelation', counterId: 'target-char-count', min: 10 },
+						{ textareaId: 'aboutSubject', counterId: 'about-char-count', min: 200 },
+						{ textareaId: 'mainMessage', counterId: 'message-char-count', max: 100 },
+						{ textareaId: 'keywordsAnecdotes', counterId: 'anecdotes-char-count', min: 200 }
+					];
 
-					// Compteur pour "message à faire passer"
-					const messageTextarea = document.getElementById('mainMessage');
-					if (messageTextarea) {
-						messageTextarea.addEventListener('input', () => {
-							const count = messageTextarea.value.length;
-							document.getElementById('message-char-count').textContent = count;
-						});
-					}
-
-					// Compteur pour "parlez-nous de cette personne"
-					const aboutTextarea = document.getElementById('aboutSubject');
-					if (aboutTextarea) {
-						aboutTextarea.addEventListener('input', () => {
-							const count = aboutTextarea.value.length;
-							document.getElementById('about-char-count').textContent = count;
-						});
-					}
-
-					// Compteur pour "anecdotes spéciales"
-					const anecdotesTextarea = document.getElementById('keywordsAnecdotes');
-					if (anecdotesTextarea) {
-						anecdotesTextarea.addEventListener('input', () => {
-							const count = anecdotesTextarea.value.length;
-							document.getElementById('anecdotes-char-count').textContent = count;
-						});
-					}
+					counters.forEach(config => {
+						const textarea = document.getElementById(config.textareaId);
+						const counter = document.getElementById(config.counterId);
+						
+						if (textarea && counter) {
+							textarea.addEventListener('input', () => {
+								this.updateCharCounter(textarea, counter, config);
+							});
+						}
+					});
 
 					// Compteur d'émotions
 					document.addEventListener('change', (e) => {
 						if (e.target.matches('input[name="emotions"]')) {
 							const emotionCount = document.querySelectorAll('input[name="emotions"]:checked').length;
-							document.getElementById('emotion-selection-count').textContent = `${emotionCount} / 2 émotions minimum`;
+							const counter = document.getElementById('emotion-selection-count');
+							this.updateEmotionCounter(counter, emotionCount, 2);
 						}
 					});
 				}
 
+				updateCharCounter(textarea, counter, config) {
+					const currentCount = textarea.value.length;
+					const currentSpan = counter.querySelector('.count-current');
+					
+					// Mettre à jour le nombre
+					currentSpan.textContent = currentCount;
+					
+					// Logique de couleur
+					if (config.min) {
+						// Compteur avec minimum
+						if (currentCount >= config.min) {
+							counter.className = 'char-counter text-green-400';
+						} else if (currentCount >= config.min * 0.5) {
+							counter.className = 'char-counter text-yellow-400';
+						} else {
+							counter.className = 'char-counter text-red-400';
+						}
+					} else if (config.max) {
+						// Compteur avec maximum
+						const percentage = currentCount / config.max;
+						if (percentage <= 0.8) {
+							counter.className = 'char-counter text-green-400';
+						} else if (percentage <= 0.95) {
+							counter.className = 'char-counter text-yellow-400';
+						} else {
+							counter.className = 'char-counter text-red-400';
+						}
+					}
+				}
+
+				updateEmotionCounter(counter, current, min) {
+					const currentSpan = counter.querySelector('.count-current') || counter;
+					
+					if (counter.querySelector('.count-current')) {
+						currentSpan.textContent = current;
+					} else {
+						counter.innerHTML = `<span class="count-current">${current}</span> / ${min} émotions minimum`;
+					}
+					
+					// Couleur selon le nombre sélectionné
+					if (current >= min) {
+						counter.className = 'text-green-400 text-sm';
+					} else if (current >= min - 1) {
+						counter.className = 'text-yellow-400 text-sm';
+					} else {
+						counter.className = 'text-red-400 text-sm';
+					}
+				}
+
 				updateCharCounters(element) {
-					if (element.id === 'targetRelation') {
-						document.getElementById('target-char-count').textContent = element.value.length;
-					} else if (element.id === 'mainMessage') {
-						document.getElementById('message-char-count').textContent = element.value.length;
-					} else if (element.id === 'aboutSubject') {
-						document.getElementById('about-char-count').textContent = element.value.length;
-					} else if (element.id === 'keywordsAnecdotes') {
-						document.getElementById('anecdotes-char-count').textContent = element.value.length;
+					const counterId = {
+						'targetRelation': 'target-char-count',
+						'aboutSubject': 'about-char-count',
+						'mainMessage': 'message-char-count',
+						'keywordsAnecdotes': 'anecdotes-char-count'
+					}[element.id];
+					
+					if (counterId) {
+						const counter = document.getElementById(counterId);
+						const config = {
+							'target-char-count': { min: 10 },
+							'about-char-count': { min: 200 },
+							'message-char-count': { max: 100 },
+							'anecdotes-char-count': { min: 200 }
+						}[counterId];
+						
+						if (counter && config) {
+							this.updateCharCounter(element, counter, config);
+						}
 					}
 				}
 
@@ -1112,6 +1166,27 @@ const url = "https://poppymusic.fr/brief";
 			.music-style-option:has(input:checked) {
 				border-color: #c76927 !important;
 				background-color: rgba(199, 105, 39, 0.1);
+			}
+
+			.char-counter {
+				transition: color 0.3s ease;
+				font-weight: 500;
+			}
+
+			.char-counter.text-green-400 {
+				color: #10b981;
+			}
+
+			.char-counter.text-yellow-400 {
+				color: #f59e0b;
+			}
+
+			.char-counter.text-red-400 {
+				color: #ef4444;
+			}
+
+			.char-counter .count-current {
+				font-weight: 600;
 			}
 		</style>
 	</body>
