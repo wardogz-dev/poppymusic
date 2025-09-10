@@ -99,26 +99,28 @@ const description = "Votre brief créatif a été envoyé avec succès. Nous vou
 				console.log('Brief ID:', briefId);
 				
 				// Analytics - Tracker conversion réussie
-				gtag('event', 'purchase', {
-					'event_category': 'Payment',
-					'transaction_id': sessionId || briefId,
-					'value': 199,
-					'currency': 'EUR',
-					'items': [{
-						'item_id': 'chanson-personnalisee',
-						'item_name': 'Chanson Personnalisée',
-						'category': 'Music Production',
-						'quantity': 1,
-						'price': 199
-					}]
-				});
+				if (typeof gtag !== 'undefined') {
+					gtag('event', 'purchase', {
+						'event_category': 'Payment',
+						'transaction_id': sessionId || briefId,
+						'value': 199,
+						'currency': 'EUR',
+						'items': [{
+							'item_id': 'chanson-personnalisee',
+							'item_name': 'Chanson Personnalisée',
+							'category': 'Music Production',
+							'quantity': 1,
+							'price': 199
+						}]
+					});
 
-				// Analytics - Tracker page de confirmation
-				gtag('event', 'conversion_confirmation', {
-					'event_category': 'Payment',
-					'event_label': 'Payment Confirmed',
-					'value': 199
-				});
+					// Analytics - Tracker page de confirmation
+					gtag('event', 'conversion_confirmation', {
+						'event_category': 'Payment',
+						'event_label': 'Payment Confirmed',
+						'value': 199
+					});
+				}
 			}
 		</script>
 	</body>

@@ -625,11 +625,13 @@ const url = "https://poppymusic.fr/brief";
 
 				init() {
 					// Analytics - Tracker début de formulaire
-					gtag('event', 'form_started', {
-						'event_category': 'Brief Form',
-						'event_label': 'Form Initialized',
-						'step_number': 1
-					});
+					if (typeof gtag !== 'undefined') {
+						gtag('event', 'form_started', {
+							'event_category': 'Brief Form',
+							'event_label': 'Form Initialized',
+							'step_number': 1
+						});
+					}
 
 					this.bindEvents();
 					this.createPurposeTags();
@@ -803,12 +805,14 @@ const url = "https://poppymusic.fr/brief";
 					element.classList.add('border-[#c76927]', 'bg-opacity-40');
 
 					// Analytics - Tracker sélection objectif
-					gtag('event', 'form_purpose_selected', {
-						'event_category': 'Brief Form',
-						'event_label': tag,
-						'purpose_type': tag,
-						'step_number': 3
-					});
+					if (typeof gtag !== 'undefined') {
+						gtag('event', 'form_purpose_selected', {
+							'event_category': 'Brief Form',
+							'event_label': tag,
+							'purpose_type': tag,
+							'step_number': 3
+						});
+					}
 
 					// Gérer le champ "Autre"
 					const otherField = document.getElementById('other-purpose-field');
@@ -868,35 +872,41 @@ const url = "https://poppymusic.fr/brief";
 					}
 
 					// Analytics - Tracker progression étapes
-					gtag('event', 'form_step_completed', {
-						'event_category': 'Brief Form',
-						'event_label': `Step ${this.currentStep}`,
-						'step_number': this.currentStep,
-						'step_name': this.getStepName(this.currentStep)
-					});
+					if (typeof gtag !== 'undefined') {
+						gtag('event', 'form_step_completed', {
+							'event_category': 'Brief Form',
+							'event_label': `Step ${this.currentStep}`,
+							'step_number': this.currentStep,
+							'step_name': this.getStepName(this.currentStep)
+						});
+					}
 
 					if (this.currentStep < this.totalSteps) {
 						this.hideStep(this.currentStep);
 						this.currentStep++;
 						
 						// Analytics - Nouvelle étape commencée
-						gtag('event', 'form_step_started', {
-							'event_category': 'Brief Form',
-							'event_label': `Step ${this.currentStep}`,
-							'step_number': this.currentStep,
-							'step_name': this.getStepName(this.currentStep)
-						});
+						if (typeof gtag !== 'undefined') {
+							gtag('event', 'form_step_started', {
+								'event_category': 'Brief Form',
+								'event_label': `Step ${this.currentStep}`,
+								'step_number': this.currentStep,
+								'step_name': this.getStepName(this.currentStep)
+							});
+						}
 
 						this.showStep(this.currentStep);
 						this.updateProgress();
 						await this.autoSave();
 					} else if (this.currentStep === this.totalSteps) {
 						// Analytics - Formulaire terminé
-						gtag('event', 'form_completed', {
-							'event_category': 'Brief Form',
-							'event_label': 'All Steps Completed',
-							'value': 199
-						});
+						if (typeof gtag !== 'undefined') {
+							gtag('event', 'form_completed', {
+								'event_category': 'Brief Form',
+								'event_label': 'All Steps Completed',
+								'value': 199
+							});
+						}
 						
 						// Étape 11 terminée, rediriger vers le paiement
 						await this.proceedToPayment();
@@ -1034,11 +1044,13 @@ const url = "https://poppymusic.fr/brief";
 
 				async proceedToPayment() {
 					// Analytics - Tracker redirection vers paiement
-					gtag('event', 'form_proceed_to_payment', {
-						'event_category': 'Brief Form',
-						'event_label': 'Redirect to Payment',
-						'value': 199
-					});
+					if (typeof gtag !== 'undefined') {
+						gtag('event', 'form_proceed_to_payment', {
+							'event_category': 'Brief Form',
+							'event_label': 'Redirect to Payment',
+							'value': 199
+						});
+					}
 
 					this.formData.isCompleted = true;
 					await this.autoSave();
@@ -1048,11 +1060,13 @@ const url = "https://poppymusic.fr/brief";
 				prevStep() {
 					if (this.currentStep > 1) {
 						// Analytics - Tracker retour en arrière
-						gtag('event', 'form_step_back', {
-							'event_category': 'Brief Form',
-							'event_label': `Back from Step ${this.currentStep} to ${this.currentStep - 1}`,
-							'step_number': this.currentStep
-						});
+						if (typeof gtag !== 'undefined') {
+							gtag('event', 'form_step_back', {
+								'event_category': 'Brief Form',
+								'event_label': `Back from Step ${this.currentStep} to ${this.currentStep - 1}`,
+								'step_number': this.currentStep
+							});
+						}
 
 						this.hideStep(this.currentStep);
 						this.currentStep--;
@@ -1209,7 +1223,7 @@ const url = "https://poppymusic.fr/brief";
 
 			// Analytics - Tracker abandon de formulaire
 			window.addEventListener('beforeunload', () => {
-				if (briefWizard && briefWizard.currentStep < briefWizard.totalSteps && !briefWizard.formData.isCompleted) {
+				if (briefWizard && briefWizard.currentStep < briefWizard.totalSteps && !briefWizard.formData.isCompleted && typeof gtag !== 'undefined') {
 					gtag('event', 'form_abandoned', {
 						'event_category': 'Brief Form',
 						'event_label': `Abandoned at Step ${briefWizard.currentStep}`,
