@@ -173,26 +173,26 @@ const title = "Dashboard Admin - Poppy Music";
 			const BriefService = {
 				async getDashboardStats() {
 					const { data: briefs, error } = await supabase
-						.from('client_briefs')
-						.select('status, payment_status, amount_paid');
+						.from('client_briefs_steps')
+						.select('is_completed, is_paid, amount_paid, current_step');
 					
 					if (error) throw error;
 					
 					return {
 						total_briefs: briefs.length,
-						pending_briefs: briefs.filter(b => b.status === 'pending').length,
-						in_progress_briefs: briefs.filter(b => b.status === 'in_progress').length,
-						completed_briefs: briefs.filter(b => b.status === 'completed').length,
-						paid_briefs: briefs.filter(b => b.payment_status === 'paid').length,
+						pending_briefs: briefs.filter(b => !b.is_completed && (b.current_step || 1) < 12).length,
+						in_progress_briefs: briefs.filter(b => !b.is_completed && (b.current_step || 1) >= 3).length,
+						completed_briefs: briefs.filter(b => b.is_completed).length,
+						paid_briefs: briefs.filter(b => b.is_paid).length,
 						total_revenue: briefs
-							.filter(b => b.payment_status === 'paid')
-							.reduce((sum, b) => sum + (b.amount_paid || 0), 0)
+							.filter(b => b.is_paid)
+							.reduce((sum, b) => sum + (b.amount_paid || 19900), 0)
 					};
 				},
 
 				async getBriefs(page = 1, limit = 5) {
 					const { data, error } = await supabase
-						.from('client_briefs')
+						.from('client_briefs_steps')
 						.select('*')
 						.order('created_at', { ascending: false })
 						.range((page - 1) * limit, page * limit - 1);
@@ -270,26 +270,43 @@ const title = "Dashboard Admin - Poppy Music";
 						cancelled: 'Annulé'
 					};
 
+					// Fonction pour déterminer le statut d'un brief steps
+					function getBriefStatus(brief) {
+						if (brief.is_completed) return 'completed';
+						if ((brief.current_step || 1) >= 3) return 'in_progress';
+						return 'pending';
+					}
+
 					// Version desktop (tableau)
 					tbody.innerHTML = briefs.map(brief => {
+						const status = getBriefStatus(brief);
+						const targetName = brief.target_first_name && brief.target_last_name 
+							? `${brief.target_first_name} ${brief.target_last_name}`
+							: brief.target_audience || 'Non spécifié';
+						
 						return `
 							<tr class="hover:bg-gray-800 transition-colors">
 								<td class="p-4">
 									<div>
-										<div class="font-medium text-white">${brief.first_name} ${brief.last_name}</div>
-										<div class="text-sm text-gray-400">${brief.email}</div>
+										<div class="font-medium text-white">${brief.first_name || 'N/A'} ${brief.last_name || 'N/A'}</div>
+										<div class="text-sm text-gray-400">${brief.email || 'N/A'}</div>
 									</div>
 								</td>
 								<td class="p-4">
-									<div class="font-medium text-white">${brief.project_title || 'Sans titre'}</div>
-									<div class="text-sm text-gray-400">${brief.project_purpose}</div>
+									<div class="font-medium text-white">${brief.song_title || 'Sans titre'}</div>
+									<div class="text-sm text-gray-400">Pour: ${targetName}</div>
 								</td>
-								<td class="p-4 text-gray-300">${brief.music_style}</td>
-								<td class="p-4 text-gray-300">${new Date(brief.deadline).toLocaleDateString('fr-FR')}</td>
+								<td class="p-4 text-gray-300">${brief.music_style || 'Non défini'}</td>
+								<td class="p-4 text-gray-300">Étape ${brief.current_step || 1}/12</td>
 								<td class="p-4">
-									<span class="px-2 py-1 text-xs rounded-full ${statusColors[brief.status] || statusColors.pending}">
-										${statusLabels[brief.status] || 'En attente'}
-									</span>
+									<div>
+										<span class="px-2 py-1 text-xs rounded-full ${statusColors[status]}">
+											${statusLabels[status]}
+										</span>
+										<div class="text-xs text-gray-500 mt-1">
+											${brief.is_paid ? `Payé ${brief.amount_paid ? (brief.amount_paid / 100).toFixed(0) + '€' : ''}` : 'Non payé'}
+										</div>
+									</div>
 								</td>
 								<td class="p-4">
 									<button onclick="viewBrief('${brief.id}')" 

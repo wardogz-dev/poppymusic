@@ -768,7 +768,7 @@ const url = "https://poppymusic.fr/brief";
 					
 					const tags = [
 						{ name: 'Anniversaire', color: 'bg-purple-500', textColor: 'text-purple-100' },
-						{ name: 'Club', color: 'bg-orange-500', textColor: 'text-orange-100' },
+						{ name: 'Club', color: 'bg-purple-600', textColor: 'text-purple-100' },
 						{ name: 'Entreprise', color: 'bg-blue-500', textColor: 'text-blue-100' },
 						{ name: 'Association', color: 'bg-green-500', textColor: 'text-green-100' },
 						{ name: 'Nouvelle vie', color: 'bg-pink-500', textColor: 'text-pink-100' },
@@ -1259,9 +1259,27 @@ const url = "https://poppymusic.fr/brief";
 				background-color: rgba(199, 105, 39, 0.1);
 			}
 
+			.emotion-option:has(input:checked) .text-white {
+				color: #c76927 !important;
+				font-weight: 600;
+			}
+
+			.emotion-option:has(input:checked) .text-gray-400 {
+				color: #d1d5db !important;
+			}
+
 			.music-style-option:has(input:checked) {
 				border-color: #c76927 !important;
 				background-color: rgba(199, 105, 39, 0.1);
+			}
+
+			.music-style-option:has(input:checked) .text-white {
+				color: #c76927 !important;
+				font-weight: 600;
+			}
+
+			.music-style-option:has(input:checked) .text-gray-400 {
+				color: #d1d5db !important;
 			}
 
 			.char-counter {

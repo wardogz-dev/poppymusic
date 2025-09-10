@@ -40,3 +40,6 @@ deploy.log
 
 # PM2
 .pm2/
+
+# Configuration PM2 avec clés privées
+ecosystem.config.cjs
