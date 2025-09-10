@@ -46,7 +46,7 @@ export class EmailService {
       });
 
       const { data, error } = await resend.emails.send({
-        from: 'Poppy Music <noreply@poppymusic.fr>',
+        from: 'Poppy Music <onboarding@resend.dev>', // Utiliser le domaine par défaut Resend ou ton domaine vérifié
         to: [briefData.email],
         subject: `🎵 Confirmation de commande - ${songTitle}`,
         html: emailHtml,
@@ -199,7 +199,7 @@ export class EmailService {
         : 'Non spécifié';
 
       const { data, error } = await resend.emails.send({
-        from: 'Poppy Music <noreply@poppymusic.fr>',
+        from: 'Poppy Music <onboarding@resend.dev>', // Utiliser le domaine par défaut Resend ou ton domaine vérifié
         to: ['hello@poppymusic.fr'], // Email de l'équipe
         subject: `🔔 Nouvelle commande payée - ${briefData.firstName} ${briefData.lastName}`,
         html: `
