@@ -187,7 +187,15 @@ const description = "Finalisez votre commande de chanson personnalisée.";
 						}
 					} catch (error) {
 						console.error('Erreur paiement:', error);
-						alert('Erreur lors de la création du paiement. Veuillez réessayer.');
+						
+						let errorMessage = 'Erreur lors de la création du paiement. Veuillez réessayer.';
+						
+						// Afficher un message plus spécifique selon l'erreur
+						if (error.message && error.message.includes('Configuration Stripe manquante')) {
+							errorMessage = 'Configuration Stripe non disponible en développement.\n\nPour tester les paiements :\n1. Configurez vos clés Stripe dans .env\n2. Ou testez directement en production';
+						}
+						
+						alert(errorMessage);
 						
 						// Restaurer le bouton
 						btn.disabled = false;

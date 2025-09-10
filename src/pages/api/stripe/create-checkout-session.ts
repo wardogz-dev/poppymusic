@@ -1,13 +1,37 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 
-// Initialiser Stripe avec la clé secrète
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20',
-});
-
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Vérifier que les variables d'environnement Stripe sont définies
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error('❌ STRIPE_SECRET_KEY non définie');
+      return new Response(JSON.stringify({ 
+        success: false, 
+        message: 'Configuration Stripe manquante - Variables d\'environnement non définies',
+        details: 'STRIPE_SECRET_KEY requis'
+      }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    if (!process.env.STRIPE_PRICE_ID) {
+      console.error('❌ STRIPE_PRICE_ID non définie');
+      return new Response(JSON.stringify({ 
+        success: false, 
+        message: 'Configuration Stripe manquante - STRIPE_PRICE_ID requis'
+      }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Initialiser Stripe avec la clé secrète
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2024-06-20',
+    });
+
     const { briefId, sessionId } = await request.json();
 
     if (!briefId && !sessionId) {
