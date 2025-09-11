@@ -936,11 +936,14 @@ const url = "https://poppymusic.fr/brief";
 						await this.autoSave();
 					} else if (this.currentStep === this.totalSteps) {
 						// GTM Tracking - Formulaire terminé
-						if (typeof gtag !== 'undefined') {
-							gtag('event', 'form_completed', {
+						// GTM - Formulaire terminé
+						console.log('🎯 GTM Event: form_completed');
+						if (typeof dataLayer !== 'undefined') {
+							dataLayer.push({
+								'event': 'form_completed',
 								'event_category': 'Brief Form',
 								'event_label': 'All Steps Completed',
-								'value': 199
+								'value': 160
 							});
 						}
 						
@@ -1079,12 +1082,14 @@ const url = "https://poppymusic.fr/brief";
 				}
 
 				async proceedToPayment() {
-					// Analytics - Tracker redirection vers paiement
-					if (typeof gtag !== 'undefined') {
-						gtag('event', 'form_proceed_to_payment', {
+					// GTM - Tracker redirection vers paiement
+					console.log('🎯 GTM Event: form_proceed_to_payment');
+					if (typeof dataLayer !== 'undefined') {
+						dataLayer.push({
+							'event': 'form_proceed_to_payment',
 							'event_category': 'Brief Form',
 							'event_label': 'Redirect to Payment',
-							'value': 199
+							'value': 160
 						});
 					}
 
