@@ -16,11 +16,19 @@ const description = "Votre brief créatif a été envoyé avec succès. Nous vou
 		<meta name="robots" content="noindex, nofollow" />
 
 		<!-- Google Tag Manager -->
-		<GTM />
-		<GTMInit pageType="confirmation" formName="brief_completed" />
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NGZ6SCTP');</script>
+		<!-- End Google Tag Manager -->
 	</head>
 	
 	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased min-h-screen flex items-center justify-center">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGZ6SCTP"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
 		<div class="max-w-2xl w-full mx-auto px-6 text-center">
 			<!-- SUCCÈS -->
 			<div class="mb-8">
@@ -85,38 +93,99 @@ const description = "Votre brief créatif a été envoyé avec succès. Nous vou
 
 		<script>
 			// @ts-nocheck
-			// Afficher l'ID du brief si disponible dans l'URL
-			const urlParams = new URLSearchParams(window.location.search);
-			const briefId = urlParams.get('briefId');
-			const sessionId = urlParams.get('session_id'); // Stripe session ID
-			
-			if (briefId) {
-				console.log('Brief ID:', briefId);
+			(async () => {
+				// Initialiser dataLayer pour GTM
+				window.dataLayer = window.dataLayer || [];
 				
-				// Analytics - Tracker conversion réussie
-				if (typeof gtag !== 'undefined') {
-					gtag('event', 'purchase', {
-						'event_category': 'Payment',
-						'transaction_id': sessionId || briefId,
-						'value': 199,
-						'currency': 'EUR',
-						'items': [{
-							'item_id': 'chanson-personnalisee',
-							'item_name': 'Chanson Personnalisée',
-							'category': 'Music Production',
-							'quantity': 1,
-							'price': 199
+				// Lire les paramètres URL
+				const urlParams = new URLSearchParams(window.location.search);
+				const briefId = urlParams.get('briefId');
+				const sessionId = urlParams.get('session_id'); // Stripe session ID
+				
+				console.log('🎯 Page confirmation - Brief ID:', briefId, 'Session ID:', sessionId);
+				
+				// Si on a un session_id, vérifier le paiement auprès de Stripe
+				if (sessionId) {
+					try {
+						console.log('🔍 Vérification du paiement Stripe...');
+						
+						// Vérifier le statut du paiement
+						const response = await fetch(`/api/stripe/payment-status?session_id=${sessionId}`);
+						const paymentData = await response.json();
+						
+						console.log('💳 Stripe payment-status:', paymentData);
+						
+						if (paymentData.success && paymentData.paymentStatus === 'paid') {
+							// Anti-doublon avec localStorage
+							const purchaseKey = `purchased_${sessionId}`;
+							if (localStorage.getItem(purchaseKey)) {
+								console.log('⚠️ Purchase déjà tracké, éviter doublon');
+								return;
+							}
+							localStorage.setItem(purchaseKey, '1');
+							
+							// Préparer les données de conversion
+							const purchaseData = {
+								event: 'purchase',
+								transaction_id: sessionId,
+								value: (paymentData.paymentDetails.amount_total || 19900) / 100, // Conversion cents -> euros
+								currency: paymentData.paymentDetails.currency || 'EUR',
+								items: [{
+									item_id: 'chanson-personnalisee',
+									item_name: 'Chanson Personnalisée Poppy Music',
+									item_category: 'Music Production',
+									item_variant: 'Standard',
+									price: (paymentData.paymentDetails.amount_total || 19900) / 100,
+									quantity: 1
+								}],
+								customer_email: paymentData.paymentDetails.customer_email || '',
+								payment_method: 'stripe'
+							};
+							
+							// Push vers GTM
+							console.log('🎯 GTM Event: purchase', purchaseData);
+							window.dataLayer.push(purchaseData);
+							
+							// Événement de confirmation de page
+							window.dataLayer.push({
+								event: 'conversion_confirmation',
+								event_category: 'Payment',
+								event_label: 'Payment Confirmed',
+								value: purchaseData.value,
+								transaction_id: sessionId
+							});
+							
+							console.log('✅ Événements purchase envoyés vers GTM');
+							
+						} else {
+							console.log('❌ Paiement non confirmé ou échec:', paymentData);
+						}
+						
+					} catch (error) {
+						console.error('❌ Erreur vérification paiement:', error);
+					}
+				} else if (briefId) {
+					// Fallback pour les anciens liens sans session_id
+					console.log('📝 Brief ID trouvé sans session_id, conversion basique');
+					
+					const basicPurchaseData = {
+						event: 'purchase',
+						transaction_id: briefId,
+						value: 199,
+						currency: 'EUR',
+						items: [{
+							item_id: 'chanson-personnalisee',
+							item_name: 'Chanson Personnalisée Poppy Music',
+							item_category: 'Music Production',
+							price: 199,
+							quantity: 1
 						}]
-					});
-
-					// Analytics - Tracker page de confirmation
-					gtag('event', 'conversion_confirmation', {
-						'event_category': 'Payment',
-						'event_label': 'Payment Confirmed',
-						'value': 199
-					});
+					};
+					
+					console.log('🎯 GTM Event: purchase (fallback)', basicPurchaseData);
+					window.dataLayer.push(basicPurchaseData);
 				}
-			}
+			})();
 		</script>
 
 		<!-- FOOTER DISCRET -->
