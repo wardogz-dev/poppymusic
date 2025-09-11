@@ -57,6 +57,9 @@ export class StickyPlayer {
         this.setupControls();
         this.setupProgress();
         this.setupVolume();
+
+        // Initialiser le volume à 70% par défaut
+        this.setVolume(0.7);
     }
     
     show() {
@@ -91,6 +94,13 @@ export class StickyPlayer {
             // Update progress display
             this.updateProgress();
             this.updateDuration();
+
+            // Appliquer le volume actuel au nouveau track
+            if (this.currentAudio) {
+                const currentVolume = this.getCurrentVolume();
+                this.currentAudio.volume = currentVolume;
+                console.log(`🔊 Volume appliqué au nouveau track: ${(currentVolume * 100).toFixed(0)}%`);
+            }
         }
     }
     
@@ -235,12 +245,81 @@ export class StickyPlayer {
     }
     
     setupVolume() {
-        this.volumeSlider.addEventListener('click', (e) => {
+        let isDragging = false;
+
+        const updateVolume = (e) => {
+            if (!this.volumeSlider) return;
+
             const rect = this.volumeSlider.getBoundingClientRect();
             const volume = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-            
-            this.tracks.forEach(track => track.audio.volume = volume);
-            this.volumeFill.style.width = `${volume * 100}%`;
+
+            // Utiliser la méthode setVolume pour une gestion cohérente
+            this.setVolume(volume);
+        };
+
+        // Gestion du clic
+        this.volumeSlider.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('🔘 Volume slider cliqué');
+            updateVolume(e);
+        });
+
+        // Gestion du drag (souris)
+        this.volumeSlider.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            isDragging = true;
+            console.log('🖱️ Début drag volume');
+            updateVolume(e);
+
+            const handleMouseMove = (e) => {
+                if (isDragging) {
+                    updateVolume(e);
+                }
+            };
+
+            const handleMouseUp = () => {
+                isDragging = false;
+                console.log('🖱️ Fin drag volume');
+                document.removeEventListener('mousemove', handleMouseMove);
+                document.removeEventListener('mouseup', handleMouseUp);
+            };
+
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        });
+
+        // Gestion tactile pour mobile
+        this.volumeSlider.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            this.volumeSlider.dispatchEvent(mouseEvent);
+        });
+
+        this.volumeSlider.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (isDragging) {
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousemove', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                document.dispatchEvent(mouseEvent);
+            }
+        });
+
+        this.volumeSlider.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            const mouseEvent = new MouseEvent('mouseup');
+            document.dispatchEvent(mouseEvent);
+        });
+
+        // Empêcher la sélection de texte pendant le drag
+        this.volumeSlider.addEventListener('selectstart', (e) => {
+            e.preventDefault();
         });
     }
     
@@ -262,5 +341,40 @@ export class StickyPlayer {
         const mins = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Méthodes de gestion du volume
+    setVolume(volume) {
+        const clampedVolume = Math.max(0, Math.min(1, volume));
+
+        // Appliquer à tous les tracks
+        this.tracks.forEach(track => {
+            track.audio.volume = clampedVolume;
+        });
+
+        // Mettre à jour l'affichage visuel
+        if (this.volumeFill) {
+            this.volumeFill.style.width = `${clampedVolume * 100}%`;
+        }
+
+        console.log(`🔊 Volume défini à: ${(clampedVolume * 100).toFixed(0)}%`);
+    }
+
+    getCurrentVolume() {
+        // Retourner le volume du track actuel ou une valeur par défaut
+        if (this.currentAudio) {
+            return this.currentAudio.volume;
+        }
+
+        // Si pas de track actuel, essayer de récupérer depuis le volumeFill
+        if (this.volumeFill) {
+            const width = this.volumeFill.style.width;
+            if (width) {
+                return parseFloat(width) / 100;
+            }
+        }
+
+        // Valeur par défaut
+        return 0.7;
     }
 }
