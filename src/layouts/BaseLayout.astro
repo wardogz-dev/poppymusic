@@ -1,0 +1,107 @@
+---
+export interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	url?: string;
+}
+
+const {
+	title,
+	description = "Poppy Music Studio - Votre message en musique personnalisée. Créez des chansons uniques pour vos proches avec nos services de production musicale professionnelle.",
+	image = "/og-image.png",
+	url = "https://poppymusic.fr"
+} = Astro.props;
+
+// Vérifier si c'est une page admin pour exclure le GTM
+const isAdminPage = Astro.url.pathname.startsWith('/admin');
+
+const ogTitle = `${title} - Poppy Music Studio`;
+const ogDescription = description;
+const ogImage = image.startsWith('http') ? image : `https://poppymusic.fr${image}`;
+---
+
+<html lang="fr">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<meta name="viewport" content="width=device-width" />
+	<title>{ogTitle}</title>
+	<meta name="description" content={ogDescription} />
+
+	<!-- Favicon -->
+	<link rel="alternate icon" href="/favicon.ico" />
+
+	<!-- Open Graph -->
+	<meta property="og:title" content={ogTitle} />
+	<meta property="og:description" content={ogDescription} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={ogTitle} />
+	<meta name="twitter:description" content={ogDescription} />
+	<meta name="twitter:image" content={ogImage} />
+
+	<!-- Google Tag Manager - Seulement pour les pages non-admin -->
+	{!isAdminPage && (
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NGZ6SCTP');</script>
+	)}
+
+	<!-- Google Analytics (gardé pour compatibilité) -->
+	{!isAdminPage && (
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XM9JLS953"></script>
+	)}
+	{!isAdminPage && (
+		<script>
+			// @ts-nocheck
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-7XM9JLS953');
+		</script>
+	)}
+
+	<!-- Styles globaux -->
+	<link rel="stylesheet" href="/styles/global.css" />
+</head>
+
+<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased">
+	<!-- Google Tag Manager (noscript) - Seulement pour les pages non-admin -->
+	{!isAdminPage && (
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGZ6SCTP"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	)}
+
+	<!-- Contenu de la page -->
+	<slot />
+
+	<!-- Scripts globaux -->
+	<script>
+		// @ts-nocheck
+		// Fonctions utilitaires globales
+		window.closeMobileMenu = function() {
+			const mobileMenu = document.getElementById('mobileMenu');
+			const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+			if (mobileMenu) {
+				mobileMenu.classList.add('hidden');
+			}
+			if (mobileMenuBtn) {
+				const svg = mobileMenuBtn.querySelector('svg');
+				if (svg) {
+					svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+				}
+			}
+		};
+	</script>
+</body>
+</html>
