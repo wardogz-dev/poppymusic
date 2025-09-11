@@ -1082,14 +1082,20 @@ const url = "https://poppymusic.fr/brief";
 				}
 
 				async proceedToPayment() {
-					// GTM - Tracker redirection vers paiement
-					console.log('🎯 GTM Event: form_proceed_to_payment');
+					// GTM - Tracker redirection vers paiement (begin_checkout GA4)
+					console.log('🎯 GTM Event: begin_checkout');
 					if (typeof dataLayer !== 'undefined') {
 						dataLayer.push({
-							'event': 'form_proceed_to_payment',
-							'event_category': 'Brief Form',
-							'event_label': 'Redirect to Payment',
-							'value': 160
+							'event': 'begin_checkout',
+							'currency': 'EUR',
+							'value': 160,
+							'items': [{
+								'item_id': 'chanson-personnalisee',
+								'item_name': 'Chanson Personnalisée Poppy Music',
+								'item_category': 'Music Production',
+								'price': 160,
+								'quantity': 1
+							}]
 						});
 					}
 
