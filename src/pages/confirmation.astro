@@ -1,7 +1,5 @@
 ---
 import '../styles/global.css';
-import GTM from '../components/GTM.astro';
-import GTMInit from '../components/GTMInit.astro';
 
 const title = "Brief Envoyé - Poppy Music";
 const description = "Votre brief créatif a été envoyé avec succès. Nous vous contacterons bientôt.";
@@ -115,7 +113,7 @@ const description = "Votre brief créatif a été envoyé avec succès. Nous vou
 						
 						console.log('💳 Stripe payment-status:', paymentData);
 						
-						if (paymentData.success && paymentData.paymentStatus === 'paid') {
+						if (paymentData.success && paymentData.paid) {
 							// Anti-doublon avec localStorage
 							const purchaseKey = `purchased_${sessionId}`;
 							if (localStorage.getItem(purchaseKey)) {

@@ -53,6 +53,7 @@ export const GET: APIRoute = async ({ url }) => {
 
     return new Response(JSON.stringify({ 
       success: true, 
+      paid: paymentStatus === 'paid',
       paymentStatus,
       paymentDetails
     }), {
