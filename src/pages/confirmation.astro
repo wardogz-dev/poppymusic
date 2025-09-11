@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import GTM from '../components/GTM.astro';
+import GTMInit from '../components/GTMInit.astro';
 
 const title = "Brief Envoyé - Poppy Music";
 const description = "Votre brief créatif a été envoyé avec succès. Nous vous contacterons bientôt.";
@@ -13,16 +15,9 @@ const description = "Votre brief créatif a été envoyé avec succès. Nous vou
 		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
 		<meta name="robots" content="noindex, nofollow" />
 
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XM9JLS953"></script>
-		<script>
-			// @ts-nocheck
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-
-			gtag('config', 'G-7XM9JLS953');
-		</script>
+		<!-- Google Tag Manager -->
+		<GTM />
+		<GTMInit pageType="confirmation" formName="brief_completed" />
 	</head>
 	
 	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased min-h-screen flex items-center justify-center">
@@ -98,25 +93,19 @@ const description = "Votre brief créatif a été envoyé avec succès. Nous vou
 			if (briefId) {
 				console.log('Brief ID:', briefId);
 				
-				// Analytics - Tracker conversion réussie
-				if (typeof gtag !== 'undefined') {
-					gtag('event', 'purchase', {
-						'event_category': 'Payment',
-						'transaction_id': sessionId || briefId,
-						'value': 199,
-						'currency': 'EUR',
-						'items': [{
-							'item_id': 'chanson-personnalisee',
-							'item_name': 'Chanson Personnalisée',
-							'category': 'Music Production',
-							'quantity': 1,
-							'price': 199
-						}]
+				// GTM Tracking - Conversion finale réussie
+				if (window.GTMTracker) {
+					window.GTMTracker.trackPaymentComplete({
+						id: sessionId || briefId,
+						currency: 'EUR',
+						amount_total: 19900, // 199€ en cents
+						customer_details: { email: 'N/A' },
+						metadata: { briefId: briefId }
 					});
 
-					// Analytics - Tracker page de confirmation
-					gtag('event', 'conversion_confirmation', {
-						'event_category': 'Payment',
+					// GTM Tracking - Page de confirmation vue
+					window.GTMTracker.trackEvent('conversion_confirmation', {
+						page_type: 'confirmation',
 						'event_label': 'Payment Confirmed',
 						'value': 199
 					});
