@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test GTM Events - Poppy Music</title>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NGZ6SCTP');</script>
+    <!-- End Google Tag Manager -->
+
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        button { background: #667eea; color: white; border: none; padding: 10px 20px; margin: 10px; cursor: pointer; border-radius: 5px; }
+        button:hover { background: #5a67d8; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; font-family: monospace; }
+        .event { background: #e6fffa; border-left: 4px solid #38b2ac; padding: 10px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGZ6SCTP"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <h1>🧪 Test GTM Events - Poppy Music</h1>
+
+    <div>
+        <h2>Tests des événements formulaire</h2>
+        
+        <button onclick="testFormStarted()">Test: form_started</button>
+        <button onclick="testFormStep(2)">Test: form_step (étape 2)</button>
+        <button onclick="testFormStep(6)">Test: form_step (étape 6)</button>
+        <button onclick="testFormPurpose('Anniversaire')">Test: form_purpose_selected</button>
+        <button onclick="testFormCompleted()">Test: form_completed</button>
+        <button onclick="testBeginCheckout()">Test: begin_checkout</button>
+        <button onclick="testPurchase()">Test: purchase</button>
+    </div>
+
+    <div>
+        <h2>Monitoring</h2>
+        <button onclick="showDataLayer()">Afficher dataLayer</button>
+        <button onclick="clearLogs()">Clear logs</button>
+    </div>
+
+    <div id="logs"></div>
+
+    <script>
+        // Initialiser dataLayer
+        window.dataLayer = window.dataLayer || [];
+        
+        // Logger pour affichage
+        const logElement = document.getElementById('logs');
+        
+        function log(message, data = null) {
+            console.log(message, data);
+            const div = document.createElement('div');
+            div.className = 'log';
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            if (data) {
+                div.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            }
+            logElement.appendChild(div);
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        function logEvent(eventName, data) {
+            const div = document.createElement('div');
+            div.className = 'event';
+            div.innerHTML = `
+                <strong>📊 GTM Event: ${eventName}</strong>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+            logElement.appendChild(div);
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        // Tests des événements
+        function testFormStarted() {
+            const data = {
+                'event': 'form_started',
+                'event_category': 'Brief Form',
+                'event_label': 'Form Initialized',
+                'step_number': 1
+            };
+            
+            dataLayer.push(data);
+            logEvent('form_started', data);
+        }
+
+        function testFormStep(stepNumber) {
+            const data = {
+                'event': 'form_step_completed',
+                'event_category': 'Brief Form',
+                'event_label': `Step ${stepNumber}`,
+                'step_number': stepNumber,
+                'step_name': `Étape ${stepNumber}`
+            };
+            
+            dataLayer.push(data);
+            logEvent('form_step_completed', data);
+        }
+
+        function testFormPurpose(purpose) {
+            const data = {
+                'event': 'form_purpose_selected',
+                'event_category': 'Brief Form',
+                'event_label': purpose,
+                'purpose_type': purpose,
+                'step_number': 3
+            };
+            
+            dataLayer.push(data);
+            logEvent('form_purpose_selected', data);
+        }
+
+        function testFormCompleted() {
+            const data = {
+                'event': 'form_completed',
+                'event_category': 'Brief Form',
+                'event_label': 'All Steps Completed',
+                'value': 199
+            };
+            
+            dataLayer.push(data);
+            logEvent('form_completed', data);
+        }
+
+        function testBeginCheckout() {
+            const data = {
+                'event': 'begin_checkout',
+                'currency': 'EUR',
+                'value': 199,
+                'items': [{
+                    'item_name': 'Chanson personnalisée Poppy Music',
+                    'item_category': 'Music Production',
+                    'price': 199,
+                    'quantity': 1
+                }]
+            };
+            
+            dataLayer.push(data);
+            logEvent('begin_checkout', data);
+        }
+
+        function testPurchase() {
+            const data = {
+                'event': 'purchase',
+                'transaction_id': 'test_' + Date.now(),
+                'value': 199,
+                'currency': 'EUR',
+                'items': [{
+                    'item_id': 'chanson-personnalisee',
+                    'item_name': 'Chanson Personnalisée',
+                    'category': 'Music Production',
+                    'quantity': 1,
+                    'price': 199
+                }]
+            };
+            
+            dataLayer.push(data);
+            logEvent('purchase', data);
+        }
+
+        function showDataLayer() {
+            log('📊 DataLayer complet:', window.dataLayer);
+        }
+
+        function clearLogs() {
+            logElement.innerHTML = '';
+        }
+
+        // Log initial
+        document.addEventListener('DOMContentLoaded', function() {
+            log('🎯 Page chargée, GTM initialisé');
+            log('📊 DataLayer disponible:', typeof window.dataLayer !== 'undefined');
+            
+            // Test automatique
+            setTimeout(() => {
+                testFormStarted();
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

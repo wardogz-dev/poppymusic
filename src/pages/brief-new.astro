@@ -30,8 +30,12 @@ const url = "https://poppymusic.fr/brief";
 		<meta property="og:image:height" content="630" />
 
 		<!-- Google Tag Manager -->
-		<GTM />
-		<GTMInit pageType="form" formName="brief_creation" />
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NGZ6SCTP');</script>
+		<!-- End Google Tag Manager -->
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
@@ -52,6 +56,10 @@ const url = "https://poppymusic.fr/brief";
 	</head>
 	
 	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased min-h-screen">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGZ6SCTP"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
 		<!-- HEADER MINIMAL -->
 		<header class="fixed top-0 left-0 right-0 z-50 bg-[#0B0B0B] bg-opacity-95 backdrop-blur-sm border-b border-gray-800">
 			<nav class="flex justify-between items-center px-4 sm:px-8 py-4">
@@ -617,6 +625,10 @@ const url = "https://poppymusic.fr/brief";
 			// @ts-nocheck
 			// Vérification côté client pour éviter les erreurs de build
 			if (typeof window !== 'undefined') {
+				// Initialiser dataLayer pour GTM
+				window.dataLayer = window.dataLayer || [];
+				console.log('🎯 GTM dataLayer initialisé:', window.dataLayer);
+
 				class BriefFormWizard {
 				constructor() {
 					this.currentStep = 1;
@@ -632,9 +644,11 @@ const url = "https://poppymusic.fr/brief";
 				}
 
 				init() {
-					// Analytics - Tracker début de formulaire
-					if (typeof gtag !== 'undefined') {
-						gtag('event', 'form_started', {
+					// GTM - Tracker début de formulaire
+					console.log('🎯 GTM Event: form_started');
+					if (typeof dataLayer !== 'undefined') {
+						dataLayer.push({
+							'event': 'form_started',
 							'event_category': 'Brief Form',
 							'event_label': 'Form Initialized',
 							'step_number': 1
@@ -820,9 +834,11 @@ const url = "https://poppymusic.fr/brief";
 					element.classList.remove('border-transparent', 'bg-opacity-20');
 					element.classList.add('border-[#c76927]', 'bg-opacity-40');
 
-					// Analytics - Tracker sélection objectif
-					if (typeof gtag !== 'undefined') {
-						gtag('event', 'form_purpose_selected', {
+					// GTM - Tracker sélection objectif
+					console.log(`🎯 GTM Event: form_purpose_selected - ${tag}`);
+					if (typeof dataLayer !== 'undefined') {
+						dataLayer.push({
+							'event': 'form_purpose_selected',
 							'event_category': 'Brief Form',
 							'event_label': tag,
 							'purpose_type': tag,
@@ -887,9 +903,11 @@ const url = "https://poppymusic.fr/brief";
 						return;
 					}
 
-					// Analytics - Tracker progression étapes
-					if (typeof gtag !== 'undefined') {
-						gtag('event', 'form_step_completed', {
+					// GTM - Tracker progression étapes
+					console.log(`🎯 GTM Event: form_step_completed - Step ${this.currentStep}`);
+					if (typeof dataLayer !== 'undefined') {
+						dataLayer.push({
+							'event': 'form_step_completed',
 							'event_category': 'Brief Form',
 							'event_label': `Step ${this.currentStep}`,
 							'step_number': this.currentStep,
@@ -901,9 +919,11 @@ const url = "https://poppymusic.fr/brief";
 						this.hideStep(this.currentStep);
 						this.currentStep++;
 						
-						// Analytics - Nouvelle étape commencée
-						if (typeof gtag !== 'undefined') {
-							gtag('event', 'form_step_started', {
+						// GTM - Nouvelle étape commencée
+						console.log(`🎯 GTM Event: form_step_started - Step ${this.currentStep}`);
+						if (typeof dataLayer !== 'undefined') {
+							dataLayer.push({
+								'event': 'form_step_started',
 								'event_category': 'Brief Form',
 								'event_label': `Step ${this.currentStep}`,
 								'step_number': this.currentStep,
