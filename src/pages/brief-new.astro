@@ -615,7 +615,9 @@ const url = "https://poppymusic.fr/brief";
 
 		<script>
 			// @ts-nocheck
-			class BriefFormWizard {
+			// Vérification côté client pour éviter les erreurs de build
+			if (typeof window !== 'undefined') {
+				class BriefFormWizard {
 				constructor() {
 					this.currentStep = 1;
 					this.totalSteps = 12;
@@ -1223,6 +1225,7 @@ const url = "https://poppymusic.fr/brief";
 					window.GTMTracker.trackFormAbandon(briefWizard.currentStep, briefWizard.getStepName(briefWizard.currentStep));
 				}
 			});
+			} // Fin de la vérification typeof window
 		</script>
 
 		<style>
