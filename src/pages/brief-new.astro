@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import GTM from '../components/GTM.astro';
 
 const title = "Créer ma chanson - Poppy Music";
 const description = "Créez votre chanson personnalisée en quelques étapes simples.";
@@ -26,6 +27,9 @@ const url = "https://poppymusic.fr/brief";
 		<meta property="og:image" content={image} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
+
+		<!-- Google Tag Manager -->
+		<GTM />
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
