@@ -5,7 +5,7 @@ export interface Props {
 	genre: string;
 	duration: string;
 	tag: string;
-	tagColor: 'anniversaire-adulte' | 'anniversaire-enfant' | 'entreprise' | 'association' | 'club';
+	tagColor: 'anniversaire-adulte' | 'anniversaire-enfant' | 'entreprise' | 'association' | 'club' | 'amour';
 	audioSrc: string;
 	audioType: 'wav' | 'mp3';
 	coverClosed: string;
@@ -32,7 +32,8 @@ const tagStyles = {
 	'anniversaire-enfant': 'bg-pink-500 bg-opacity-80 text-white border-pink-400',
 	'entreprise': 'bg-blue-500 bg-opacity-80 text-white border-blue-400',
 	'association': 'bg-green-500 bg-opacity-80 text-white border-green-400',
-	'club': 'bg-orange-500 bg-opacity-80 text-white border-orange-400'
+	'club': 'bg-orange-500 bg-opacity-80 text-white border-orange-400',
+	'amour': 'bg-rose-500 bg-opacity-80 text-white border-rose-400'
 };
 ---
 
