@@ -49,7 +49,7 @@ const ogImage = image.startsWith('http') ? image : `https://poppymusic.fr${image
 
 	<!-- Google Tag Manager - Seulement pour les pages non-admin -->
 	{!isAdminPage && (
-		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		<script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -61,7 +61,7 @@ const ogImage = image.startsWith('http') ? image : `https://poppymusic.fr${image
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XM9JLS953"></script>
 	)}
 	{!isAdminPage && (
-		<script>
+		<script is:inline>
 			// @ts-nocheck
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
@@ -86,7 +86,7 @@ const ogImage = image.startsWith('http') ? image : `https://poppymusic.fr${image
 	<slot />
 
 	<!-- Scripts globaux -->
-	<script>
+	<script is:inline>
 		// @ts-nocheck
 		// Fonctions utilitaires globales
 		window.closeMobileMenu = function() {
