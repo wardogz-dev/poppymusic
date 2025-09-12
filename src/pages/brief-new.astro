@@ -66,7 +66,7 @@ const url = "https://poppymusic.fr/brief";
 				<a href="/" class="title-artistic text-xl sm:text-2xl text-[#c76927] hover:opacity-80 transition-opacity">Poppy Music</a>
 				<div class="flex items-center gap-4">
 					<div class="text-artistic text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Créer ma chanson</div>
-					<div class="bg-[#c76927] text-black px-3 py-1 rounded-full text-sm font-bold">160€</div>
+					<div class="bg-[#c76927] text-black px-3 py-1 rounded-full text-sm font-bold">199€</div>
 				</div>
 			</nav>
 		</header>
@@ -617,7 +617,7 @@ const url = "https://poppymusic.fr/brief";
 			<div class="bg-gradient-to-r from-[#c76927] to-[#a85520] rounded-lg p-6">
 				<div class="text-center">
 					<h3 class="text-black font-bold text-xl mb-4">Pack Production Complète</h3>
-					<div class="text-black text-3xl font-bold mb-4">160€</div>
+					<div class="text-black text-3xl font-bold mb-4">199€</div>
 					
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-black text-sm">
 						<div class="bg-black bg-opacity-10 rounded p-3">
@@ -989,14 +989,14 @@ const url = "https://poppymusic.fr/brief";
 						await this.autoSave();
 					} else if (this.currentStep === this.totalSteps) {
 						// GTM Tracking - Formulaire terminé
-						// GTM - Formulaire terminé
+						// GTM - Formulaire terminé (prix réel pour analytics)
 						console.log('🎯 GTM Event: form_completed');
 						if (typeof dataLayer !== 'undefined') {
 							dataLayer.push({
 								'event': 'form_completed',
 								'event_category': 'Brief Form',
 								'event_label': 'All Steps Completed',
-								'value': 160
+								'value': 160 // Prix réel pour analytics (pas prix affiché)
 							});
 						}
 						
@@ -1141,12 +1141,12 @@ const url = "https://poppymusic.fr/brief";
 						dataLayer.push({
 							'event': 'begin_checkout',
 							'currency': 'EUR',
-							'value': 160,
+							'value': 160, // Prix réel pour analytics (pas prix affiché)
 							'items': [{
 								'item_id': 'chanson-personnalisee',
 								'item_name': 'Chanson Personnalisée Poppy Music',
 								'item_category': 'Music Production',
-								'price': 160,
+								'price': 160, // Prix réel pour analytics
 								'quantity': 1
 							}]
 						});
