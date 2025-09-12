@@ -130,7 +130,7 @@ const description = "Votre brief créatif a été envoyé avec succès. Nous vou
 								event: 'purchase',
 								transaction_id: sessionId,
 								value: (paymentData.paymentDetails.amount_total || 16000) / 100, // Conversion cents -> euros (160€)
-								currency: paymentData.paymentDetails.currency || 'EUR',
+								currency: (paymentData.paymentDetails.currency || 'eur').toUpperCase(),
 								items: [{
 									item_id: 'chanson-personnalisee',
 									item_name: 'Chanson Personnalisée Poppy Music',
