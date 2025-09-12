@@ -247,11 +247,11 @@ const url = "https://poppymusic.fr/brief";
 								<label for="targetRelation" class="block text-sm font-medium text-gray-300 mb-2">Qui est cette personne pour vous ? *</label>
 								<textarea id="targetRelation" name="targetRelation" rows="3" required 
 									placeholder=""
-									minlength="10"
+									minlength="2"
 									class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none"></textarea>
 							<div class="text-right text-xs mt-1">
-								<span id="target-char-count" class="char-counter" data-min="10" data-current="0">
-									<span class="count-current">0</span> / <span class="count-min">10</span> caractères minimum
+								<span id="target-char-count" class="char-counter" data-min="2" data-current="0">
+									<span class="count-current">0</span> / <span class="count-min">2</span> caractères minimum
 								</span>
 							</div>
 							</div>
@@ -738,7 +738,7 @@ const url = "https://poppymusic.fr/brief";
 				initCharCounters() {
 					// Configuration des compteurs
 					const counters = [
-						{ textareaId: 'targetRelation', counterId: 'target-char-count', min: 10, recommended: 50 },
+						{ textareaId: 'targetRelation', counterId: 'target-char-count', min: 2, recommended: 50 },
 						{ textareaId: 'aboutSubject', counterId: 'about-char-count', min: 50, recommended: 200 },
 						{ textareaId: 'mainMessage', counterId: 'message-char-count', min: 50, recommended: 200 },
 						{ textareaId: 'keywordsAnecdotes', counterId: 'anecdotes-char-count', min: 50, recommended: 200 }
