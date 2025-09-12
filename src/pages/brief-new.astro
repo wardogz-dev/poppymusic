@@ -1,7 +1,5 @@
 ---
 import '../styles/global.css';
-import GTM from '../components/GTM.astro';
-import GTMInit from '../components/GTMInit.astro';
 
 const title = "Créer ma Chanson Personnalisée | Brief Musical | Poppy Music Studio";
 const description = "Créez votre chanson personnalisée en 12 étapes simples. Brief musical professionnel pour anniversaire, mariage, entreprise. Production studio 7-10 jours. 199€.";
@@ -835,7 +833,7 @@ const url = "https://poppymusic.fr/brief-new";
 					if (counterId) {
 						const counter = document.getElementById(counterId);
 						const config = {
-							'target-char-count': { min: 10, recommended: 50 },
+							'target-char-count': { min: 2, recommended: 50 },
 							'about-char-count': { min: 50, recommended: 200 },
 							'message-char-count': { min: 50, recommended: 200 },
 							'anecdotes-char-count': { min: 50, recommended: 200 }
@@ -1029,7 +1027,7 @@ const url = "https://poppymusic.fr/brief-new";
 							const targetBirthDate = document.getElementById('targetBirthDate').value.trim();
 							const targetGender = document.getElementById('targetGender').value.trim();
 							const targetRelation = document.getElementById('targetRelation').value.trim();
-							return targetFirstName && targetLastName && targetBirthDate && targetGender && targetRelation.length >= 10;
+							return targetFirstName && targetLastName && targetBirthDate && targetGender && targetRelation.length >= 2;
 						case 5:
 							const checkedEmotions = document.querySelectorAll('input[name="emotions"]:checked');
 							return checkedEmotions.length >= 2;

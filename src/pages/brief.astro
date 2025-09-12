@@ -1,8 +1,8 @@
 ---
 import '../styles/global.css';
 
-const title = "Brief Créatif - Poppy Music";
-const description = "Décrivez votre projet musical pour que nous puissions créer la chanson parfaite pour vous.";
+const title = "Brief Créatif | Décrire mon Projet | Poppy Music Studio";
+const description = "Décrivez votre projet musical pour que nous puissions créer la chanson parfaite pour vous. Formulaire simple et guidé pour votre chanson personnalisée.";
 const image = "https://poppymusic.fr/og-image.png?v=3";
 const url = "https://poppymusic.fr/brief";
 ---
@@ -14,9 +14,11 @@ const url = "https://poppymusic.fr/brief";
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 
-		<!-- Favicon -->
+		<!-- Favicon et icônes -->
 		<link rel="icon" href="/icon-2025.svg" type="image/svg+xml" />
 		<link rel="alternate icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/icon-2025.svg" />
+		<link rel="shortcut icon" href="/icon-2025.svg" />
 
 		<!-- Open Graph -->
 		<meta property="og:title" content={title} />
@@ -298,7 +300,7 @@ const url = "https://poppymusic.fr/brief";
 					<div class="text-center pt-8">
 						<button type="submit" 
 							class="bg-[#c76927] text-black px-16 py-4 text-xl font-bold tracking-wide hover:bg-[#a85520] transition-all duration-300 hover:scale-105 rounded-md">
-							VALIDER MON BRIEF ET PROCÉDER AU PAIEMENT
+							CRÉER MA CHANSON - 199€
 						</button>
 						<p class="text-sm text-gray-400 mt-4">
 							Vous serez redirigé vers une page de paiement sécurisée Stripe

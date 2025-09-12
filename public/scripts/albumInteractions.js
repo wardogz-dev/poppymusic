@@ -35,6 +35,25 @@ export function initAlbumInteractions(stickyPlayer) {
                     stickyPlayer.hide();
                 } else {
                     console.log(`▶️ Lecture du track ${actualTrackIndex} via StickyPlayer`);
+                    
+                    // GTM Event - Track play
+                    if (typeof window !== 'undefined' && window.dataLayer) {
+                        const trackTitle = audio.getAttribute('data-title') || `Track ${actualTrackIndex}`;
+                        const trackArtist = audio.getAttribute('data-artist') || 'Poppy Music';
+                        
+                        window.dataLayer.push({
+                            'event': 'music_play',
+                            'event_category': 'Music Player',
+                            'event_label': trackTitle,
+                            'track_name': trackTitle,
+                            'track_artist': trackArtist,
+                            'track_index': actualTrackIndex,
+                            'player_type': 'album_grid'
+                        });
+                        
+                        console.log(`🎯 GTM Event: music_play - ${trackTitle} by ${trackArtist}`);
+                    }
+                    
                     // Play this track via sticky player
                     stickyPlayer.playTrack(actualTrackIndex);
                 }
