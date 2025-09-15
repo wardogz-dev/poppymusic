@@ -126,9 +126,13 @@ const url = "https://poppymusic.fr/";
 		<div class="absolute inset-0 hero-bg"></div>
 		<div class="relative z-10 text-center max-w-5xl mx-auto px-4 sm:px-6">
 			<h1 class="title-artistic text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 sm:mb-8 leading-tight sm:leading-none">
-				Transformez une histoire<br/>
-				en <span class="text-[#c76927]">chanson</span>
+				Votre chanson personnalisée<br/>
+				créée par nos <span class="text-[#c76927]">artistes</span>
 			</h1>
+			<p class="text-lg sm:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+				<span class="text-[#c76927] font-semibold">IA assistée, mais 100% artisanale</span><br/>
+				4h de création pure pour chaque chanson
+			</p>
 			<div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
 				<a href="/brief-new" class="bg-[#c76927] text-black px-8 sm:px-12 py-3 sm:py-4 text-base sm:text-lg font-medium tracking-wide hover:bg-[#a85520] transition-all duration-300 hover:scale-105 rounded-md inline-block text-center w-full sm:w-auto max-w-xs sm:max-w-none min-h-[4rem] sm:min-h-[5rem] flex flex-col justify-center">
 					CRÉER MA CHANSON
@@ -164,32 +168,150 @@ const url = "https://poppymusic.fr/";
 					</h2>
 					<div class="text-artistic text-lg text-gray-300 space-y-6">
 						<p>
-							Poppy Music est un studio de production musicale où l'intelligence artificielle 
-							rencontre l'intuition humaine. Nous transformons vos idées en œuvres musicales 
-							authentiques et professionnelles.
+							Poppy Music est un <strong class="text-white">studio créatif</strong> où nos artistes utilisent l'IA 
+							comme outil, jamais comme remplaçant. Nous transformons vos idées en œuvres musicales 
+							<strong class="text-[#c76927]">livrées sur les principales plateformes de streaming</strong>.
 						</p>
 						<p>
-							Notre approche hybride vous place au centre du processus créatif. 
-							Vous devenez le co-producteur de votre chanson personnalisée. 
-							Nous gardons les droits d'auteur, vous obtenez un usage personnel illimité.
+							<strong class="text-white">4 heures de travail humain</strong> pour chaque chanson : nos paroliers, 
+							compositeurs et ingénieurs du son s'investissent personnellement dans votre projet. 
+							<strong class="text-[#c76927]">Vous payez l'expertise, pas juste l'outil</strong>.
 						</p>
 						<p>
-							Chaque projet est une collaboration entre vous, nos compositeurs, nos ingénieurs du son 
-							et notre technologie propriétaire d'IA musicale.
+							Nos chansons sont des tubes car nous nous efforçons de respecter les mêmes standards 
+							que l'industrie musicale professionnelle. <strong class="text-white">Qualité radio garantie</strong>.
 						</p>
 					</div>
 				</div>
 				<div class="relative">
-					<div class="album-container mx-auto" style="width: 400px; height: 250px;">
-						<div class="album-cover">
-							<div class="album-cover-closed">
-								<img src="/images/covers/poppy-music-closed.png" alt="Album fermé" class="w-full h-full object-cover" />
+					<!-- Encart Distribution Streaming -->
+					<div class="glass-effect rounded-2xl p-8 max-w-md mx-auto">
+						<div class="text-center mb-6">
+							<h3 class="text-white font-bold text-xl mb-2">Distribution Mondiale</h3>
+							<p class="text-gray-400 text-sm">Votre chanson sera disponible sur toutes les plateformes</p>
+						</div>
+						
+						<!-- Logos des plateformes -->
+						<div class="grid grid-cols-3 gap-8 mb-6">
+							<!-- Spotify -->
+							<div class="text-center">
+								<div class="flex items-center justify-center mx-auto mb-3">
+									<img src="/images/spotify.svg" alt="Spotify" class="w-12 h-12" />
+								</div>
+								<p class="text-gray-300 text-sm font-medium">Spotify</p>
 							</div>
-							<div class="album-cover-opened">
-								<img src="/images/covers/poppy-music-opened.png" alt="Album ouvert avec vinyle" class="w-full h-full object-cover" />
+							
+							<!-- Deezer -->
+							<div class="text-center">
+								<div class="flex items-center justify-center mx-auto mb-3">
+									<img src="/images/deezer.svg" alt="Deezer" class="w-12 h-12" />
+								</div>
+								<p class="text-gray-300 text-sm font-medium">Deezer</p>
+							</div>
+							
+							<!-- Apple Music -->
+							<div class="text-center">
+								<div class="flex items-center justify-center mx-auto mb-3">
+									<img src="/images/apple-music.svg" alt="Apple Music" class="w-12 h-12" />
+								</div>
+								<p class="text-gray-300 text-sm font-medium">Apple Music</p>
+							</div>
+						</div>
+						
+						<!-- Badge valeur élégant -->
+						<div class="bg-black bg-opacity-50 rounded-lg p-4 border border-gray-700">
+							<div class="text-center">
+								<p class="text-white font-semibold text-sm mb-1">Distribution incluse</p>
+								<p class="text-gray-300 text-xs">Valeur : 70€ • Inclus dans votre pack</p>
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- NOTRE PROCESSUS CRÉATIF -->
+	<section class="py-16 sm:py-32 px-6 bg-gradient-to-b from-[#0B0B0B] to-[#121212]">
+		<div class="max-w-7xl mx-auto">
+			<div class="text-center mb-16">
+				<h2 class="title-artistic text-5xl md:text-6xl text-white mb-6">
+					Notre Processus <span class="text-[#c76927]">Créatif</span>
+				</h2>
+				<p class="text-xl text-gray-300 max-w-3xl mx-auto mb-4">
+					<strong class="text-[#c76927]">4 heures de création pure</strong> pour chaque chanson
+				</p>
+				<p class="text-lg text-gray-400 max-w-4xl mx-auto">
+					L'IA nous assiste, mais chaque chanson est entièrement supervisée et affinée par nos artistes. 
+					Voici pourquoi nos créations pourraient passer à la radio.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+				<!-- Étape 1: Analyse créative -->
+				<div class="text-center">
+					<div class="w-20 h-20 bg-gradient-to-br from-[#c76927] to-[#a85520] rounded-full flex items-center justify-center mx-auto mb-6">
+						<svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+						</svg>
+					</div>
+					<h3 class="text-white font-bold text-xl mb-3">Analyse Créative</h3>
+					<p class="text-gray-400 text-sm leading-relaxed">
+						Nos artistes analysent votre brief en profondeur. Pas de génération automatique, 
+						mais une vraie réflexion créative sur votre projet.
+					</p>
+				</div>
+
+				<!-- Étape 2: Création des paroles -->
+				<div class="text-center">
+					<div class="w-20 h-20 bg-gradient-to-br from-[#c76927] to-[#a85520] rounded-full flex items-center justify-center mx-auto mb-6">
+						<svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+							<path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+						</svg>
+					</div>
+					<h3 class="text-white font-bold text-xl mb-3">Écriture des Paroles</h3>
+					<p class="text-gray-400 text-sm leading-relaxed">
+						Nos paroliers écrivent chaque mot à la main. Aucune génération automatique, 
+						mais un vrai travail d'orfèvre sur vos émotions.
+					</p>
+				</div>
+
+				<!-- Étape 3: Composition musicale -->
+				<div class="text-center">
+					<div class="w-20 h-20 bg-gradient-to-br from-[#c76927] to-[#a85520] rounded-full flex items-center justify-center mx-auto mb-6">
+						<svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+							<path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"/>
+						</svg>
+					</div>
+					<h3 class="text-white font-bold text-xl mb-3">Composition Musicale</h3>
+					<p class="text-gray-400 text-sm leading-relaxed">
+						Dizaines d'essais musicaux jusqu'au son parfait. Notre sensibilité artistique 
+						fait la différence pour trouver VOTRE son unique.
+					</p>
+				</div>
+
+				<!-- Étape 4: Finalisation -->
+				<div class="text-center">
+					<div class="w-20 h-20 bg-gradient-to-br from-[#c76927] to-[#a85520] rounded-full flex items-center justify-center mx-auto mb-6">
+						<svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+						</svg>
+					</div>
+					<h3 class="text-white font-bold text-xl mb-3">Finalisation Artistique</h3>
+					<p class="text-gray-400 text-sm leading-relaxed">
+						Ajustements, mix professionnel et notre signature sonore. 
+						Qualité radio garantie - nos chansons pourraient être des tubes.
+					</p>
+				</div>
+			</div>
+
+			<!-- Badge de qualité -->
+			<div class="text-center mt-16">
+				<div class="inline-flex items-center gap-3 bg-gradient-to-r from-[#c76927] to-[#a85520] px-6 py-3 rounded-full">
+					<svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+						<path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+					</svg>
+					<span class="text-black font-bold">Création Artisanale Certifiée</span>
 				</div>
 			</div>
 		</div>
@@ -243,87 +365,6 @@ const url = "https://poppymusic.fr/";
 		</div>
 	</section>
 
-	<!-- SERVICES CRÉATIFS -->
-	<section class="py-32 px-6">
-		<div class="max-w-7xl mx-auto">
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-				<div>
-					<h2 class="title-artistic text-5xl md:text-6xl text-white mb-8 leading-tight">
-						Votre Projet<br/>
-						<span class="text-[#c76927]">Musical</span>
-					</h2>
-					<div class="text-artistic text-lg text-gray-300 space-y-6 mb-12">
-						<p>
-							<strong>Vous devenez le producteur</strong> de votre propre chanson. Nous vous accompagnons 
-							de l'idée initiale jusqu'à la diffusion sur toutes les plateformes mondiales.
-						</p>
-						<p>
-							Que ce soit pour porter un message, célébrer un moment, ou créer votre signature sonore, 
-							<strong>votre nom apparaîtra dans les crédits</strong> comme producteur de l'œuvre.
-						</p>
-					</div>
-					
-					<div class="space-y-8">
-						<div class="flex items-start gap-6">
-							<div class="w-12 h-12 bg-[#c76927] flex items-center justify-center text-black font-bold text-lg">01</div>
-							<div>
-								<h3 class="text-white font-semibold text-xl mb-2">Brief de Production</h3>
-								<p class="text-gray-400">Votre message, votre style, l'émotion que vous voulez transmettre</p>
-							</div>
-						</div>
-						<div class="flex items-start gap-6">
-							<div class="w-12 h-12 bg-[#c76927] flex items-center justify-center text-black font-bold text-lg">02</div>
-							<div>
-								<h3 class="text-white font-semibold text-xl mb-2">Pre-Production</h3>
-								<p class="text-gray-400">Exploration créative, maquettes et direction artistique</p>
-							</div>
-						</div>
-						<div class="flex items-start gap-6">
-							<div class="w-12 h-12 bg-[#c76927] flex items-center justify-center text-black font-bold text-lg">03</div>
-							<div>
-								<h3 class="text-white font-semibold text-xl mb-2">Production Studio</h3>
-								<p class="text-gray-400">Enregistrement, composition, mix et mastering professionnel</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="mt-12">
-						<a href="/brief-new" class="bg-[#c76927] text-black px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#a85520] transition-all duration-300 rounded-md inline-block text-center">
-							CRÉER MA CHANSON
-							<span class="block text-sm opacity-80 mt-1">199€ - Pack complet</span>
-						</a>
-					</div>
-				</div>
-				
-				<div class="glass-effect p-12 rounded-lg">
-					<h3 class="title-artistic text-3xl text-white mb-8">Pack Production</h3>
-					<div class="space-y-6">
-						<div class="border-l-2 border-[#c76927] pl-6">
-							<h4 class="text-white font-semibold mb-2">Votre Brief Producteur</h4>
-							<p class="text-gray-400 text-sm">Définissez votre message, votre style, l'émotion que vous voulez transmettre</p>
-						</div>
-						<div class="border-l-2 border-[#c76927] pl-6">
-							<h4 class="text-white font-semibold mb-2">Pre-Production</h4>
-							<p class="text-gray-400 text-sm">Exploration créative, maquettes et direction artistique</p>
-						</div>
-						<div class="border-l-2 border-[#c76927] pl-6">
-							<h4 class="text-white font-semibold mb-2">Production Studio</h4>
-							<p class="text-gray-400 text-sm">Enregistrement, composition, mix et mastering professionnel</p>
-						</div>
-						<div class="border-l-2 border-[#c76927] pl-6">
-							<h4 class="text-white font-semibold mb-2">Post-Production</h4>
-							<p class="text-gray-400 text-sm">Finalisation, crédits producteur et distribution mondiale</p>
-						</div>
-					</div>
-					
-					<div class="mt-8 p-4 bg-black bg-opacity-30 rounded-lg">
-						<p class="text-[#c76927] font-semibold mb-1">Inclus dans votre Pack Production :</p>
-						<p class="text-gray-300 text-sm">Chanson finale • Instrumental • Paroles • Crédits producteur • Distribution streaming</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 
 	<!-- CAS D'USAGE ÉLARGIS -->
 	<UseCases />
@@ -335,8 +376,11 @@ const url = "https://poppymusic.fr/";
 				<h2 class="title-artistic text-5xl md:text-6xl text-white mb-6">
 					Combien ça <span class="text-[#c76927]">coûte ?</span>
 				</h2>
-				<p class="text-xl text-gray-300 max-w-3xl mx-auto">
-					Un prix unique, transparent, pour une production musicale complète de qualité professionnelle
+				<p class="text-xl text-gray-300 max-w-3xl mx-auto mb-4">
+					<strong class="text-[#c76927]">199€ pour 4h de création artistique</strong>
+				</p>
+				<p class="text-lg text-gray-400 max-w-4xl mx-auto">
+					Prix d'un studio d'enregistrement : 100€/h • Vous payez l'expertise, pas juste l'outil
 				</p>
 			</div>
 
@@ -344,9 +388,15 @@ const url = "https://poppymusic.fr/";
 				<!-- PACK PRINCIPAL -->
 				<div class="bg-gradient-to-br from-orange-100 via-orange-50 to-amber-50 rounded-3xl p-8 md:p-12 border border-orange-200 shadow-2xl">
 					<div class="text-center mb-12">
+						<div class="flex flex-wrap justify-center gap-3 mb-6">
+							<span class="bg-[#c76927] text-black px-3 py-1 rounded-full text-sm font-semibold">Supervision artistique humaine</span>
+							<span class="bg-[#c76927] text-black px-3 py-1 rounded-full text-sm font-semibold">4h de création</span>
+							<span class="bg-[#c76927] text-black px-3 py-1 rounded-full text-sm font-semibold">Qualité radio</span>
+						</div>
 						<h3 class="text-gray-800 text-2xl font-bold mb-4">Pack Production Complète</h3>
 						<div class="text-gray-900 text-6xl md:text-7xl font-bold mb-4">199€</div>
 						<p class="text-gray-600 text-lg">TTC - Paiement unique</p>
+						<p class="text-gray-500 text-sm mt-2">Prix d'un studio : 100€/h • Vous : 3-4h pour 199€</p>
 					</div>
 
 					<!-- TABLEAU ÉLÉGANT DES PRESTATIONS -->
@@ -579,6 +629,113 @@ const url = "https://poppymusic.fr/";
 		</div>
 	</section>
 
+	<!-- POURQUOI PAS UNE SIMPLE IA ? -->
+	<section class="py-32 px-6 bg-gradient-to-b from-[#0B0B0B] to-[#121212]">
+		<div class="max-w-6xl mx-auto">
+			<div class="text-center mb-16">
+				<h2 class="title-artistic text-5xl md:text-6xl text-white mb-6">
+					Pourquoi 199€ et pas <span class="text-[#c76927]">39€ sur une IA ?</span>
+				</h2>
+				<p class="text-xl text-gray-300 max-w-4xl mx-auto">
+					Voici la différence entre un prompt automatique et une création artistique professionnelle
+				</p>
+			</div>
+
+			<div class="max-w-5xl mx-auto">
+				<!-- Comparatif élégant -->
+				<div class="glass-effect rounded-2xl p-8 md:p-12">
+					<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+						<!-- Plateforme IA classique -->
+						<div class="text-center">
+							<div class="w-16 h-16 bg-gray-700 bg-opacity-50 rounded-full flex items-center justify-center mx-auto mb-6">
+								<svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+									<path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+								</svg>
+							</div>
+							<h3 class="text-gray-300 font-bold text-xl mb-2">Plateforme IA Classique</h3>
+							<p class="text-gray-500 mb-6">39€ + 70€ distribution = 109€</p>
+							<div class="space-y-3 text-gray-400 text-sm">
+								<div class="flex items-center gap-3">
+									<span class="w-2 h-2 bg-gray-500 rounded-full flex-shrink-0"></span>
+									<span>Prompt → Résultat automatique</span>
+								</div>
+								<div class="flex items-center gap-3">
+									<span class="w-2 h-2 bg-gray-500 rounded-full flex-shrink-0"></span>
+									<span>Aucune supervision humaine</span>
+								</div>
+								<div class="flex items-center gap-3">
+									<span class="w-2 h-2 bg-gray-500 rounded-full flex-shrink-0"></span>
+									<span>Paroles génériques générées</span>
+								</div>
+								<div class="flex items-center gap-3">
+									<span class="w-2 h-2 bg-gray-500 rounded-full flex-shrink-0"></span>
+									<span>Qualité variable et imprévisible</span>
+								</div>
+								<div class="flex items-center gap-3">
+									<span class="w-2 h-2 bg-gray-500 rounded-full flex-shrink-0"></span>
+									<span>Distribution streaming : +70€</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Séparateur élégant -->
+						<div class="hidden lg:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-gray-600 to-transparent"></div>
+
+						<!-- Poppy Music -->
+						<div class="text-center">
+							<div class="w-16 h-16 bg-gradient-to-br from-[#c76927] to-[#a85520] rounded-full flex items-center justify-center mx-auto mb-6">
+								<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+									<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+								</svg>
+							</div>
+							<h3 class="text-white font-bold text-xl mb-2">Poppy Music Studio</h3>
+							<p class="text-[#c76927] font-semibold mb-6">199€ - 4 heures de création</p>
+							<div class="space-y-3 text-gray-300 text-sm">
+								<div class="flex items-center gap-3">
+									<span class="w-2 h-2 bg-[#c76927] rounded-full flex-shrink-0"></span>
+									<span><strong class="text-white">Analyse créative</strong> par nos artistes (30min)</span>
+								</div>
+								<div class="flex items-center gap-3">
+									<span class="w-2 h-2 bg-[#c76927] rounded-full flex-shrink-0"></span>
+									<span><strong class="text-white">Paroles écrites à la main</strong> (90min)</span>
+								</div>
+								<div class="flex items-center gap-3">
+									<span class="w-2 h-2 bg-[#c76927] rounded-full flex-shrink-0"></span>
+									<span><strong class="text-white">Dizaines d'essais musicaux</strong> (60min)</span>
+								</div>
+								<div class="flex items-center gap-3">
+									<span class="w-2 h-2 bg-[#c76927] rounded-full flex-shrink-0"></span>
+									<span><strong class="text-white">Finalisation artistique</strong> (30min)</span>
+								</div>
+								<div class="flex items-center gap-3">
+									<span class="w-2 h-2 bg-[#c76927] rounded-full flex-shrink-0"></span>
+									<span><strong class="text-white">Distribution streaming</strong> incluse (70€ de valeur)</span>
+								</div>
+							</div>
+							<div class="mt-6">
+								<a href="/brief-new" class="bg-[#c76927] text-black px-8 py-3 text-base font-medium tracking-wide hover:bg-[#a85520] transition-all duration-300 rounded-md inline-block text-center">
+									PRODUIRE MA CHANSON
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Message de conclusion élégant -->
+				<div class="text-center mt-12">
+					<div class="inline-flex items-center gap-3 bg-gray-900 bg-opacity-50 px-6 py-3 rounded-full border border-gray-700">
+						<svg class="w-5 h-5 text-[#c76927]" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+						</svg>
+						<span class="text-gray-300 text-sm">
+							<strong class="text-white">Vous payez l'expertise artistique</strong>, pas juste l'accès à un outil
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- STREAMING PLATFORMS -->
 	<section id="spotify" class="py-20 px-6 bg-gradient-to-b from-[#0B0B0B] to-[#121212]">
 		<div class="max-w-6xl mx-auto text-center">
@@ -635,7 +792,7 @@ const url = "https://poppymusic.fr/";
 					HELLO@POPPYMUSIC.fr
 				</a>
 				<div class="text-gray-400 text-lg">ou</div>
-				<button class="border border-[#c76927] text-[#c76927] px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#c76927] hover:text-black transition-all duration-300 rounded-md">
+				<button id="openContactModal" class="border border-[#c76927] text-[#c76927] px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#c76927] hover:text-black transition-all duration-300 rounded-md">
 					FORMULAIRE DE CONTACT
 				</button>
 			</div>
@@ -675,8 +832,53 @@ const url = "https://poppymusic.fr/";
 					</button>
 					<div id="faq1" class="faq-content hidden p-6 pt-0 border-t border-gray-800">
 						<p class="text-gray-300 leading-relaxed">
-							PoppyMusic est un studio créatif qui vous permet de produire une chanson sur-mesure, même si vous n'êtes pas musicien.ne. Que ce soit pour un anniversaire, un mariage, un message personnel ou une cause à défendre, vous nous partagez votre idée, et nous la transformons en chanson.
+							PoppyMusic est un <strong class="text-white">studio créatif</strong> où nos artistes utilisent l'IA comme outil pour créer des chansons personnalisées de <strong class="text-[#c76927]">qualité professionnelle</strong>. Chaque chanson nécessite 4h de travail humain : analyse créative, écriture des paroles à la main, composition musicale avec dizaines d'essais, et finalisation artistique.
 						</p>
+					</div>
+				</div>
+
+				<!-- Question 0 - NOUVELLE -->
+				<div class="bg-gray-900 bg-opacity-50 rounded-lg overflow-hidden">
+					<button class="faq-trigger w-full text-left p-6 hover:bg-gray-800 transition-colors" data-target="faq0">
+						<div class="flex justify-between items-center">
+							<h3 class="text-lg font-semibold text-white flex items-center">
+								<span class="text-2xl mr-3">🤖</span>
+								Pourquoi ne pas utiliser ChatGPT ou Suno directement ?
+							</h3>
+							<span class="faq-icon text-[#c76927] text-xl transition-transform">+</span>
+						</div>
+					</button>
+					<div id="faq0" class="faq-content hidden p-6 pt-0 border-t border-gray-800">
+						<p class="text-gray-300 leading-relaxed">
+							L'IA nous aide, mais <strong class="text-white">chaque chanson nécessite 4h de travail humain</strong>. Nos paroliers écrivent chaque mot à la main, nos compositeurs font dizaines d'essais musicaux jusqu'au son parfait, et nos ingénieurs ajustent tout pour obtenir une <strong class="text-[#c76927]">qualité radio</strong>. Vous payez l'expertise artistique, pas juste l'accès à un outil.
+						</p>
+					</div>
+				</div>
+
+				<!-- Question 00 - NOUVELLE -->
+				<div class="bg-gray-900 bg-opacity-50 rounded-lg overflow-hidden">
+					<button class="faq-trigger w-full text-left p-6 hover:bg-gray-800 transition-colors" data-target="faq00">
+						<div class="flex justify-between items-center">
+							<h3 class="text-lg font-semibold text-white flex items-center">
+								<span class="text-2xl mr-3">💰</span>
+								Qu'est-ce qui justifie le prix de 199€ ?
+							</h3>
+							<span class="faq-icon text-[#c76927] text-xl transition-transform">+</span>
+						</div>
+					</button>
+					<div id="faq00" class="faq-content hidden p-6 pt-0 border-t border-gray-800">
+						<div class="text-gray-300 leading-relaxed">
+							<p class="mb-4">
+								<strong class="text-[#c76927]">199€ pour 4h de création artistique</strong>, c'est moins cher qu'un studio d'enregistrement classique (100€/h).
+							</p>
+							<ul class="space-y-2">
+								<li>• <strong>Paroliers professionnels</strong> qui écrivent à la main (90min)</li>
+								<li>• <strong>Compositeurs expérimentés</strong> qui testent dizaines de versions (60min)</li>
+								<li>• <strong>Ingénieurs du son</strong> pour la finalisation (30min)</li>
+								<li>• <strong>Supervision artistique</strong> à chaque étape (30min)</li>
+								<li>• <strong>Distribution professionnelle</strong> sur toutes plateformes</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 
@@ -787,7 +989,9 @@ const url = "https://poppymusic.fr/";
 					</button>
 					<div id="faq7" class="faq-content hidden p-6 pt-0 border-t border-gray-800">
 						<p class="text-gray-300 leading-relaxed">
-							La création d'une chanson commence à 199€. Vous pouvez ajouter des options à la carte (vinyle, clip, instrumentale, etc.) selon vos envies et votre budget.
+							<strong class="text-[#c76927]">199€ pour 4h de création artistique</strong> - c'est moins cher qu'un studio classique ! 
+							Ce prix inclut le travail de nos paroliers, compositeurs et ingénieurs du son. 
+							Nous ne vendons pas un accès IA, mais <strong class="text-white">l'expertise humaine</strong> pour créer une chanson de qualité radio.
 						</p>
 					</div>
 				</div>
@@ -857,14 +1061,54 @@ const url = "https://poppymusic.fr/";
 						</p>
 					</div>
 				</div>
+
+				<!-- Question FINALE - NOUVELLE -->
+				<div class="bg-gray-900 bg-opacity-50 rounded-lg overflow-hidden">
+					<button class="faq-trigger w-full text-left p-6 hover:bg-gray-800 transition-colors" data-target="faq-final">
+						<div class="flex justify-between items-center">
+							<h3 class="text-lg font-semibold text-white flex items-center">
+								<span class="text-2xl mr-3">🎵</span>
+								En quoi c'est différent d'une chanson IA basique ?
+							</h3>
+							<span class="faq-icon text-[#c76927] text-xl transition-transform">+</span>
+						</div>
+					</button>
+					<div id="faq-final" class="faq-content hidden p-6 pt-0 border-t border-gray-800">
+						<div class="text-gray-300 leading-relaxed">
+							<p class="mb-4">
+								<strong class="text-white">Nos chansons pourraient passer à la radio</strong> - c'est notre standard de qualité !
+							</p>
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+								<div>
+									<p class="text-red-400 font-semibold mb-2">❌ IA basique :</p>
+									<ul class="text-sm space-y-1">
+										<li>• Prompt → Résultat en 2min</li>
+										<li>• Paroles génériques</li>
+										<li>• Qualité imprévisible</li>
+										<li>• Aucun ajustement</li>
+									</ul>
+								</div>
+								<div>
+									<p class="text-[#c76927] font-semibold mb-2">✅ Poppy Music :</p>
+									<ul class="text-sm space-y-1">
+										<li>• 4h de travail humain</li>
+										<li>• Paroles écrites à la main</li>
+										<li>• Qualité radio garantie</li>
+										<li>• Dizaines d'ajustements</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<!-- CTA APRÈS FAQ -->
 			<div class="text-center mt-16">
 				<p class="text-gray-400 mb-6">Une autre question ? Contactez-nous !</p>
 			<a href="/brief-new" class="bg-[#c76927] text-black px-12 py-4 text-lg font-medium tracking-wide hover:bg-[#a85520] transition-all duration-300 rounded-md inline-block text-center">
-				CRÉER MA CHANSON
-				<span class="block text-sm opacity-80 mt-1">199€ - Production complète</span>
+				FAIRE APPEL À NOS ARTISTES
+				<span class="block text-sm opacity-80 mt-1">199€ - 4h de création</span>
 			</a>
 			</div>
 		</div>
@@ -940,6 +1184,70 @@ const url = "https://poppymusic.fr/";
 				<div class="volume-slider" id="volumeSlider">
 					<div class="volume-fill" id="volumeFill" style="width: 70%;"></div>
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- MODAL FORMULAIRE DE CONTACT -->
+	<div id="contactModal" class="fixed inset-0 bg-black bg-opacity-75 backdrop-blur-sm z-50 hidden">
+		<div class="flex items-center justify-center min-h-screen p-4">
+			<div class="bg-[#0B0B0B] border border-gray-700 rounded-2xl max-w-md w-full mx-auto glass-effect">
+				<!-- Header modal -->
+				<div class="flex justify-between items-center p-6 border-b border-gray-700">
+					<h3 class="text-white font-bold text-xl">Nous contacter</h3>
+					<button id="closeContactModal" class="text-gray-400 hover:text-white transition-colors">
+						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+						</svg>
+					</button>
+				</div>
+
+				<!-- Formulaire -->
+				<form id="contactForm" class="p-6 space-y-4">
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<!-- Prénom -->
+						<div>
+							<label for="firstName" class="block text-sm font-medium text-gray-300 mb-2">Prénom *</label>
+							<input type="text" id="firstName" name="firstName" required 
+								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all" 
+								placeholder="Votre prénom">
+						</div>
+
+						<!-- Nom -->
+						<div>
+							<label for="lastName" class="block text-sm font-medium text-gray-300 mb-2">Nom *</label>
+							<input type="text" id="lastName" name="lastName" required 
+								class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all" 
+								placeholder="Votre nom">
+						</div>
+					</div>
+
+					<!-- Téléphone -->
+					<div>
+						<label for="phone" class="block text-sm font-medium text-gray-300 mb-2">Numéro de téléphone</label>
+						<input type="tel" id="phone" name="phone" 
+							class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all" 
+							placeholder="06 12 34 56 78">
+					</div>
+
+					<!-- Message -->
+					<div>
+						<label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message *</label>
+						<textarea id="message" name="message" rows="4" required 
+							class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:ring-2 focus:ring-[#c76927] focus:border-transparent transition-all resize-none" 
+							placeholder="Décrivez votre projet ou posez votre question..."></textarea>
+					</div>
+
+					<!-- Boutons -->
+					<div class="flex flex-col sm:flex-row gap-3 pt-4">
+						<button type="button" id="cancelContactModal" class="flex-1 px-6 py-3 border border-gray-600 text-gray-300 rounded-md hover:bg-gray-800 transition-all">
+							Annuler
+						</button>
+						<button type="submit" class="flex-1 bg-[#c76927] text-black px-6 py-3 font-medium rounded-md hover:bg-[#a85520] transition-all">
+							Envoyer le message
+						</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -1071,6 +1379,89 @@ const url = "https://poppymusic.fr/";
 						}
 					});
 				});
+			});
+
+			// Gestion de la modal de contact
+			const openContactModal = document.getElementById('openContactModal');
+			const closeContactModal = document.getElementById('closeContactModal');
+			const cancelContactModal = document.getElementById('cancelContactModal');
+			const contactModal = document.getElementById('contactModal');
+			const contactForm = document.getElementById('contactForm');
+
+			// Ouvrir la modal
+			openContactModal?.addEventListener('click', function() {
+				contactModal.classList.remove('hidden');
+				document.body.style.overflow = 'hidden'; // Empêche le scroll
+			});
+
+			// Fermer la modal
+			function closeModal() {
+				contactModal.classList.add('hidden');
+				document.body.style.overflow = 'auto'; // Réactive le scroll
+				contactForm.reset(); // Reset le formulaire
+			}
+
+			closeContactModal?.addEventListener('click', closeModal);
+			cancelContactModal?.addEventListener('click', closeModal);
+
+			// Fermer en cliquant sur le backdrop
+			contactModal?.addEventListener('click', function(e) {
+				if (e.target === contactModal) {
+					closeModal();
+				}
+			});
+
+			// Fermer avec la touche Escape
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape' && !contactModal.classList.contains('hidden')) {
+					closeModal();
+				}
+			});
+
+			// Gestion de l'envoi du formulaire
+			contactForm?.addEventListener('submit', async function(e) {
+				e.preventDefault();
+				
+				const submitButton = contactForm.querySelector('button[type="submit"]');
+				const originalText = submitButton.textContent;
+				
+				// Désactiver le bouton et afficher le loading
+				submitButton.disabled = true;
+				submitButton.textContent = 'Envoi en cours...';
+				
+				const formData = new FormData(contactForm);
+				const data = {
+					firstName: formData.get('firstName'),
+					lastName: formData.get('lastName'),
+					phone: formData.get('phone'),
+					message: formData.get('message')
+				};
+
+				try {
+					const response = await fetch('/api/contact', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(data)
+					});
+
+					const result = await response.json();
+
+					if (result.success) {
+						alert('✅ Message envoyé avec succès ! Nous vous recontacterons rapidement.');
+						closeModal();
+					} else {
+						alert('❌ Erreur lors de l\'envoi : ' + result.message);
+					}
+				} catch (error) {
+					console.error('Erreur envoi formulaire:', error);
+					alert('❌ Erreur lors de l\'envoi du message. Veuillez réessayer.');
+				} finally {
+					// Réactiver le bouton
+					submitButton.disabled = false;
+					submitButton.textContent = originalText;
+				}
 			});
 		});
 	</script>
