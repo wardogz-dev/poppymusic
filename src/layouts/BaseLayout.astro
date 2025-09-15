@@ -56,21 +56,6 @@ const ogImage = image.startsWith('http') ? image : `https://poppymusic.fr${image
 		})(window,document,'script','dataLayer','GTM-NGZ6SCTP');</script>
 	)}
 
-	<!-- Google Analytics (gardé pour compatibilité) -->
-	{!isAdminPage && (
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XM9JLS953"></script>
-	)}
-	{!isAdminPage && (
-		<script is:inline>
-			// @ts-nocheck
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-
-			gtag('config', 'G-7XM9JLS953');
-		</script>
-	)}
-
 	<!-- Styles globaux -->
 	<link rel="stylesheet" href="/styles/global.css" />
 </head>

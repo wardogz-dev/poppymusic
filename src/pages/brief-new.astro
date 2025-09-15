@@ -45,16 +45,6 @@ const url = "https://poppymusic.fr/brief-new";
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={image} />
 
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XM9JLS953"></script>
-		<script>
-			// @ts-nocheck
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-
-			gtag('config', 'G-7XM9JLS953');
-		</script>
 	</head>
 	
 	<body class="bg-[#0B0B0B] text-gray-100 font-['Inter'] antialiased min-h-screen">
@@ -1113,14 +1103,6 @@ const url = "https://poppymusic.fr/brief-new";
 
 				prevStep() {
 					if (this.currentStep > 1) {
-						// Analytics - Tracker retour en arrière
-					if (typeof gtag !== 'undefined') {
-						gtag('event', 'form_step_back', {
-							'event_category': 'Brief Form',
-							'event_label': `Back from Step ${this.currentStep} to ${this.currentStep - 1}`,
-							'step_number': this.currentStep
-						});
-					}
 
 						this.hideStep(this.currentStep);
 						this.currentStep--;
@@ -1275,17 +1257,6 @@ const url = "https://poppymusic.fr/brief-new";
 				briefWizard = new BriefFormWizard();
 			});
 
-			// Analytics - Tracker abandon de formulaire
-			window.addEventListener('beforeunload', () => {
-				if (briefWizard && briefWizard.currentStep < briefWizard.totalSteps && !briefWizard.formData.isCompleted && typeof gtag !== 'undefined') {
-					gtag('event', 'form_abandoned', {
-						'event_category': 'Brief Form',
-						'event_label': `Abandoned at Step ${briefWizard.currentStep}`,
-						'step_number': briefWizard.currentStep,
-						'step_name': briefWizard.getStepName(briefWizard.currentStep)
-					});
-				}
-			});
 			} // Fin de la vérification typeof window
 		</script>
 
