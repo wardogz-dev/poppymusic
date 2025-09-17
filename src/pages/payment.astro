@@ -4,7 +4,7 @@ import '../styles/global.css';
 export const prerender = false;
 
 const title = "Paiement Sécurisé | Finaliser ma Commande | Poppy Music Studio";
-const description = "Finalisez votre commande de chanson personnalisée en toute sécurité. Paiement Stripe sécurisé. Production immédiate après validation. 199€ TTC.";
+const description = "Finalisez votre commande de tube personnalisé en toute sécurité. Paiement Stripe sécurisé. Production premium immédiate après validation. 500€ TTC.";
 ---
 
 <html lang="fr">
@@ -74,7 +74,7 @@ const description = "Finalisez votre commande de chanson personnalisée en toute
 									<p class="text-gray-400 text-sm">Chanson personnalisée complète</p>
 								</div>
 								<div class="text-right">
-									<div class="text-2xl font-bold text-[#c76927]">199€</div>
+									<div class="text-2xl font-bold text-[#c76927]">500€</div>
 								</div>
 							</div>
 						</div>
@@ -155,7 +155,7 @@ const description = "Finalisez votre commande de chanson personnalisée en toute
 		<div class="fixed bottom-0 left-0 right-0 z-40 bg-[#0B0B0B] bg-opacity-95 backdrop-blur-sm border-t border-gray-800">
 			<div class="px-4 sm:px-8 py-4">
 				<button id="stripe-payment-btn" class="w-full bg-[#c76927] text-black px-8 py-4 text-lg font-bold tracking-wide hover:bg-[#a85520] transition-all duration-300 hover:scale-105 rounded-md">
-					PAYER 199€
+					PAYER 500€
 				</button>
 				<p class="text-gray-500 text-xs text-center mt-2">Paiement sécurisé par Stripe</p>
 			</div>
@@ -180,7 +180,7 @@ const description = "Finalisez votre commande de chanson personnalisée en toute
 					gtag('event', 'payment_page_view', {
 						'event_category': 'Payment',
 						'event_label': 'Payment Page Loaded',
-						'value': 199
+						'value': 500
 					});
 				}
 
@@ -198,7 +198,7 @@ const description = "Finalisez votre commande de chanson personnalisée en toute
 							gtag('event', 'payment_button_click', {
 								'event_category': 'Payment',
 								'event_label': 'Payment Button Clicked',
-								'value': 199
+								'value': 500
 							});
 						}
 
@@ -221,7 +221,7 @@ const description = "Finalisez votre commande de chanson personnalisée en toute
 								gtag('event', 'payment_redirect_stripe', {
 									'event_category': 'Payment',
 									'event_label': 'Redirect to Stripe Checkout',
-									'value': 199
+									'value': 500
 								});
 							}
 
@@ -318,7 +318,7 @@ const description = "Finalisez votre commande de chanson personnalisée en toute
 					const recapContainer = document.getElementById('payment-recap');
 					recapContainer.innerHTML = `
 						<div class="text-center text-gray-400">
-							<p>🎵 Ma chanson personnalisée</p>
+							<p>🎵 Ma tube personnalisé</p>
 							<p class="text-sm mt-2">Récapitulatif en cours de chargement...</p>
 						</div>
 					`;

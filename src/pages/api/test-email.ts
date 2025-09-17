@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
       targetLastName: 'Dupont',
       targetRelation: 'ma sœur',
       purposeTag: 'Anniversaire',
-      amountPaid: 19900, // 199€ en centimes
+      amountPaid: 50000, // 500€ en centimes
       stripeSessionId: 'cs_test_' + Date.now()
     };
 

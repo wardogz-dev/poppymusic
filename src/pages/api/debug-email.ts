@@ -35,7 +35,7 @@ export const POST: APIRoute = async ({ request }) => {
       targetLastName: 'Dupont',
       targetRelation: 'ma sœur',
       purposeTag: 'Test',
-      amountPaid: 19900,
+      amountPaid: 50000,
       stripeSessionId: 'debug_session_' + Date.now()
     };
 

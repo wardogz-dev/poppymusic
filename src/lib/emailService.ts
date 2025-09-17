@@ -30,10 +30,10 @@ export class EmailService {
         ? `${briefData.targetFirstName} ${briefData.targetLastName}`
         : 'votre proche';
 
-      const songTitle = briefData.songTitle || 'votre chanson personnalisée';
+      const songTitle = briefData.songTitle || 'votre tube personnalisé';
       const amountFormatted = briefData.amountPaid 
         ? `${(briefData.amountPaid / 100).toFixed(0)}€`
-        : '199€';
+        : '500€';
 
       const emailHtml = this.generateConfirmationEmailHtml({
         clientName: `${briefData.firstName} ${briefData.lastName}`,
@@ -176,7 +176,7 @@ export class EmailService {
                 </div>
             </div>
 
-            <p>Notre équipe va commencer immédiatement le travail sur votre projet. Vous recevrez des mises à jour régulières sur l'avancement de votre chanson personnalisée.</p>
+            <p>Notre équipe va commencer immédiatement le travail sur votre projet. Vous recevrez des mises à jour régulières sur l'avancement de votre tube personnalisé.</p>
 
             <!-- Contact -->
             <div class="contact-section">
@@ -220,7 +220,7 @@ export class EmailService {
           <p><strong>Chanson :</strong> ${briefData.songTitle || 'Sans titre'}</p>
           <p><strong>Pour :</strong> ${targetName} (${briefData.targetRelation || 'N/A'})</p>
           <p><strong>Catégorie :</strong> ${briefData.purposeTag || 'N/A'}</p>
-          <p><strong>Montant :</strong> ${briefData.amountPaid ? (briefData.amountPaid / 100).toFixed(0) + '€' : '199€'}</p>
+          <p><strong>Montant :</strong> ${briefData.amountPaid ? (briefData.amountPaid / 100).toFixed(0) + '€' : '500€'}</p>
           <p><strong>Référence :</strong> ${briefData.id}</p>
           
           <p style="margin-top: 20px;">

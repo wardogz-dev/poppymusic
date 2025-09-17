@@ -68,8 +68,8 @@ export const POST: APIRoute = async ({ request }) => {
     // Sauvegarder dans Supabase
     const savedBrief = await BriefService.createBrief(briefToSave);
     
-    // Calculer le montant selon la formule
-    const amount = briefData.package === 'premium' ? 39900 : 19900; // En centimes
+    // Calculer le montant selon la formule - Nouveau pricing premium
+    const amount = 50000; // 500€ en centimes - Prix unique premium
     
     // TODO: Créer la session Stripe ici
     // const stripeSession = await createStripeSession(savedBrief.id, amount, briefData);
