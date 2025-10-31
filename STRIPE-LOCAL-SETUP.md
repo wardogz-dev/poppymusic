@@ -21,9 +21,9 @@ cp .env.example .env
 3. **Éditer .env :**
 ```bash
 # Remplacez par vos vraies clés
-STRIPE_SECRET_KEY=sk_test_VOTRE_CLE_ICI
-STRIPE_PRICE_ID=price_VOTRE_PRICE_ID_ICI
-STRIPE_PUBLIC_KEY=pk_test_VOTRE_CLE_PUBLIQUE_ICI
+STRIPE_SECRET_KEY=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
+STRIPE_PRICE_ID=price_1S5oeRLDQESNqm4mfoBbVcLE
+STRIPE_PUBLIC_KEY=pk_live_51S5keeLDQESNqm4mNxe4ekuWI77PFdwX9G9XyH3rX4768RjkCMXfoazummquveR8aNIxqsCPE8xVllhS52mQnALU00O7Cp7LFy
 NODE_ENV=development
 ```
 

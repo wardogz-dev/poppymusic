@@ -1,0 +1,77 @@
+
+
+Conditions Générales de Vente – Wardogz / PoppyMusic
+
+1. Société et objet
+La société Wardogz, immatriculée en France, dont le siège social est situé au 73 boulevard Victor Hugo, 92200 Neuilly-sur-Seine (ci-après « nous » ou « Wardogz »), exploite la plateforme PoppyMusic accessible à https://poppymusic.fr, permettant aux utilisateurs d’acheter des productions musicales personnalisées (ci-après « Services »).
+
+⸻
+
+2. Acceptation des CGV
+Les présentes CGV s’appliquent à toute commande validée sur le site. La validation de la commande vaut acceptation sans réserve des présentes CGV.
+
+⸻
+
+3. Commande – Processus
+	•	Après consultation de l’offre (à partir de 199 €), le Client choisit son pack, ajoute les options souhaitées (vinyle, clip, etc.), et procède au paiement via la plateforme sécurisée Stripe.
+	•	Une fois le paiement accepté, la commande devient ferme. Une confirmation de commande est envoyée par email.
+
+⸻
+
+4. Prix & Paiement
+	•	Les prix sont indiqués en euros (TTC), hors frais éventuels, tels que livraison d’un support physique ou options supplémentaires.
+	•	Le paiement s’effectue par carte bancaire via Stripe, dans un environnement sécurisé.
+
+⸻
+
+5. Livraison – délais
+	•	Le délai de livraison standard est de 7 à 10 jours ouvrés. Une option express est disponible sur demande.
+	•	Le client reçoit les contenus numériques (MP3, visuel) par téléchargement.
+
+⸻
+
+6. Droit de rétractation – Produits numériques
+	•	Conformément à l’article L221-28 du Code de la consommation, le droit de rétractation ne s’applique pas aux contenus numériques fournis immédiatement après le paiement : la prestation musicale est considérée comme exécutée dès que les fichiers sont accessibles au client.
+	•	Toutefois, en cas de défaut technique ou erreur de livraison, une indemnisation ou réédition peut être proposée, selon la situation et à l’appréciation de Wardogz.
+
+⸻
+
+7. Propriété intellectuelle & droits d’usage
+	•	L’œuvre produite reste la propriété intellectuelle de Wardogz (auteurs, compositeurs, enregistrants).
+	•	Le client reçoit une licence personnelle exclusive, incluant :
+	•	Usage privé illimité ( partager avec proches, écouter, diffuser lors d’événements privés).
+	•	Publication sur réseaux sociaux personnels.
+	•	Toute utilisation commerciale ou hors cadre privé nécessite une licence spécifique sur demande.
+	•	Le client apparaît comme co-producteur dans les crédits.
+
+⸻
+
+8. Responsabilité
+	•	Wardogz s’engage à fournir un travail professionnel (composition, mixage, mastering).
+	•	En cas de défaillance technique (fichier corrompu, lien invalide), la correction ou réédition est assurée sans frais.
+
+⸻
+
+9. Données personnelles
+Les données collectées (email, nom) sont utilisées exclusivement pour gérer la commande et la communication. Elles sont stockées en conformité avec la réglementation (RGPD). Le client peut exercer ses droits d’accès, rectification ou suppression en contactant hello@poppymusic.fr.
+
+⸻
+
+10. Modification des CGV
+Wardogz se réserve le droit de modifier les CGV à tout moment. La version applicable est celle en vigueur au moment de la commande.
+
+⸻
+
+11. Loi applicable & litiges
+Les présentes CGV sont soumises au droit français. En cas de litige, non résolu sous 30 jours, les tribunaux compétents de Paris seront seuls compétents.
+
+⸻
+
+À transmettre à Cursor (ton dev) :
+	•	Mettre les CGV accessibles depuis le footer du site.
+	•	Référence légale complète et adresse.
+	•	Intégrer clause expresse de non-rétractation sur contenus numériques.
+	•	Mentionner clairement la licence personnelle vs usage commercial.
+	•	Assurer lien en PDF ou page dédiée, consultable avant commande.
+
+⸻
